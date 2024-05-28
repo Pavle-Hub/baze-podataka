@@ -2,7 +2,7 @@
 {
     public class TehnickoLice
     {
-        public virtual long MaticniBroj { get; protected set; }
+        public virtual long MaticniBroj { get;  set; }
         public virtual string Ime { get; set; }
         public virtual string Prezime { get; set; }
         public virtual DateTime DatumRodjenja { get; set; } 

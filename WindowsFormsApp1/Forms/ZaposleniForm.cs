@@ -33,9 +33,9 @@ namespace WindowsFormsApp1.Forms
 
             listBox1.Items.Clear();
 
-            foreach(FizickoObezbedjenjeDTO a in lista)
+            foreach (FizickoObezbedjenjeDTO a in lista)
             {
-                if(a.PripadaEkipi != null)
+                if (a.PripadaEkipi != null)
                     listBox1.Items.Add(a.MaticniBroj + " - " + a.Ime + " " + a.Prezime + " - " + a.DatumRodjenja.ToString().Split(' ')[0] + " - " + a.Pol + " - " + a.BorilackaVestina + " - " + a.PripadaEkipi.RedniBroj);
                 else
                     listBox1.Items.Add(a.MaticniBroj + " - " + a.Ime + " " + a.Prezime + " - " + a.DatumRodjenja.ToString().Split(' ')[0] + " - " + a.Pol + " - " + a.BorilackaVestina + " -  null");
@@ -148,7 +148,7 @@ namespace WindowsFormsApp1.Forms
 
                 MessageBox.Show("Uspesno azurirano fizicko obezbedjenje!");
 
-                
+
             }
             catch (Exception ec)
             {
@@ -159,6 +159,70 @@ namespace WindowsFormsApp1.Forms
         private void listBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
 
+        }
+
+        private void dodajTehnickoLice_Click(object sender, EventArgs e)
+        {
+
+            try
+            {
+                ISession s = DataLayer.GetSession();
+
+                ObezbedjenjeForm frm = new ObezbedjenjeForm();//treba da se izmeni na TehnickoLice_form
+
+                DialogResult dlg = frm.ShowDialog();
+
+                TehnickoLice f = new TehnickoLice();
+
+                f.MaticniBroj = 222222222;
+                f.Ime = "Stefan";
+                f.Prezime = "Gejovic";
+                f.DatumRodjenja = new DateTime(2002, 11, 10);
+                f.Pol = 'M';
+                f.StrucnaSprema = "osnovna skola";
+                f.Oblast = "informatika";
+                s.Save(f);
+
+                s.Flush();
+                s.Close();
+
+                MessageBox.Show("Uspesno dodato novo tehnicko lice!");
+
+                PopuniListuFizickoObezbedjenje();
+
+            }
+            catch (Exception ec)
+            {
+                MessageBox.Show(ec.Message);
+            }
+
+        }
+
+        private void button5_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                ISession s = DataLayer.GetSession();
+
+                FizickoObezbedjenje f = s.Load<FizickoObezbedjenje>(222222222);
+
+                f.Pol = 'Z';
+                f.Ime = "Stoja";
+                f.Prezime = "Hrebeljanovic";
+
+                s.SaveOrUpdate(f);
+
+                s.Flush();
+                s.Close();
+
+                MessageBox.Show("Uspesno azurirano tehicko lice!");
+
+
+            }
+            catch (Exception ec)
+            {
+                MessageBox.Show(ec.Message);
+            }
         }
     }
 }
