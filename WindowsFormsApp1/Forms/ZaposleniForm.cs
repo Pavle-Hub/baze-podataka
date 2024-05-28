@@ -59,6 +59,9 @@ namespace WindowsFormsApp1.Forms
             {
                 ISession s = DataLayer.GetSession();
 
+                ObezbedjenjeForm frm = new ObezbedjenjeForm();
+                DialogResult dlg = frm.ShowDialog();
+
                 FizickoObezbedjenje f = new FizickoObezbedjenje();
 
                 f.MaticniBroj = 1111111111;
