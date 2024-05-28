@@ -27,6 +27,7 @@ namespace WindowsFormsApp1.Forms
         {
             try
             {
+
                 ISession s = DataLayer.GetSession();
                 int redniBrojEkipe;
 
