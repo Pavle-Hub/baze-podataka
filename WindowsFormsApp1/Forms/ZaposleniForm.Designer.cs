@@ -63,6 +63,7 @@
             // 
             listBox2.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
             listBox2.FormattingEnabled = true;
+            listBox2.HorizontalScrollbar = true;
             listBox2.Location = new System.Drawing.Point(11, 243);
             listBox2.Name = "listBox2";
             listBox2.Size = new System.Drawing.Size(387, 224);
@@ -72,6 +73,7 @@
             // 
             listBox3.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
             listBox3.FormattingEnabled = true;
+            listBox3.HorizontalScrollbar = true;
             listBox3.Location = new System.Drawing.Point(11, 472);
             listBox3.Name = "listBox3";
             listBox3.Size = new System.Drawing.Size(387, 224);

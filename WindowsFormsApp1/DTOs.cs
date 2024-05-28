@@ -8,14 +8,14 @@ namespace WindowsFormsApp1
         public long MaticniBroj;
         public string Ime;
         public string Prezime;
-        public string Pol;
+        public char? Pol;
         public DateTime DatumRodjenja;
         public string StrucnaSprema;
         public string Oblast;
 
         public IList<AlarmniSistemDTO> OdrzavaAS;
 
-        public TehnickoLiceDTO(long maticniBroj, string ime, string prezime, string pol, DateTime datumRodjenja, string strucnaSprema, string oblast)
+        public TehnickoLiceDTO(long maticniBroj, string ime, string prezime, char? pol, DateTime datumRodjenja, string strucnaSprema, string oblast)
         {
             MaticniBroj = maticniBroj;
             Ime = ime;
@@ -58,16 +58,16 @@ namespace WindowsFormsApp1
 
     public class MenadzerDTO
     {
-        public string MaticniBroj;
+        public long MaticniBroj;
         public string Ime;
         public string Prezime;
-        public string Pol;
+        public char? Pol;
         public DateTime DatumRodjenja;
 
         public IList<RegionalniCentarDTO> RegionalniCentri;
         public IList<string> Gradovi;
 
-        public MenadzerDTO(string maticniBroj, string ime, string prezime, string pol, DateTime datumRodjenja)
+        public MenadzerDTO(long maticniBroj, string ime, string prezime, char? pol, DateTime datumRodjenja)
         {
             MaticniBroj = maticniBroj;
             Ime = ime;

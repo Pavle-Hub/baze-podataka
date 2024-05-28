@@ -45,12 +45,32 @@ namespace WindowsFormsApp1.Forms
 
         private void PopuniListuTehnickoLice()
         {
+            listBox2.Items.Clear();
+            listBox2.Items.Add("Loading...");
 
+            List<TehnickoLiceDTO> lista = DTOManager.PopuniTehnickoLice();
+
+            listBox2.Items.Clear();
+
+            foreach (TehnickoLiceDTO a in lista)
+            {
+                listBox2.Items.Add(a.MaticniBroj + " - " + a.Ime + " " + a.Prezime + " - " + a.DatumRodjenja.ToString().Split(' ')[0] + " - " + a.Pol + " - " + a.StrucnaSprema + " " + a.Oblast);
+            }
         }
 
         private void PopuniListuMenadzera()
         {
+            listBox3.Items.Clear();
+            listBox3.Items.Add("Loading...");
 
+            List<MenadzerDTO> lista = DTOManager.PopuniMenadzera();
+
+            listBox3.Items.Clear();
+
+            foreach (MenadzerDTO a in lista)
+            {
+                listBox3.Items.Add(a.MaticniBroj + " - " + a.Ime + " " + a.Prezime + " - " + a.DatumRodjenja.ToString().Split(' ')[0] + " - " + a.Pol);
+            }
         }
 
         private void dodajObezbedjenje_Click(object sender, EventArgs e)
