@@ -4,6 +4,7 @@
     {
         public EkipaMap()
         {
+
             Table("EKIPA");
 
             Id(x => x.RedniBroj, "REDNI_BROJ").GeneratedBy.TriggerIdentity(); // primarni kljuc
