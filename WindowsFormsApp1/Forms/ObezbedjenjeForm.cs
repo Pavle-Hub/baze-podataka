@@ -1,4 +1,5 @@
-﻿using System;
+﻿using FluentNHibernate.Conventions.Helpers;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -24,22 +25,62 @@ namespace WindowsFormsApp1.Forms
 
         private void ProslediObezbedjenje_Click(object sender, EventArgs e)
         {
-            long maticniBroj = long.Parse(textBox1.Text);
-            string ime = textBox2.Text;
-            string prezime = textBox3.Text;
-            char pol = char.Parse(comboBox1.Text);
-            string borilackaVestina = textBox5.Text;
-            DateTime datumRodjenja = datumRodj.Value;
-            int redniBrojEkipe = int.Parse(textBox6.Text);
+            try
+            {
 
-            FizickoObezbedjenje f = new FizickoObezbedjenje();
-            f.MaticniBroj = maticniBroj;
-            f.Ime = ime;
-            f.Prezime = prezime;
-            f.Pol = pol;
-            f.BorilackaVestina = borilackaVestina;
-            f.DatumRodjenja = datumRodjenja;
-            f.PripadaEkipi = new Ekipa();
+                ISession s = DataLayer.GetSession();
+                int redniBrojEkipe;
+
+                long maticniBroj = long.Parse(textBox1.Text);
+                string ime = textBox2.Text;
+                string prezime = textBox3.Text;
+                char pol = char.Parse(comboBox1.Text);
+                
+                string borilackaVestina = textBox5.Text;
+                DateTime datumRodjenja = datumRodj.Value;
+
+                if (textBox6.Text != "")
+                {
+                    redniBrojEkipe = int.Parse(textBox6.Text);
+                }
+                else
+                {
+                    redniBrojEkipe = -1;
+                }
+
+
+                FizickoObezbedjenje f = new FizickoObezbedjenje();
+                f.MaticniBroj = maticniBroj;
+                f.Ime = ime;
+                f.Prezime = prezime;
+                f.Pol = pol;
+                f.BorilackaVestina = borilackaVestina;
+                f.DatumRodjenja = datumRodjenja;
+
+                if (redniBrojEkipe == -1)
+                {
+                    f.PripadaEkipi = null;
+                }
+                else
+                {
+                    f.PripadaEkipi = s.Load<Ekipa>(redniBrojEkipe);
+                }
+
+                s.Save(f);
+
+                s.Flush();
+
+                s.Close();
+
+                MessageBox.Show("Uspesno dodato novo fizicko obezbedjenje!");
+
+                this.Close();
+
+            }
+            catch (Exception ec)
+            {
+                MessageBox.Show("oh no\n" + ec.Message);
+            }
         }
     }
 }

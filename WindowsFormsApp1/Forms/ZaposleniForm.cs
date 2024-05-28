@@ -76,27 +76,10 @@ namespace WindowsFormsApp1.Forms
         private void dodajObezbedjenje_Click(object sender, EventArgs e)
         {
             try
-            {
-                ISession s = DataLayer.GetSession();
+            { 
 
                 ObezbedjenjeForm frm = new ObezbedjenjeForm();
                 DialogResult dlg = frm.ShowDialog();
-
-                FizickoObezbedjenje f = new FizickoObezbedjenje();
-
-                f.MaticniBroj = 1111111111;
-                f.Ime = "Pavle";
-                f.Prezime = "Petrovic";
-                f.DatumRodjenja = new DateTime(2020, 12, 12);
-                f.Pol = 'M';
-                f.BorilackaVestina = "tekvondo";
-                f.PripadaEkipi = null;
-                s.Save(f);
-
-                s.Flush();
-                s.Close();
-
-                MessageBox.Show("Uspesno dodato novo fizicko obezbedjenje!");
 
                 PopuniListuFizickoObezbedjenje();
 
