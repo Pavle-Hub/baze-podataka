@@ -93,24 +93,25 @@ namespace WindowsFormsApp1.Forms
 
         private void izbrisiObezbedjenje_Click(object sender, EventArgs e)
         {
-            try
+            if (listBox1.SelectedItems.Count == 0)
             {
-                ISession s = DataLayer.GetSession();
+                MessageBox.Show("Izaberite obezbedjenje koje zelite da obrisete!");
+                return;
+            }
 
-                FizickoObezbedjenje f = s.Load<FizickoObezbedjenje>(Convert.ToInt64((listBox1.SelectedItem).ToString().Substring(0, 13)));
-                s.Delete(f);
+            long maticniBrojFizickog = Convert.ToInt64((listBox1.SelectedItem).ToString().Substring(0, 13));
+            string poruka = "Da li zelite da obrisete izabranog zaposlenog?";
+            string title = "Pitanje";
+            MessageBoxButtons buttons = MessageBoxButtons.OKCancel;
+            DialogResult result = MessageBox.Show(poruka, title, buttons);
 
-                s.Flush();
-                s.Close();
-
+            if(result == DialogResult.OK)
+            {
+                DTOManager.obrisiFizickoObezbedjenje(maticniBrojFizickog);
                 MessageBox.Show("Uspesno obrisano fizicko obezbedjenje!");
+                this.PopuniListuFizickoObezbedjenje();
+            }
 
-                PopuniListuFizickoObezbedjenje();
-            }
-            catch (Exception ec)
-            {
-                MessageBox.Show(ec.Message);
-            }
         }
 
         private void izmeniObezbedjenje_Click(object sender, EventArgs e)
