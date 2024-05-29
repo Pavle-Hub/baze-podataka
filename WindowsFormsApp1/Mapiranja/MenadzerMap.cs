@@ -6,7 +6,7 @@
         {
             Table("MENADZER");
 
-            Id(x => x.MaticniBroj, "MATICNI_BROJ").GeneratedBy.TriggerIdentity();
+            Id(x => x.MaticniBroj, "MATICNI_BROJ").GeneratedBy.Assigned();
 
             Map(x => x.Ime, "IME");
             Map(x => x.Prezime, "PREZIME");

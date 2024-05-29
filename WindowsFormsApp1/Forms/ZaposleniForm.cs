@@ -97,7 +97,7 @@ namespace WindowsFormsApp1.Forms
             {
                 ISession s = DataLayer.GetSession();
 
-                FizickoObezbedjenje f = s.Load<FizickoObezbedjenje>(Convert.ToInt64((listBox1.SelectedItem).ToString().Substring(0,13)));
+                FizickoObezbedjenje f = s.Load<FizickoObezbedjenje>(Convert.ToInt64((listBox1.SelectedItem).ToString().Substring(0, 13)));
                 s.Delete(f);
 
                 s.Flush();
@@ -151,29 +151,11 @@ namespace WindowsFormsApp1.Forms
 
             try
             {
-                ISession s = DataLayer.GetSession();
 
-                ObezbedjenjeForm frm = new ObezbedjenjeForm();//treba da se izmeni na TehnickoLice_form
-
+                dodajTehnickoLiceForm frm = new dodajTehnickoLiceForm();
                 DialogResult dlg = frm.ShowDialog();
 
-                TehnickoLice f = new TehnickoLice();
-
-                f.MaticniBroj = 222222222;
-                f.Ime = "Stefan";
-                f.Prezime = "Gejovic";
-                f.DatumRodjenja = new DateTime(2002, 11, 10);
-                f.Pol = 'M';
-                f.StrucnaSprema = "osnovna skola";
-                f.Oblast = "informatika";
-                s.Save(f);
-
-                s.Flush();
-                s.Close();
-
-                MessageBox.Show("Uspesno dodato novo tehnicko lice!");
-
-                PopuniListuFizickoObezbedjenje();
+                PopuniListuTehnickoLice();
 
             }
             catch (Exception ec)
@@ -216,7 +198,7 @@ namespace WindowsFormsApp1.Forms
             {
                 ISession s = DataLayer.GetSession();
 
-                TehnickoLice f = s.Load<TehnickoLice>(Convert.ToInt64(222222222));
+                TehnickoLice f = s.Load<TehnickoLice>(Convert.ToInt64((listBox2.SelectedItem).ToString().Substring(0, 13)));
                 s.Delete(f);
 
                 s.Flush();
@@ -225,6 +207,43 @@ namespace WindowsFormsApp1.Forms
                 MessageBox.Show("Uspesno obrisano Tehnicko Lice!");
 
                 PopuniListuTehnickoLice();
+            }
+            catch (Exception ec)
+            {
+                MessageBox.Show(ec.Message);
+            }
+        }
+
+        private void dodajMenadzera_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                dodajMenadzeraForm frm = new dodajMenadzeraForm();
+                DialogResult dlg = frm.ShowDialog();
+
+                PopuniListuTehnickoLice();
+            }
+            catch (Exception ec)
+            {
+                MessageBox.Show(ec.Message);
+            }
+        }
+
+        private void button10_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                ISession s = DataLayer.GetSession();
+
+                Menadzer f = s.Load<Menadzer>(Convert.ToInt64((listBox2.SelectedItem).ToString().Substring(0, 13)));
+                s.Delete(f);
+
+                s.Flush();
+                s.Close();
+
+                MessageBox.Show("Uspesno obrisan Menadzer!");
+
+                PopuniListuMenadzera();
             }
             catch (Exception ec)
             {

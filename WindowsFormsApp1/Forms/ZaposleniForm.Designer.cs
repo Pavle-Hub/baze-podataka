@@ -41,7 +41,7 @@
             dodajTehnickoLice = new System.Windows.Forms.Button();
             izmeniTehnickoLice = new System.Windows.Forms.Button();
             obrisiTehnickoLice = new System.Windows.Forms.Button();
-            button7 = new System.Windows.Forms.Button();
+            dodajMenadzera = new System.Windows.Forms.Button();
             button8 = new System.Windows.Forms.Button();
             button9 = new System.Windows.Forms.Button();
             button10 = new System.Windows.Forms.Button();
@@ -53,9 +53,11 @@
             listBox1.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
             listBox1.FormattingEnabled = true;
             listBox1.HorizontalScrollbar = true;
-            listBox1.Location = new System.Drawing.Point(11, 12);
+            listBox1.ItemHeight = 15;
+            listBox1.Location = new System.Drawing.Point(10, 9);
+            listBox1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             listBox1.Name = "listBox1";
-            listBox1.Size = new System.Drawing.Size(387, 224);
+            listBox1.Size = new System.Drawing.Size(339, 169);
             listBox1.TabIndex = 0;
             listBox1.SelectedIndexChanged += listBox1_SelectedIndexChanged;
             // 
@@ -64,9 +66,11 @@
             listBox2.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
             listBox2.FormattingEnabled = true;
             listBox2.HorizontalScrollbar = true;
-            listBox2.Location = new System.Drawing.Point(11, 243);
+            listBox2.ItemHeight = 15;
+            listBox2.Location = new System.Drawing.Point(10, 182);
+            listBox2.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             listBox2.Name = "listBox2";
-            listBox2.Size = new System.Drawing.Size(387, 224);
+            listBox2.Size = new System.Drawing.Size(339, 169);
             listBox2.TabIndex = 1;
             // 
             // listBox3
@@ -74,9 +78,11 @@
             listBox3.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
             listBox3.FormattingEnabled = true;
             listBox3.HorizontalScrollbar = true;
-            listBox3.Location = new System.Drawing.Point(11, 472);
+            listBox3.ItemHeight = 15;
+            listBox3.Location = new System.Drawing.Point(10, 354);
+            listBox3.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             listBox3.Name = "listBox3";
-            listBox3.Size = new System.Drawing.Size(387, 224);
+            listBox3.Size = new System.Drawing.Size(339, 169);
             listBox3.TabIndex = 2;
             // 
             // label1
@@ -84,9 +90,9 @@
             label1.AutoSize = true;
             label1.BackColor = System.Drawing.SystemColors.GradientActiveCaption;
             label1.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, 0);
-            label1.Location = new System.Drawing.Point(455, 13);
+            label1.Location = new System.Drawing.Point(398, 10);
             label1.Name = "label1";
-            label1.Size = new System.Drawing.Size(209, 28);
+            label1.Size = new System.Drawing.Size(171, 21);
             label1.TabIndex = 3;
             label1.Text = "Fizicko obezbedjenje";
             // 
@@ -95,9 +101,9 @@
             label2.AutoSize = true;
             label2.BackColor = System.Drawing.SystemColors.GradientActiveCaption;
             label2.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, 0);
-            label2.Location = new System.Drawing.Point(495, 243);
+            label2.Location = new System.Drawing.Point(433, 182);
             label2.Name = "label2";
-            label2.Size = new System.Drawing.Size(135, 28);
+            label2.Size = new System.Drawing.Size(110, 21);
             label2.TabIndex = 4;
             label2.Text = "Tehnicko lice";
             // 
@@ -106,18 +112,19 @@
             label3.AutoSize = true;
             label3.BackColor = System.Drawing.SystemColors.GradientActiveCaption;
             label3.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, 0);
-            label3.Location = new System.Drawing.Point(504, 472);
+            label3.Location = new System.Drawing.Point(441, 354);
             label3.Name = "label3";
-            label3.Size = new System.Drawing.Size(106, 28);
+            label3.Size = new System.Drawing.Size(86, 21);
             label3.TabIndex = 5;
             label3.Text = "Menadzer";
             // 
             // dodajObezbedjenje
             // 
             dodajObezbedjenje.BackColor = System.Drawing.SystemColors.ActiveCaption;
-            dodajObezbedjenje.Location = new System.Drawing.Point(517, 44);
+            dodajObezbedjenje.Location = new System.Drawing.Point(452, 33);
+            dodajObezbedjenje.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             dodajObezbedjenje.Name = "dodajObezbedjenje";
-            dodajObezbedjenje.Size = new System.Drawing.Size(94, 35);
+            dodajObezbedjenje.Size = new System.Drawing.Size(82, 26);
             dodajObezbedjenje.TabIndex = 6;
             dodajObezbedjenje.Text = "Dodaj";
             dodajObezbedjenje.UseVisualStyleBackColor = false;
@@ -126,9 +133,10 @@
             // izmeniObezbedjenje
             // 
             izmeniObezbedjenje.BackColor = System.Drawing.SystemColors.ActiveCaption;
-            izmeniObezbedjenje.Location = new System.Drawing.Point(517, 85);
+            izmeniObezbedjenje.Location = new System.Drawing.Point(452, 64);
+            izmeniObezbedjenje.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             izmeniObezbedjenje.Name = "izmeniObezbedjenje";
-            izmeniObezbedjenje.Size = new System.Drawing.Size(94, 35);
+            izmeniObezbedjenje.Size = new System.Drawing.Size(82, 26);
             izmeniObezbedjenje.TabIndex = 7;
             izmeniObezbedjenje.Text = "Izmeni";
             izmeniObezbedjenje.UseVisualStyleBackColor = false;
@@ -137,9 +145,10 @@
             // izbrisiObezbedjenje
             // 
             izbrisiObezbedjenje.BackColor = System.Drawing.SystemColors.ActiveCaption;
-            izbrisiObezbedjenje.Location = new System.Drawing.Point(517, 125);
+            izbrisiObezbedjenje.Location = new System.Drawing.Point(452, 94);
+            izbrisiObezbedjenje.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             izbrisiObezbedjenje.Name = "izbrisiObezbedjenje";
-            izbrisiObezbedjenje.Size = new System.Drawing.Size(94, 35);
+            izbrisiObezbedjenje.Size = new System.Drawing.Size(82, 26);
             izbrisiObezbedjenje.TabIndex = 8;
             izbrisiObezbedjenje.Text = "Izbrisi";
             izbrisiObezbedjenje.UseVisualStyleBackColor = false;
@@ -148,9 +157,10 @@
             // dodajTehnickoLice
             // 
             dodajTehnickoLice.BackColor = System.Drawing.SystemColors.ActiveCaption;
-            dodajTehnickoLice.Location = new System.Drawing.Point(517, 275);
+            dodajTehnickoLice.Location = new System.Drawing.Point(452, 206);
+            dodajTehnickoLice.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             dodajTehnickoLice.Name = "dodajTehnickoLice";
-            dodajTehnickoLice.Size = new System.Drawing.Size(94, 35);
+            dodajTehnickoLice.Size = new System.Drawing.Size(82, 26);
             dodajTehnickoLice.TabIndex = 9;
             dodajTehnickoLice.Text = "Dodaj";
             dodajTehnickoLice.UseVisualStyleBackColor = false;
@@ -159,10 +169,10 @@
             // izmeniTehnickoLice
             // 
             izmeniTehnickoLice.BackColor = System.Drawing.SystemColors.ActiveCaption;
-            izmeniTehnickoLice.Location = new System.Drawing.Point(452, 237);
+            izmeniTehnickoLice.Location = new System.Drawing.Point(452, 247);
             izmeniTehnickoLice.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             izmeniTehnickoLice.Name = "izmeniTehnickoLice";
-            izmeniTehnickoLice.Size = new System.Drawing.Size(82, 26);
+            izmeniTehnickoLice.Size = new System.Drawing.Size(82, 29);
             izmeniTehnickoLice.TabIndex = 10;
             izmeniTehnickoLice.Text = "Izmeni";
             izmeniTehnickoLice.UseVisualStyleBackColor = false;
@@ -171,31 +181,34 @@
             // obrisiTehnickoLice
             // 
             obrisiTehnickoLice.BackColor = System.Drawing.SystemColors.ActiveCaption;
-            obrisiTehnickoLice.Location = new System.Drawing.Point(452, 268);
+            obrisiTehnickoLice.Location = new System.Drawing.Point(452, 290);
             obrisiTehnickoLice.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             obrisiTehnickoLice.Name = "obrisiTehnickoLice";
-            obrisiTehnickoLice.Size = new System.Drawing.Size(82, 26);
+            obrisiTehnickoLice.Size = new System.Drawing.Size(82, 27);
             obrisiTehnickoLice.TabIndex = 11;
-            obrisiTehnickoLice.Text = "Obrisi";
+            obrisiTehnickoLice.Text = "Izbrisi";
             obrisiTehnickoLice.UseVisualStyleBackColor = false;
             obrisiTehnickoLice.Click += obrisiTehnickoLice_Click;
             // 
-            // button7
+            // dodajMenadzera
             // 
-            button7.BackColor = System.Drawing.SystemColors.ActiveCaption;
-            button7.Location = new System.Drawing.Point(517, 501);
-            button7.Name = "button7";
-            button7.Size = new System.Drawing.Size(94, 35);
-            button7.TabIndex = 12;
-            button7.Text = "Dodaj";
-            button7.UseVisualStyleBackColor = false;
+            dodajMenadzera.BackColor = System.Drawing.SystemColors.ActiveCaption;
+            dodajMenadzera.Location = new System.Drawing.Point(452, 376);
+            dodajMenadzera.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            dodajMenadzera.Name = "dodajMenadzera";
+            dodajMenadzera.Size = new System.Drawing.Size(82, 26);
+            dodajMenadzera.TabIndex = 12;
+            dodajMenadzera.Text = "Dodaj";
+            dodajMenadzera.UseVisualStyleBackColor = false;
+            dodajMenadzera.Click += dodajMenadzera_Click;
             // 
             // button8
             // 
             button8.BackColor = System.Drawing.SystemColors.ActiveCaption;
-            button8.Location = new System.Drawing.Point(455, 541);
+            button8.Location = new System.Drawing.Point(398, 406);
+            button8.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             button8.Name = "button8";
-            button8.Size = new System.Drawing.Size(94, 35);
+            button8.Size = new System.Drawing.Size(82, 26);
             button8.TabIndex = 13;
             button8.Text = "Gradovi";
             button8.UseVisualStyleBackColor = false;
@@ -203,9 +216,10 @@
             // button9
             // 
             button9.BackColor = System.Drawing.SystemColors.ActiveCaption;
-            button9.Location = new System.Drawing.Point(584, 541);
+            button9.Location = new System.Drawing.Point(511, 406);
+            button9.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             button9.Name = "button9";
-            button9.Size = new System.Drawing.Size(94, 35);
+            button9.Size = new System.Drawing.Size(82, 26);
             button9.TabIndex = 14;
             button9.Text = "Izmeni";
             button9.UseVisualStyleBackColor = false;
@@ -213,37 +227,40 @@
             // button10
             // 
             button10.BackColor = System.Drawing.SystemColors.ActiveCaption;
-            button10.Location = new System.Drawing.Point(517, 583);
+            button10.Location = new System.Drawing.Point(452, 437);
+            button10.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             button10.Name = "button10";
-            button10.Size = new System.Drawing.Size(94, 35);
+            button10.Size = new System.Drawing.Size(82, 26);
             button10.TabIndex = 15;
             button10.Text = "Izbrisi";
             button10.UseVisualStyleBackColor = false;
+            button10.Click += button10_Click;
             // 
             // button11
             // 
             button11.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
             button11.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, 0);
             button11.ForeColor = System.Drawing.SystemColors.ControlText;
-            button11.Location = new System.Drawing.Point(455, 636);
+            button11.Location = new System.Drawing.Point(398, 477);
+            button11.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             button11.Name = "button11";
-            button11.Size = new System.Drawing.Size(223, 49);
+            button11.Size = new System.Drawing.Size(195, 37);
             button11.TabIndex = 16;
             button11.Text = "Nazad";
             button11.UseVisualStyleBackColor = false;
             // 
             // ZaposleniForm
             // 
-            AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
+            AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             BackgroundImage = (System.Drawing.Image)resources.GetObject("$this.BackgroundImage");
             BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            ClientSize = new System.Drawing.Size(731, 925);
+            ClientSize = new System.Drawing.Size(640, 694);
             Controls.Add(button11);
             Controls.Add(button10);
             Controls.Add(button9);
             Controls.Add(button8);
-            Controls.Add(button7);
+            Controls.Add(dodajMenadzera);
             Controls.Add(obrisiTehnickoLice);
             Controls.Add(izmeniTehnickoLice);
             Controls.Add(dodajTehnickoLice);
@@ -256,6 +273,7 @@
             Controls.Add(listBox3);
             Controls.Add(listBox2);
             Controls.Add(listBox1);
+            Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             Name = "ZaposleniForm";
             Text = "ZaposleniForm";
             Load += ZaposleniForm_Load;
@@ -277,7 +295,7 @@
         private System.Windows.Forms.Button dodajTehnickoLice;
         private System.Windows.Forms.Button izmeniTehnickoLice;
         private System.Windows.Forms.Button obrisiTehnickoLice;
-        private System.Windows.Forms.Button button7;
+        private System.Windows.Forms.Button dodajMenadzera;
         private System.Windows.Forms.Button button8;
         private System.Windows.Forms.Button button9;
         private System.Windows.Forms.Button button10;
