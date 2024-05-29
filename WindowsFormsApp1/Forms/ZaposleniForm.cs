@@ -1,4 +1,5 @@
-﻿using System;
+﻿using NHibernate.Linq.Functions;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -96,7 +97,7 @@ namespace WindowsFormsApp1.Forms
             {
                 ISession s = DataLayer.GetSession();
 
-                FizickoObezbedjenje f = s.Load<FizickoObezbedjenje>(Convert.ToInt64(1111111111));
+                FizickoObezbedjenje f = s.Load<FizickoObezbedjenje>(Convert.ToInt64((listBox1.SelectedItem).ToString().Substring(0,13)));
                 s.Delete(f);
 
                 s.Flush();
