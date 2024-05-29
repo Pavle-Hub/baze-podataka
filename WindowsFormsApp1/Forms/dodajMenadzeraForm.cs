@@ -20,46 +20,26 @@ namespace WindowsFormsApp1.Forms
 
         private void ProslediMenadzera_Click(object sender, EventArgs e)
         {
-            try
+
+            //if (!ValidacijaKontrola())
+            //    return;
+
+            MenadzerDTO m = new MenadzerDTO();
+
+            m.MaticniBroj = long.Parse(textBox1.Text);
+            m.Ime = textBox2.Text;
+            m.Prezime = textBox3.Text;
+            m.Pol = null;
+            if (!string.IsNullOrWhiteSpace(comboBox1.Text))
             {
-
-                ISession s = DataLayer.GetSession();
-                int redniBrojEkipe;
-
-                long maticniBroj = long.Parse(textBox1.Text);
-                string ime = textBox2.Text;
-                string prezime = textBox3.Text;
-                char pol = char.Parse(comboBox1.Text);
-
-              
-                DateTime datumRodjenja = datumRodj.Value;
-
-
-                Menadzer f = new Menadzer();
-                f.MaticniBroj = maticniBroj;
-                f.Ime = ime;
-                f.Prezime = prezime;
-                f.Pol = pol;
-               
-                f.DatumRodjenja = datumRodjenja;
-
-               
-
-                s.Save(f);
-
-                s.Flush();
-
-                s.Close();
-
-                MessageBox.Show("Uspesno dodat nov menadzer!");
-
-                this.Close();
-
+                m.Pol = char.Parse(comboBox1.Text);
             }
-            catch (Exception ec)
-            {
-                MessageBox.Show("oh no\n" + ec.Message);
-            }
+            m.DatumRodjenja = datumRodj.Value;
+
+            DTOManager.dodajMenadzera(m);
+
+            MessageBox.Show("Uspesno dodat novi menadzer!");
+            this.Close();
         }
     }
 }

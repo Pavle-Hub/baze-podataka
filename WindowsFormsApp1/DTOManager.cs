@@ -192,6 +192,189 @@ namespace WindowsFormsApp1
                 MessageBox.Show("Oh no\n" + ex.Message);
             }
         }
+
+        public static void dodajTehnickoLice(TehnickoLiceDTO t)
+        {
+            try
+            {
+                ISession s = DataLayer.GetSession();
+
+                TehnickoLice tl = new TehnickoLice();
+                tl.MaticniBroj = t.MaticniBroj;
+                tl.Ime = t.Ime;
+                tl.Prezime = t.Prezime;
+                tl.Pol = t.Pol;
+                tl.DatumRodjenja = t.DatumRodjenja;
+                tl.StrucnaSprema = t.StrucnaSprema;
+                tl.Oblast = t.Oblast;
+                tl.OdrzavaAS = null;
+
+                s.SaveOrUpdate(tl);
+
+                s.Flush();
+
+                s.Close();
+
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Oh no\n" + ex.Message);
+            }
+        }
+
+        public static TehnickoLiceDTO azurirajTehnickoLice(TehnickoLiceDTO t)
+        {
+            try
+            {
+                ISession s = DataLayer.GetSession();
+
+                TehnickoLice tl = s.Load<TehnickoLice>(t.MaticniBroj);
+
+                tl.Ime = t.Ime;
+                tl.Prezime = t.Prezime;
+                tl.Pol = t.Pol;
+                tl.DatumRodjenja = t.DatumRodjenja;
+                tl.StrucnaSprema = t.StrucnaSprema;
+                tl.Oblast = t.Oblast;
+
+                s.Update(tl);
+                s.Flush();
+
+                s.Close();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Oh no\n" + ex.Message);
+            }
+
+            return t;
+        }
+
+        public static TehnickoLiceDTO vratiTehnickoLice(long maticniBrojTehnickog)
+        {
+            TehnickoLiceDTO tl = new TehnickoLiceDTO();
+            try
+            {
+                ISession s = DataLayer.GetSession();
+
+                TehnickoLice t = s.Load<TehnickoLice>(maticniBrojTehnickog);
+                tl = new TehnickoLiceDTO(t.MaticniBroj, t.Ime, t.Prezime, t.Pol, t.DatumRodjenja, t.StrucnaSprema, t.Oblast);
+
+                s.Close();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Oh no\n" + ex.Message);
+            }
+            return tl;
+        }
+
+        public static void obrisiTehnickoLice(long maticniBrojFizickog)
+        {
+            try
+            {
+                ISession s = DataLayer.GetSession();
+
+                TehnickoLice tl = s.Load<TehnickoLice>(maticniBrojFizickog);
+                s.Delete(tl);
+                s.Flush();
+
+                s.Close();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Oh no\n" + ex.Message);
+            }
+        }
+
+        public static void dodajMenadzera(MenadzerDTO m)
+        {
+            try
+            {
+                ISession s = DataLayer.GetSession();
+
+                Menadzer me = new Menadzer();
+                me.MaticniBroj = m.MaticniBroj;
+                me.Ime = m.Ime;
+                me.Prezime = m.Prezime;
+                me.Pol = m.Pol;
+                me.DatumRodjenja = m.DatumRodjenja;
+
+                s.SaveOrUpdate(me);
+
+                s.Flush();
+
+                s.Close();
+
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Oh no\n" + ex.Message);
+            }
+        }
+
+        public static MenadzerDTO azurirajMenadzera(MenadzerDTO m)
+        {
+            try
+            {
+                ISession s = DataLayer.GetSession();
+
+                Menadzer men = s.Load<Menadzer>(m.MaticniBroj);
+
+                men.Ime = m.Ime;
+                men.Prezime = m.Prezime;
+                men.Pol = m.Pol;
+                men.DatumRodjenja = m.DatumRodjenja;
+
+                s.Update(men);
+                s.Flush();
+
+                s.Close();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Oh no\n" + ex.Message);
+            }
+
+            return m;
+        }
+
+        public static MenadzerDTO vratiMenadzera(long maticniBrojMenadzer)
+        {
+            MenadzerDTO m = new MenadzerDTO();
+            try
+            {
+                ISession s = DataLayer.GetSession();
+
+                Menadzer men = s.Load<Menadzer>(maticniBrojMenadzer);
+                m = new MenadzerDTO(men.MaticniBroj, men.Ime, men.Prezime, men.Pol, men.DatumRodjenja);
+
+                s.Close();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Oh no\n" + ex.Message);
+            }
+            return m;
+        }
+
+        public static void obrisiMenadzera(long maticniBrojMenadzera)
+        {
+            try
+            {
+                ISession s = DataLayer.GetSession();
+
+                Menadzer m = s.Load<Menadzer>(maticniBrojMenadzera);
+                s.Delete(m);
+                s.Flush();
+
+                s.Close();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Oh no\n" + ex.Message);
+            }
+        }
         #endregion
     }
 }
