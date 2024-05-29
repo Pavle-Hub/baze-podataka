@@ -18,6 +18,7 @@ namespace WindowsFormsApp1.Forms
             InitializeComponent();
         }
 
+
         private void ProslediMenadzera_Click(object sender, EventArgs e)
         {
             try
