@@ -1,4 +1,5 @@
-﻿using System;
+﻿using NHibernate.Linq.Functions;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -76,7 +77,7 @@ namespace WindowsFormsApp1.Forms
         private void dodajObezbedjenje_Click(object sender, EventArgs e)
         {
             try
-            { 
+            {
 
                 ObezbedjenjeForm frm = new ObezbedjenjeForm();
                 DialogResult dlg = frm.ShowDialog();
@@ -96,7 +97,7 @@ namespace WindowsFormsApp1.Forms
             {
                 ISession s = DataLayer.GetSession();
 
-                FizickoObezbedjenje f = s.Load<FizickoObezbedjenje>(Convert.ToInt64(1111111111));
+                FizickoObezbedjenje f = s.Load<FizickoObezbedjenje>(Convert.ToInt64((listBox1.SelectedItem).ToString().Substring(0,13)));
                 s.Delete(f);
 
                 s.Flush();
@@ -147,6 +148,7 @@ namespace WindowsFormsApp1.Forms
         private void dodajTehnickoLice_Click(object sender, EventArgs e)
         {
 
+
             try
             {
                 ISession s = DataLayer.GetSession();
@@ -181,13 +183,13 @@ namespace WindowsFormsApp1.Forms
 
         }
 
-        private void button5_Click(object sender, EventArgs e)
+        private void izmeniTehnickoLice_Click(object sender, EventArgs e)
         {
             try
             {
                 ISession s = DataLayer.GetSession();
 
-                FizickoObezbedjenje f = s.Load<FizickoObezbedjenje>(222222222);
+                TehnickoLice f = s.Load<TehnickoLice>(222222222);
 
                 f.Pol = 'Z';
                 f.Ime = "Stoja";
@@ -201,6 +203,28 @@ namespace WindowsFormsApp1.Forms
                 MessageBox.Show("Uspesno azurirano tehicko lice!");
 
 
+            }
+            catch (Exception ec)
+            {
+                MessageBox.Show(ec.Message);
+            }
+        }
+
+        private void obrisiTehnickoLice_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                ISession s = DataLayer.GetSession();
+
+                TehnickoLice f = s.Load<TehnickoLice>(Convert.ToInt64(222222222));
+                s.Delete(f);
+
+                s.Flush();
+                s.Close();
+
+                MessageBox.Show("Uspesno obrisano Tehnicko Lice!");
+
+                PopuniListuTehnickoLice();
             }
             catch (Exception ec)
             {
