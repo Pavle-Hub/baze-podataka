@@ -37,8 +37,74 @@ namespace WindowsFormsApp1.Forms
             textBox4.Text = fo.PEkipi.RedniBroj.ToString();
         }
 
+        private bool ValidacijaKontrola()
+        {
+            if (String.IsNullOrEmpty(textBox1.Text))
+            {
+                MessageBox.Show("Ime ne sme biti prazno polje.",
+                                "Obavestenje",
+                                 MessageBoxButtons.OK,
+                                 MessageBoxIcon.Information);
+
+                return false;
+            }
+
+            if (String.IsNullOrEmpty(textBox2.Text))
+            {
+                MessageBox.Show("Prezime ne sme biti prazno polje.",
+                                "Obavestenje",
+                                 MessageBoxButtons.OK,
+                                 MessageBoxIcon.Information);
+
+                return false;
+            }
+
+            if (String.IsNullOrEmpty(textBox3.Text))
+            {
+                MessageBox.Show("Borilacka vestina ne sme biti prazno polje.",
+                                "Obavestenje",
+                                 MessageBoxButtons.OK,
+                                 MessageBoxIcon.Information);
+
+                return false;
+            }
+
+            if (dateTimePicker1.Value.Year + 18 > DateTime.Now.Year)
+            {
+                MessageBox.Show("Clan fizickog obezbedjenja mora imati minimum 18 godina.",
+                                "Obavestenje",
+                                MessageBoxButtons.OK,
+                MessageBoxIcon.Information);
+
+                return false;
+            }
+
+            if (comboBox1.SelectedIndex == -1)
+            {
+                MessageBox.Show("Izaberite pol",
+                                "Obavestenje",
+                                MessageBoxButtons.OK,
+                MessageBoxIcon.Information);
+
+                return false;
+            }
+
+            if (textBox1.Text == String.Empty || textBox2.Text == String.Empty || comboBox1.SelectedIndex == -1
+                || textBox3.Text == String.Empty || dateTimePicker1.Value.Year + 18 > DateTime.Now.Year)
+            {
+                MessageBox.Show("Sva polja moraju biti popunjena.",
+                                "Obavestenje",
+                                 MessageBoxButtons.OK,
+                                 MessageBoxIcon.Information);
+                return false;
+            }
+            return true;
+        }
+
         private void ProslediDugme_Click(object sender, EventArgs e)
         {
+            if (!ValidacijaKontrola())
+                return;
             int redniBrojEkipe;
             fo.Ime = textBox1.Text;
             fo.Prezime = textBox2.Text;
