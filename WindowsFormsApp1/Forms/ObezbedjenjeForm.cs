@@ -25,7 +25,7 @@ namespace WindowsFormsApp1.Forms
 
         private bool ValidacijaKontrola()
         {
-            if (String.IsNullOrEmpty(textBox2.Text))
+            if (String.IsNullOrEmpty(textBox1.Text))
             {
                 MessageBox.Show("Ime ne sme biti prazno polje.",
                                 "Obavestenje",
@@ -35,7 +35,7 @@ namespace WindowsFormsApp1.Forms
                 return false;
             }
 
-            if (String.IsNullOrEmpty(textBox3.Text))
+            if (String.IsNullOrEmpty(textBox2.Text))
             {
                 MessageBox.Show("Prezime ne sme biti prazno polje.",
                                 "Obavestenje",
@@ -45,9 +45,19 @@ namespace WindowsFormsApp1.Forms
                 return false;
             }
 
-            if (String.IsNullOrEmpty(textBox1.Text))
+            if (String.IsNullOrEmpty(textBox3.Text))
             {
                 MessageBox.Show("Maticni broj ne sme biti prazno polje.",
+                                "Obavestenje",
+                                 MessageBoxButtons.OK,
+                                 MessageBoxIcon.Information);
+
+                return false;
+            }
+
+            if (String.IsNullOrEmpty(textBox5.Text))
+            {
+                MessageBox.Show("Borilacka vestina ne sme biti prazno polje.",
                                 "Obavestenje",
                                  MessageBoxButtons.OK,
                                  MessageBoxIcon.Information);
@@ -64,8 +74,29 @@ namespace WindowsFormsApp1.Forms
 
                 return false;
             }
-            if (textBox2.Text == String.Empty || textBox3.Text == String.Empty || comboBox1.SelectedIndex == -1
-                || textBox1.Text == String.Empty || datumRodj.Value.DayOfYear == DateTime.Now.DayOfYear || textBox5.Text == String.Empty)
+
+            if (datumRodj.Value.Year + 18 > DateTime.Now.Year)
+            {
+                MessageBox.Show("Clan fizickog obezbedjenja mora imati minimum 18 godina.",
+                                "Obavestenje",
+                                MessageBoxButtons.OK,
+                MessageBoxIcon.Information);
+
+                return false;
+            }
+
+            if (comboBox1.SelectedIndex == -1)
+            {
+                MessageBox.Show("Izaberite pol",
+                                "Obavestenje",
+                                MessageBoxButtons.OK,
+                MessageBoxIcon.Information);
+
+                return false;
+            }
+
+            if (textBox1.Text == String.Empty || textBox2.Text == String.Empty || comboBox1.SelectedIndex == -1
+                || textBox3.Text == String.Empty || datumRodj.Value.Year + 18 > DateTime.Now.Year || textBox5.Text == String.Empty)
             {
                 MessageBox.Show("Sva polja moraju biti popunjena.",
                                 "Obavestenje",
