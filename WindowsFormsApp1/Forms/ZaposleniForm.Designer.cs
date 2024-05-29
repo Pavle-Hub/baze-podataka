@@ -39,8 +39,8 @@
             izmeniObezbedjenje = new System.Windows.Forms.Button();
             izbrisiObezbedjenje = new System.Windows.Forms.Button();
             dodajTehnickoLice = new System.Windows.Forms.Button();
-            button5 = new System.Windows.Forms.Button();
-            button6 = new System.Windows.Forms.Button();
+            izmeniTehnickoLice = new System.Windows.Forms.Button();
+            obrisiTehnickoLice = new System.Windows.Forms.Button();
             button7 = new System.Windows.Forms.Button();
             button8 = new System.Windows.Forms.Button();
             button9 = new System.Windows.Forms.Button();
@@ -166,28 +166,29 @@
             dodajTehnickoLice.UseVisualStyleBackColor = false;
             dodajTehnickoLice.Click += dodajTehnickoLice_Click;
             // 
-            // button5
+            // izmeniTehnickoLice
             // 
-            button5.BackColor = System.Drawing.SystemColors.ActiveCaption;
-            button5.Location = new System.Drawing.Point(452, 237);
-            button5.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            button5.Name = "button5";
-            button5.Size = new System.Drawing.Size(82, 26);
-            button5.TabIndex = 10;
-            button5.Text = "Izmeni";
-            button5.UseVisualStyleBackColor = false;
-            button5.Click += button5_Click;
+            izmeniTehnickoLice.BackColor = System.Drawing.SystemColors.ActiveCaption;
+            izmeniTehnickoLice.Location = new System.Drawing.Point(452, 237);
+            izmeniTehnickoLice.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            izmeniTehnickoLice.Name = "izmeniTehnickoLice";
+            izmeniTehnickoLice.Size = new System.Drawing.Size(82, 26);
+            izmeniTehnickoLice.TabIndex = 10;
+            izmeniTehnickoLice.Text = "Izmeni";
+            izmeniTehnickoLice.UseVisualStyleBackColor = false;
+            izmeniTehnickoLice.Click += izmeniTehnickoLice_Click;
             // 
-            // button6
+            // obrisiTehnickoLice
             // 
-            button6.BackColor = System.Drawing.SystemColors.ActiveCaption;
-            button6.Location = new System.Drawing.Point(452, 268);
-            button6.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            button6.Name = "button6";
-            button6.Size = new System.Drawing.Size(82, 26);
-            button6.TabIndex = 11;
-            button6.Text = "Obrisi";
-            button6.UseVisualStyleBackColor = false;
+            obrisiTehnickoLice.BackColor = System.Drawing.SystemColors.ActiveCaption;
+            obrisiTehnickoLice.Location = new System.Drawing.Point(452, 268);
+            obrisiTehnickoLice.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            obrisiTehnickoLice.Name = "obrisiTehnickoLice";
+            obrisiTehnickoLice.Size = new System.Drawing.Size(82, 26);
+            obrisiTehnickoLice.TabIndex = 11;
+            obrisiTehnickoLice.Text = "Obrisi";
+            obrisiTehnickoLice.UseVisualStyleBackColor = false;
+            obrisiTehnickoLice.Click += obrisiTehnickoLice_Click;
             // 
             // button7
             // 
@@ -258,8 +259,8 @@
             Controls.Add(button9);
             Controls.Add(button8);
             Controls.Add(button7);
-            Controls.Add(button6);
-            Controls.Add(button5);
+            Controls.Add(obrisiTehnickoLice);
+            Controls.Add(izmeniTehnickoLice);
             Controls.Add(dodajTehnickoLice);
             Controls.Add(izbrisiObezbedjenje);
             Controls.Add(izmeniObezbedjenje);
@@ -290,8 +291,8 @@
         private System.Windows.Forms.Button izmeniObezbedjenje;
         private System.Windows.Forms.Button izbrisiObezbedjenje;
         private System.Windows.Forms.Button dodajTehnickoLice;
-        private System.Windows.Forms.Button button5;
-        private System.Windows.Forms.Button button6;
+        private System.Windows.Forms.Button izmeniTehnickoLice;
+        private System.Windows.Forms.Button obrisiTehnickoLice;
         private System.Windows.Forms.Button button7;
         private System.Windows.Forms.Button button8;
         private System.Windows.Forms.Button button9;
