@@ -169,10 +169,10 @@
             // izmeniTehnickoLice
             // 
             izmeniTehnickoLice.BackColor = System.Drawing.SystemColors.ActiveCaption;
-            izmeniTehnickoLice.Location = new System.Drawing.Point(452, 247);
+            izmeniTehnickoLice.Location = new System.Drawing.Point(518, 315);
             izmeniTehnickoLice.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             izmeniTehnickoLice.Name = "izmeniTehnickoLice";
-            izmeniTehnickoLice.Size = new System.Drawing.Size(82, 29);
+            izmeniTehnickoLice.Size = new System.Drawing.Size(93, 37);
             izmeniTehnickoLice.TabIndex = 10;
             izmeniTehnickoLice.Text = "Izmeni";
             izmeniTehnickoLice.UseVisualStyleBackColor = false;
@@ -181,10 +181,10 @@
             // obrisiTehnickoLice
             // 
             obrisiTehnickoLice.BackColor = System.Drawing.SystemColors.ActiveCaption;
-            obrisiTehnickoLice.Location = new System.Drawing.Point(452, 290);
+            obrisiTehnickoLice.Location = new System.Drawing.Point(517, 356);
             obrisiTehnickoLice.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             obrisiTehnickoLice.Name = "obrisiTehnickoLice";
-            obrisiTehnickoLice.Size = new System.Drawing.Size(82, 27);
+            obrisiTehnickoLice.Size = new System.Drawing.Size(93, 37);
             obrisiTehnickoLice.TabIndex = 11;
             obrisiTehnickoLice.Text = "Izbrisi";
             obrisiTehnickoLice.UseVisualStyleBackColor = false;
@@ -255,7 +255,7 @@
             AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             BackgroundImage = (System.Drawing.Image)resources.GetObject("$this.BackgroundImage");
             BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            ClientSize = new System.Drawing.Size(640, 694);
+            ClientSize = new System.Drawing.Size(731, 746);
             Controls.Add(button11);
             Controls.Add(button10);
             Controls.Add(button9);

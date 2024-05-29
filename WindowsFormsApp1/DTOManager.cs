@@ -21,20 +21,20 @@ namespace WindowsFormsApp1
                 IEnumerable<FizickoObezbedjenje> lica = from o in s.Query<FizickoObezbedjenje>()
                                                         select o;
 
-                foreach(FizickoObezbedjenje a in lica)
+                foreach (FizickoObezbedjenje a in lica)
                 {
                     FizickoObezbedjenjeDTO b = new FizickoObezbedjenjeDTO(a.MaticniBroj, a.Ime, a.Prezime, a.Pol, a.DatumRodjenja, a.BorilackaVestina);
                     if (a.PripadaEkipi != null)
                     {
                         b.PripadaEkipi = new EkipaDTO(a.PripadaEkipi.RedniBroj);
                     }
-              
+
                     lista.Add(b);
                 }
 
                 s.Close();
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 MessageBox.Show("Oh no\n" + ex.Message);
             }
@@ -50,7 +50,7 @@ namespace WindowsFormsApp1
                 ISession s = DataLayer.GetSession();
 
                 IEnumerable<TehnickoLice> lica = from o in s.Query<TehnickoLice>()
-                                                        select o;
+                                                 select o;
 
                 foreach (TehnickoLice a in lica)
                 {
@@ -76,7 +76,7 @@ namespace WindowsFormsApp1
                 ISession s = DataLayer.GetSession();
 
                 IEnumerable<Menadzer> lica = from o in s.Query<Menadzer>()
-                                                 select o;
+                                             select o;
 
                 foreach (Menadzer a in lica)
                 {
@@ -93,6 +93,55 @@ namespace WindowsFormsApp1
 
             return lista;
         }
+
+
+        public static FizickoObezbedjenjeDTO azurirajFizickoObezbedjenje(FizickoObezbedjenjeDTO fo, int redniBrojEkipe)
+        {
+            try
+            {
+                ISession s = DataLayer.GetSession();
+
+                FizickoObezbedjenje fizobz = s.Load<FizickoObezbedjenje>(fo.MaticniBroj);
+
+                fizobz.Ime = fo.Ime;
+                fizobz.Prezime = fo.Prezime;
+                fizobz.Pol = fo.Pol;
+                fizobz.BorilackaVestina = fo.BorilackaVestina;
+                fizobz.DatumRodjenja = fo.DatumRodjenja;
+                fizobz.PripadaEkipi = s.Load<Ekipa>(redniBrojEkipe);
+
+                s.Update(fizobz);
+                s.Flush();
+
+                s.Close();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Oh no\n" + ex.Message);
+            }
+
+            return fo;
+        }
+
+        public static FizickoObezbedjenjeDTO vratiFizickoObezbedjenje(long maticniBrojFizickog)
+        {
+            FizickoObezbedjenjeDTO fo = new FizickoObezbedjenjeDTO();
+            try
+            {
+                ISession s = DataLayer.GetSession();
+
+                FizickoObezbedjenje fizobz = s.Load<FizickoObezbedjenje>(maticniBrojFizickog);
+                fo = new FizickoObezbedjenjeDTO(fizobz.MaticniBroj, fizobz.Ime, fizobz.Prezime, fizobz.Pol, fizobz.DatumRodjenja, fizobz.BorilackaVestina, fizobz.PripadaEkipi);
+
+                s.Close();
+            }
+            catch(Exception ex)
+            {
+                MessageBox.Show("Oh no\n" + ex.Message);
+            }
+            return fo;
+        }
+
 
         #endregion
     }
