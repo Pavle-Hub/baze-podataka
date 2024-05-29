@@ -108,7 +108,10 @@ namespace WindowsFormsApp1
                 fizobz.Pol = fo.Pol;
                 fizobz.BorilackaVestina = fo.BorilackaVestina;
                 fizobz.DatumRodjenja = fo.DatumRodjenja;
-                fizobz.PripadaEkipi = s.Load<Ekipa>(redniBrojEkipe);
+                if (redniBrojEkipe == -1)
+                    fizobz.PripadaEkipi = null;
+                else
+                    fizobz.PripadaEkipi = s.Load<Ekipa>(redniBrojEkipe);
 
                 s.Update(fizobz);
                 s.Flush();
