@@ -76,19 +76,10 @@ namespace WindowsFormsApp1.Forms
 
         private void dodajObezbedjenje_Click(object sender, EventArgs e)
         {
-            try
-            {
-
                 ObezbedjenjeForm frm = new ObezbedjenjeForm();
                 DialogResult dlg = frm.ShowDialog();
 
                 PopuniListuFizickoObezbedjenje();
-
-            }
-            catch (Exception ec)
-            {
-                MessageBox.Show(ec.Message);
-            }
         }
 
         private void izbrisiObezbedjenje_Click(object sender, EventArgs e)
@@ -105,7 +96,7 @@ namespace WindowsFormsApp1.Forms
             MessageBoxButtons buttons = MessageBoxButtons.OKCancel;
             DialogResult result = MessageBox.Show(poruka, title, buttons);
 
-            if(result == DialogResult.OK)
+            if (result == DialogResult.OK)
             {
                 DTOManager.obrisiFizickoObezbedjenje(maticniBrojFizickog);
                 MessageBox.Show("Uspesno obrisano fizicko obezbedjenje!");
@@ -116,8 +107,8 @@ namespace WindowsFormsApp1.Forms
 
         private void izmeniObezbedjenje_Click(object sender, EventArgs e)
         {
-           
-            if(listBox1.SelectedItems.Count == 0)
+
+            if (listBox1.SelectedItems.Count == 0)
             {
                 MessageBox.Show("Izaberite obezbedjenje cije podatke zelite da izmenite!");
                 return;
@@ -129,7 +120,7 @@ namespace WindowsFormsApp1.Forms
             DialogResult dlg = frm.ShowDialog();
 
             PopuniListuFizickoObezbedjenje();
-          
+
         }
 
         private void listBox1_SelectedIndexChanged(object sender, EventArgs e)
@@ -241,6 +232,11 @@ namespace WindowsFormsApp1.Forms
             {
                 MessageBox.Show(ec.Message);
             }
+        }
+
+        private void button11_Click(object sender, EventArgs e)
+        {
+            this.Close();
         }
     }
 }

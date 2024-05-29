@@ -78,64 +78,32 @@ namespace WindowsFormsApp1.Forms
 
         private void ProslediObezbedjenje_Click(object sender, EventArgs e)
         {
-            try
+            
+            if (!ValidacijaKontrola())
+                return;
+
+            int redniBrojEkipe;
+            FizickoObezbedjenjeDTO f = new FizickoObezbedjenjeDTO();
+            f.MaticniBroj = long.Parse(textBox1.Text);
+            f.Ime = textBox2.Text;
+            f.Prezime = textBox3.Text;
+            f.Pol = char.Parse(comboBox1.Text);
+            f.BorilackaVestina = textBox5.Text;
+            f.DatumRodjenja = datumRodj.Value;
+            if (textBox6.Text != "")
             {
-                if (!ValidacijaKontrola())
-                    return;
-
-                ISession s = DataLayer.GetSession();
-                int redniBrojEkipe;
-
-                long maticniBroj = long.Parse(textBox1.Text);
-                string ime = textBox2.Text;
-                string prezime = textBox3.Text;
-                char pol = char.Parse(comboBox1.Text);
-                
-                string borilackaVestina = textBox5.Text;
-                DateTime datumRodjenja = datumRodj.Value;
-
-                if (textBox6.Text != "")
-                {
-                    redniBrojEkipe = int.Parse(textBox6.Text);
-                }
-                else
-                {
-                    redniBrojEkipe = -1;
-                }
-
-
-                FizickoObezbedjenje f = new FizickoObezbedjenje();
-                f.MaticniBroj = maticniBroj;
-                f.Ime = ime;
-                f.Prezime = prezime;
-                f.Pol = pol;
-                f.BorilackaVestina = borilackaVestina;
-                f.DatumRodjenja = datumRodjenja;
-
-                if (redniBrojEkipe == -1)
-                {
-                    f.PripadaEkipi = null;
-                }
-                else
-                {
-                    f.PripadaEkipi = s.Load<Ekipa>(redniBrojEkipe);
-                }
-
-                s.Save(f);
-
-                s.Flush();
-
-                s.Close();
-
-                MessageBox.Show("Uspesno dodato novo fizicko obezbedjenje!");
-
-                this.Close();
-
+               redniBrojEkipe = int.Parse(textBox6.Text);
             }
-            catch (Exception ec)
+            else
             {
-                MessageBox.Show("oh no\n" + ec.Message);
+               redniBrojEkipe = -1;
             }
+
+            DTOManager.dodajFizickoObezbedjenje(f, redniBrojEkipe);
+
+            MessageBox.Show("Uspesno dodato novo fizicko obezbedjenje!");
+            this.Close();
+
         }
     }
 }

@@ -61,6 +61,7 @@
             // 
             textBox1.Location = new System.Drawing.Point(200, 32);
             textBox1.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            textBox1.MaxLength = 13;
             textBox1.Name = "textBox1";
             textBox1.Size = new System.Drawing.Size(114, 27);
             textBox1.TabIndex = 1;
@@ -99,6 +100,8 @@
             // 
             // datumRodj
             // 
+            datumRodj.CustomFormat = "dd. MMM yyyy.";
+            datumRodj.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
             datumRodj.Location = new System.Drawing.Point(200, 297);
             datumRodj.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             datumRodj.Name = "datumRodj";

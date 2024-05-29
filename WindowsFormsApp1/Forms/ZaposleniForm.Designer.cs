@@ -231,6 +231,7 @@
             button11.TabIndex = 16;
             button11.Text = "Nazad";
             button11.UseVisualStyleBackColor = false;
+            button11.Click += button11_Click;
             // 
             // ZaposleniForm
             // 

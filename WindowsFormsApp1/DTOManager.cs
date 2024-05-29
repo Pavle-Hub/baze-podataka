@@ -163,6 +163,35 @@ namespace WindowsFormsApp1
             }
         }
 
+        public static void dodajFizickoObezbedjenje(FizickoObezbedjenjeDTO f, int redniBrojEkipe)
+        {
+            try
+            {
+                ISession s = DataLayer.GetSession();
+
+                FizickoObezbedjenje fo = new FizickoObezbedjenje();
+                fo.MaticniBroj = f.MaticniBroj;
+                fo.Ime = f.Ime;
+                fo.Prezime = f.Prezime;
+                fo.Pol = f.Pol;
+                fo.BorilackaVestina = f.BorilackaVestina;
+                fo.DatumRodjenja = f.DatumRodjenja;
+                if (redniBrojEkipe != -1)
+                    fo.PripadaEkipi = s.Load<Ekipa>(redniBrojEkipe);
+                else
+                    fo.PripadaEkipi = null;
+
+                s.SaveOrUpdate(fo);
+
+                s.Flush();
+
+                s.Close();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Oh no\n" + ex.Message);
+            }
+        }
         #endregion
     }
 }
