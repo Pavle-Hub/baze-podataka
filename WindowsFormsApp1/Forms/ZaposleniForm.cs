@@ -115,29 +115,20 @@ namespace WindowsFormsApp1.Forms
 
         private void izmeniObezbedjenje_Click(object sender, EventArgs e)
         {
-            try
+           
+            if(listBox1.SelectedItems.Count == 0)
             {
-                ISession s = DataLayer.GetSession();
-
-                FizickoObezbedjenje f = s.Load<FizickoObezbedjenje>(1987465230128);
-
-                f.Pol = 'Z';
-                f.Ime = "Stoja";
-                f.Prezime = "Hrebeljanovic";
-
-                s.SaveOrUpdate(f);
-
-                s.Flush();
-                s.Close();
-
-                MessageBox.Show("Uspesno azurirano fizicko obezbedjenje!");
-
-
+                MessageBox.Show("Izaberite obezbedjenje cije podatke zelite da izmenite!");
+                return;
             }
-            catch (Exception ec)
-            {
-                MessageBox.Show(ec.Message);
-            }
+
+            long maticniBrojFizickog = Convert.ToInt64((listBox1.SelectedItem).ToString().Substring(0, 13));
+            FizickoObezbedjenjeDTO fo = DTOManager.vratiFizickoObezbedjenje(maticniBrojFizickog);
+            IzmeniFizickoObezbedjenjeForm frm = new IzmeniFizickoObezbedjenjeForm(fo);
+            DialogResult dlg = frm.ShowDialog();
+
+            PopuniListuFizickoObezbedjenje();
+          
         }
 
         private void listBox1_SelectedIndexChanged(object sender, EventArgs e)

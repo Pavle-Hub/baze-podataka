@@ -38,6 +38,7 @@ namespace WindowsFormsApp1
         public char? Pol;
         public DateTime DatumRodjenja;
         public string BorilackaVestina;
+        public Ekipa PEkipi;
         public EkipaDTO PripadaEkipi;
 
         public FizickoObezbedjenjeDTO(long maticniBroj, string ime, string prezime, char? pol, DateTime datumRodjenja, string borilackaVestina)
@@ -48,6 +49,22 @@ namespace WindowsFormsApp1
             Pol = pol;
             DatumRodjenja = datumRodjenja;
             BorilackaVestina = borilackaVestina;
+        }
+
+        public FizickoObezbedjenjeDTO(long maticniBroj, string ime, string prezime, char? pol, DateTime datumRodjenja, string borilackaVestina, Ekipa e)
+        {
+            MaticniBroj = maticniBroj;
+            Ime = ime;
+            Prezime = prezime;
+            Pol = pol;
+            DatumRodjenja = datumRodjenja;
+            BorilackaVestina = borilackaVestina;
+            PEkipi = e;
+        }
+
+        public FizickoObezbedjenjeDTO()
+        {
+
         }
 
         public override string ToString()
