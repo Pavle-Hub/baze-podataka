@@ -8,6 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.TaskbarClock;
 
 namespace WindowsFormsApp1.Forms
 {
@@ -20,13 +21,67 @@ namespace WindowsFormsApp1.Forms
 
         private void label7_Click(object sender, EventArgs e)
         {
+        }
 
+        private bool ValidacijaKontrola()
+        {
+            if (String.IsNullOrEmpty(textBox2.Text))
+            {
+                MessageBox.Show("Ime ne sme biti prazno polje.",
+                                "Obavestenje",
+                                 MessageBoxButtons.OK,
+                                 MessageBoxIcon.Information);
+
+                return false;
+            }
+
+            if (String.IsNullOrEmpty(textBox3.Text))
+            {
+                MessageBox.Show("Prezime ne sme biti prazno polje.",
+                                "Obavestenje",
+                                 MessageBoxButtons.OK,
+                                 MessageBoxIcon.Information);
+
+                return false;
+            }
+
+            if (String.IsNullOrEmpty(textBox1.Text))
+            {
+                MessageBox.Show("Maticni broj ne sme biti prazno polje.",
+                                "Obavestenje",
+                                 MessageBoxButtons.OK,
+                                 MessageBoxIcon.Information);
+
+                return false;
+            }
+
+            if (textBox1.Text.Length != 13)
+            {
+                MessageBox.Show("Maticni broj mora sadrzati 13 cifara.",
+                                "Obavestenje",
+                                MessageBoxButtons.OK,
+                MessageBoxIcon.Information);
+
+                return false;
+            }
+            if (textBox2.Text == String.Empty || textBox3.Text == String.Empty || comboBox1.SelectedIndex == -1
+                || textBox1.Text == String.Empty || datumRodj.Value.DayOfYear == DateTime.Now.DayOfYear || textBox5.Text == String.Empty)
+            {
+                MessageBox.Show("Sva polja moraju biti popunjena.",
+                                "Obavestenje",
+                                 MessageBoxButtons.OK,
+                                 MessageBoxIcon.Information);
+                return false;
+            }
+            return true;
         }
 
         private void ProslediObezbedjenje_Click(object sender, EventArgs e)
         {
             try
             {
+                if (!ValidacijaKontrola())
+                    return;
 
                 ISession s = DataLayer.GetSession();
                 int redniBrojEkipe;

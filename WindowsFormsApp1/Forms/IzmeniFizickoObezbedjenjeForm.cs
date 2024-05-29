@@ -51,6 +51,8 @@ namespace WindowsFormsApp1.Forms
                 redniBrojEkipe = -1;
 
             DTOManager.azurirajFizickoObezbedjenje(fo, redniBrojEkipe);
+
+            MessageBox.Show("Uspesno azurirano fizicko obezbedjenje!");
             this.Close();
         }
     }
