@@ -145,6 +145,23 @@ namespace WindowsFormsApp1
             return fo;
         }
 
+        public static void obrisiFizickoObezbedjenje(long maticniBrojFizickog)
+        {
+            try
+            {
+                ISession s = DataLayer.GetSession();
+
+                FizickoObezbedjenje fo = s.Load<FizickoObezbedjenje>(maticniBrojFizickog);
+                s.Delete(fo);
+                s.Flush();
+
+                s.Close();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Oh no\n" + ex.Message);
+            }
+        }
 
         #endregion
     }
