@@ -32,8 +32,54 @@ namespace WindowsFormsApp1.Forms
             textBox1.Text = m.Ime;
             textBox2.Text = m.Prezime;
             comboBox1.Text = m.Pol.ToString();
-            dateTimePicker1.Value = m.DatumRodjenja;
+            datumRodj.Value = m.DatumRodjenja;
         }
+
+        private bool ValidacijaKontrolaMenadzer()
+        {        
+            if (String.IsNullOrEmpty(textBox1.Text))
+            {
+                MessageBox.Show("Ime ne sme biti prazno polje.",
+                                "Obaveštenje",
+                                MessageBoxButtons.OK,
+                                MessageBoxIcon.Information);
+
+                return false;
+            }
+
+            if (String.IsNullOrEmpty(textBox2.Text))
+            {
+                MessageBox.Show("Prezime ne sme biti prazno polje.",
+                                "Obaveštenje",
+                                MessageBoxButtons.OK,
+                                MessageBoxIcon.Information);
+
+                return false;
+            }
+
+            if (datumRodj.Value.Year + 18 > DateTime.Now.Year)
+            {
+                MessageBox.Show("Menadžer mora imati minimum 18 godina.",
+                                "Obaveštenje",
+                                MessageBoxButtons.OK,
+                                MessageBoxIcon.Information);
+
+                return false;
+            }
+
+            if (comboBox1.SelectedIndex == -1)
+            {
+                MessageBox.Show("Izaberite pol.",
+                                "Obaveštenje",
+                                MessageBoxButtons.OK,
+                                MessageBoxIcon.Information);
+
+                return false;
+            }
+
+            return true;
+        }
+
         private void button1_Click(object sender, EventArgs e)
         {
             //if (!ValidacijaKontrola())
@@ -42,7 +88,7 @@ namespace WindowsFormsApp1.Forms
             m.Ime = textBox1.Text;
             m.Prezime = textBox2.Text;
             m.Pol = char.Parse(comboBox1.Text);
-            m.DatumRodjenja = dateTimePicker1.Value;
+            m.DatumRodjenja = datumRodj.Value;
 
             DTOManager.azurirajMenadzera(m);
 

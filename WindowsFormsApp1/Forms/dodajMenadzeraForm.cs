@@ -18,12 +18,76 @@ namespace WindowsFormsApp1.Forms
             InitializeComponent();
         }
 
+        private bool ValidacijaKontrolaMenadzer()
+        {
+            if (String.IsNullOrEmpty(textBox1.Text))
+            {
+                MessageBox.Show("Matični broj ne sme biti prazno polje.",
+                                "Obaveštenje",
+                                MessageBoxButtons.OK,
+                                MessageBoxIcon.Information);
+
+                return false;
+            }
+
+            if (textBox1.Text.Length != 13)
+            {
+                MessageBox.Show("Matični broj mora sadržati 13 cifara.",
+                                "Obaveštenje",
+                                MessageBoxButtons.OK,
+                                MessageBoxIcon.Information);
+
+                return false;
+            }
+
+            if (String.IsNullOrEmpty(textBox2.Text))
+            {
+                MessageBox.Show("Ime ne sme biti prazno polje.",
+                                "Obaveštenje",
+                                MessageBoxButtons.OK,
+                                MessageBoxIcon.Information);
+
+                return false;
+            }
+
+            if (String.IsNullOrEmpty(textBox3.Text))
+            {
+                MessageBox.Show("Prezime ne sme biti prazno polje.",
+                                "Obaveštenje",
+                                MessageBoxButtons.OK,
+                                MessageBoxIcon.Information);
+
+                return false;
+            }
+
+            if (datumRodj.Value.Year + 18 > DateTime.Now.Year)
+            {
+                MessageBox.Show("Menadžer mora imati minimum 18 godina.",
+                                "Obaveštenje",
+                                MessageBoxButtons.OK,
+                                MessageBoxIcon.Information);
+
+                return false;
+            }
+
+            if (comboBox1.SelectedIndex == -1)
+            {
+                MessageBox.Show("Izaberite pol.",
+                                "Obaveštenje",
+                                MessageBoxButtons.OK,
+                                MessageBoxIcon.Information);
+
+                return false;
+            }
+
+            return true;
+        }
 
         private void ProslediMenadzera_Click(object sender, EventArgs e)
         {
 
-            //if (!ValidacijaKontrola())
-            //    return;
+            if (!ValidacijaKontrolaMenadzer())
+                return;
 
             MenadzerDTO m = new MenadzerDTO();
 
