@@ -76,10 +76,10 @@ namespace WindowsFormsApp1.Forms
 
         private void dodajObezbedjenje_Click(object sender, EventArgs e)
         {
-                ObezbedjenjeForm frm = new ObezbedjenjeForm();
-                DialogResult dlg = frm.ShowDialog();
+            ObezbedjenjeForm frm = new ObezbedjenjeForm();
+            DialogResult dlg = frm.ShowDialog();
 
-                PopuniListuFizickoObezbedjenje();
+            PopuniListuFizickoObezbedjenje();
         }
 
         private void izbrisiObezbedjenje_Click(object sender, EventArgs e)
@@ -131,69 +131,51 @@ namespace WindowsFormsApp1.Forms
         private void dodajTehnickoLice_Click(object sender, EventArgs e)
         {
 
+            dodajTehnickoLiceForm frm = new dodajTehnickoLiceForm();
+            DialogResult dlg = frm.ShowDialog();
 
-            try
-            {
-
-                dodajTehnickoLiceForm frm = new dodajTehnickoLiceForm();
-                DialogResult dlg = frm.ShowDialog();
-
-                PopuniListuTehnickoLice();
-
-            }
-            catch (Exception ec)
-            {
-                MessageBox.Show(ec.Message);
-            }
+            PopuniListuTehnickoLice();
 
         }
 
         private void izmeniTehnickoLice_Click(object sender, EventArgs e)
         {
-            try
+
+            if (listBox2.SelectedItems.Count == 0)
             {
-                ISession s = DataLayer.GetSession();
-
-                TehnickoLice f = s.Load<TehnickoLice>(222222222);
-
-                f.Pol = 'Z';
-                f.Ime = "Stoja";
-                f.Prezime = "Hrebeljanovic";
-
-                s.SaveOrUpdate(f);
-
-                s.Flush();
-                s.Close();
-
-                MessageBox.Show("Uspesno azurirano tehicko lice!");
-
-
+                MessageBox.Show("Izaberite tehnicko lice cije podatke zelite da izmenite!");
+                return;
             }
-            catch (Exception ec)
-            {
-                MessageBox.Show(ec.Message);
-            }
+            long maticniBrojTehnickog = Convert.ToInt64((listBox2.SelectedItem).ToString().Substring(0, 13));
+            TehnickoLiceDTO t = DTOManager.vratiTehnickoLice(maticniBrojTehnickog);
+            IzmeniTehnickoLiceForm frm = new IzmeniTehnickoLiceForm(t);
+            DialogResult dlg = frm.ShowDialog();
+
+            PopuniListuTehnickoLice();
+
         }
 
         private void obrisiTehnickoLice_Click(object sender, EventArgs e)
         {
-            try
+
+
+            if (listBox2.SelectedItems.Count == 0)
             {
-                ISession s = DataLayer.GetSession();
-
-                TehnickoLice f = s.Load<TehnickoLice>(Convert.ToInt64((listBox2.SelectedItem).ToString().Substring(0, 13)));
-                s.Delete(f);
-
-                s.Flush();
-                s.Close();
-
-                MessageBox.Show("Uspesno obrisano Tehnicko Lice!");
-
-                PopuniListuTehnickoLice();
+                MessageBox.Show("Izaberite tehnicko lice koje zelite da obrisete!");
+                return;
             }
-            catch (Exception ec)
+
+            long maticniBrojTehnickog = Convert.ToInt64((listBox2.SelectedItem).ToString().Substring(0, 13));
+            string poruka = "Da li zelite da obrisete izabranog zaposlenog?";
+            string title = "Pitanje";
+            MessageBoxButtons buttons = MessageBoxButtons.OKCancel;
+            DialogResult result = MessageBox.Show(poruka, title, buttons);
+
+            if (result == DialogResult.OK)
             {
-                MessageBox.Show(ec.Message);
+                DTOManager.obrisiTehnickoLice(maticniBrojTehnickog);
+                MessageBox.Show("Uspesno obrisano tehnicko lice!");
+                this.PopuniListuTehnickoLice();
             }
         }
 
@@ -204,7 +186,7 @@ namespace WindowsFormsApp1.Forms
                 dodajMenadzeraForm frm = new dodajMenadzeraForm();
                 DialogResult dlg = frm.ShowDialog();
 
-                PopuniListuTehnickoLice();
+                PopuniListuMenadzera();
             }
             catch (Exception ec)
             {
@@ -214,29 +196,44 @@ namespace WindowsFormsApp1.Forms
 
         private void button10_Click(object sender, EventArgs e)
         {
-            try
+            if (listBox3.SelectedItems.Count == 0)
             {
-                ISession s = DataLayer.GetSession();
-
-                Menadzer f = s.Load<Menadzer>(Convert.ToInt64((listBox2.SelectedItem).ToString().Substring(0, 13)));
-                s.Delete(f);
-
-                s.Flush();
-                s.Close();
-
-                MessageBox.Show("Uspesno obrisan Menadzer!");
-
-                PopuniListuMenadzera();
+                MessageBox.Show("Izaberite menadzera kojeg zelite da obrisete!");
+                return;
             }
-            catch (Exception ec)
+
+            long maticniBrojMenadzera = Convert.ToInt64((listBox3.SelectedItem).ToString().Substring(0, 13));
+            string poruka = "Da li zelite da obrisete izabranog zaposlenog?";
+            string title = "Pitanje";
+            MessageBoxButtons buttons = MessageBoxButtons.OKCancel;
+            DialogResult result = MessageBox.Show(poruka, title, buttons);
+
+            if (result == DialogResult.OK)
             {
-                MessageBox.Show(ec.Message);
+                DTOManager.obrisiMenadzera(maticniBrojMenadzera);
+                MessageBox.Show("Uspesno obrisan menadzer!");
+                this.PopuniListuMenadzera();
             }
         }
 
         private void button11_Click(object sender, EventArgs e)
         {
             this.Close();
+        }
+
+        private void button9_Click(object sender, EventArgs e)
+        {
+            if (listBox3.SelectedItems.Count == 0)
+            {
+                MessageBox.Show("Izaberite menadzera cije podatke zelite da izmenite!");
+                return;
+            }
+            long maticniBrojMenadzer = Convert.ToInt64((listBox3.SelectedItem).ToString().Substring(0, 13));
+            MenadzerDTO m = DTOManager.vratiMenadzera(maticniBrojMenadzer);
+            IzmeniMenadzeraForm frm = new IzmeniMenadzeraForm(m);
+            DialogResult dlg = frm.ShowDialog();
+
+            PopuniListuMenadzera();
         }
     }
 }

@@ -106,7 +106,7 @@
             label3.AutoSize = true;
             label3.BackColor = System.Drawing.SystemColors.GradientActiveCaption;
             label3.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, 0);
-            label3.Location = new System.Drawing.Point(504, 472);
+            label3.Location = new System.Drawing.Point(517, 469);
             label3.Name = "label3";
             label3.Size = new System.Drawing.Size(106, 28);
             label3.TabIndex = 5;
@@ -181,7 +181,7 @@
             // dodajMenadzera
             // 
             dodajMenadzera.BackColor = System.Drawing.SystemColors.ActiveCaption;
-            dodajMenadzera.Location = new System.Drawing.Point(517, 501);
+            dodajMenadzera.Location = new System.Drawing.Point(518, 500);
             dodajMenadzera.Name = "dodajMenadzera";
             dodajMenadzera.Size = new System.Drawing.Size(94, 35);
             dodajMenadzera.TabIndex = 12;
@@ -208,6 +208,7 @@
             button9.TabIndex = 14;
             button9.Text = "Izmeni";
             button9.UseVisualStyleBackColor = false;
+            button9.Click += button9_Click;
             // 
             // button10
             // 

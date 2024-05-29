@@ -20,46 +20,28 @@ namespace WindowsFormsApp1.Forms
 
         private void ProslediTehickoLice_Click(object sender, EventArgs e)
         {
-            try
+
+            //if (!ValidacijaKontrola())
+            //    return;
+
+            TehnickoLiceDTO t = new TehnickoLiceDTO();
+
+            t.MaticniBroj = long.Parse(textBox1.Text);
+            t.Ime = textBox2.Text;
+            t.Prezime = textBox3.Text;
+            t.Pol = null;
+            if (!string.IsNullOrWhiteSpace(comboBox1.Text))
             {
-                ISession s = DataLayer.GetSession();
-
-                long maticniBroj = long.Parse(textBox1.Text);
-                string ime = textBox2.Text;
-                string prezime = textBox3.Text;
-                char? pol = null;
-                if (!string.IsNullOrWhiteSpace(comboBox1.Text))
-                {
-                    pol = char.Parse(comboBox1.Text);
-                }
-
-                string strucnaSprema = textBox6.Text;
-                string oblast = textBox5.Text;
-                DateTime datumRodjenja = dateTimePicker1.Value;
-
-                TehnickoLice t = new TehnickoLice();
-                    
-                t.MaticniBroj = maticniBroj;
-                t.Ime = ime;
-                t.Prezime = prezime;
-                t.Pol = pol;
-                t.StrucnaSprema = strucnaSprema;
-                t.Oblast = oblast;
-                t.DatumRodjenja = datumRodjenja;
-              
-
-                s.Save(t);
-                s.Flush();
-                s.Close();
-
-                MessageBox.Show("Uspesno dodato novo tehnicko lice!");
-
-                this.Close();
+                t.Pol = char.Parse(comboBox1.Text);
             }
-            catch (Exception ec)
-            {
-                MessageBox.Show("oh no\n" + ec.Message);
-            }
+            t.StrucnaSprema = textBox6.Text;
+            t.Oblast = textBox5.Text;
+            t.DatumRodjenja = dateTimePicker1.Value;
+
+            DTOManager.dodajTehnickoLice(t);
+
+            MessageBox.Show("Uspesno dodato novo tehnicko lice!");
+            this.Close();
         }
     }
 }

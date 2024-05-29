@@ -28,6 +28,11 @@ namespace WindowsFormsApp1
             OdrzavaAS = new List<AlarmniSistemDTO>();
         }
 
+        public TehnickoLiceDTO()
+        {
+
+        }
+
     }
 
     public class FizickoObezbedjenjeDTO
@@ -93,6 +98,11 @@ namespace WindowsFormsApp1
             DatumRodjenja = datumRodjenja;
             RegionalniCentri = new List<RegionalniCentarDTO>();
             Gradovi = new List<string>();
+        }
+
+        public MenadzerDTO()
+        {
+
         }
     }
 
