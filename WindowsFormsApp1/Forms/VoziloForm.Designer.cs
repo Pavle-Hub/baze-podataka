@@ -31,8 +31,8 @@
             listBox1 = new System.Windows.Forms.ListBox();
             dodajVozilo = new System.Windows.Forms.Button();
             izmeniVozilo = new System.Windows.Forms.Button();
-            izbrisiVozilo = new System.Windows.Forms.Button();
             button1 = new System.Windows.Forms.Button();
+            izbrisiVozilo = new System.Windows.Forms.Button();
             SuspendLayout();
             // 
             // listBox1
@@ -54,7 +54,7 @@
             dodajVozilo.Location = new System.Drawing.Point(12, 22);
             dodajVozilo.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             dodajVozilo.Name = "dodajVozilo";
-            dodajVozilo.Size = new System.Drawing.Size(123, 85);
+            dodajVozilo.Size = new System.Drawing.Size(114, 85);
             dodajVozilo.TabIndex = 7;
             dodajVozilo.Text = "Dodaj";
             dodajVozilo.UseVisualStyleBackColor = false;
@@ -71,18 +71,6 @@
             izmeniVozilo.Text = "Izmeni";
             izmeniVozilo.UseVisualStyleBackColor = false;
             // 
-            // izbrisiVozilo
-            // 
-            izbrisiVozilo.BackColor = System.Drawing.SystemColors.ActiveCaption;
-            izbrisiVozilo.Location = new System.Drawing.Point(268, 22);
-            izbrisiVozilo.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            izbrisiVozilo.Name = "izbrisiVozilo";
-            izbrisiVozilo.Size = new System.Drawing.Size(116, 85);
-            izbrisiVozilo.TabIndex = 9;
-            izbrisiVozilo.Text = "Izbrisi";
-            izbrisiVozilo.UseVisualStyleBackColor = false;
-            izbrisiVozilo.Click += dodajVozilo_Click;
-            // 
             // button1
             // 
             button1.BackColor = System.Drawing.SystemColors.ActiveCaption;
@@ -94,13 +82,25 @@
             button1.Text = "nazad";
             button1.UseVisualStyleBackColor = false;
             // 
+            // izbrisiVozilo
+            // 
+            izbrisiVozilo.BackColor = System.Drawing.SystemColors.ActiveCaption;
+            izbrisiVozilo.ForeColor = System.Drawing.SystemColors.ControlText;
+            izbrisiVozilo.Location = new System.Drawing.Point(280, 22);
+            izbrisiVozilo.Name = "izbrisiVozilo";
+            izbrisiVozilo.Size = new System.Drawing.Size(114, 85);
+            izbrisiVozilo.TabIndex = 11;
+            izbrisiVozilo.Text = "izbrisi";
+            izbrisiVozilo.UseVisualStyleBackColor = false;
+            izbrisiVozilo.Click += izbrisiVozilo_Click_1;
+            // 
             // VoziloForm
             // 
             AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             ClientSize = new System.Drawing.Size(566, 381);
-            Controls.Add(button1);
             Controls.Add(izbrisiVozilo);
+            Controls.Add(button1);
             Controls.Add(izmeniVozilo);
             Controls.Add(dodajVozilo);
             Controls.Add(listBox1);
@@ -115,7 +115,7 @@
         private System.Windows.Forms.ListBox listBox1;
         private System.Windows.Forms.Button dodajVozilo;
         private System.Windows.Forms.Button izmeniVozilo;
-        private System.Windows.Forms.Button izbrisiVozilo;
         private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button izbrisiVozilo;
     }
 }

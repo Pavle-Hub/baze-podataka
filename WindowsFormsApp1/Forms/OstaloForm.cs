@@ -36,5 +36,19 @@ namespace WindowsFormsApp1.Forms
             SmenaForm s = new SmenaForm();
             s.ShowDialog();
         }
+
+        private void OstaloForm_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button5_Click(object sender, EventArgs e)
+        {
+            Hide();
+            RegionalniCentarForm f = new RegionalniCentarForm();
+            f.ShowDialog();
+
+            Show();
+        }
     }
 }

@@ -1,6 +1,7 @@
 ﻿using Microsoft.Identity.Client;
 using System.Drawing;
 
+
 namespace WindowsFormsApp1
 {
     #region Zaposleni
@@ -160,6 +161,11 @@ namespace WindowsFormsApp1
             RedniBroj = redniBroj;    
             clanoviEkipe = new List<FizickoObezbedjenjeDTO>();
         }
+        public EkipaDTO()
+        {
+
+        }
+
     }
 
     #endregion
@@ -297,7 +303,11 @@ namespace WindowsFormsApp1
             EkipaSmene = ekipa;
             ObjektiZaSmenu = new List<ObjekatDTO>();
         }
+
     }
+
+
+
 
     #endregion
 
@@ -321,6 +331,7 @@ namespace WindowsFormsApp1
             IntervencijaObjekta = intervencijaObjekta;
             IntervencijaEkipe = intervencijaEkipe;
         }
+        public IntervencijaDTO() { }
     }
 
     #endregion
@@ -339,7 +350,7 @@ namespace WindowsFormsApp1
         public IList<AlarmniSistemDTO> AlarmniSistemi;
 
         public ObjekatDTO(int id, string adresa, string tip, float? povrsina)
-        { 
+        {
             Id = id;
             Adresa = adresa;
             Tip = tip;
@@ -412,8 +423,13 @@ namespace WindowsFormsApp1
             DatumOd = datumOd;
             DatumDo = datumDo;
         }
+        public VoziloDTO()
+        {
+
+        }
     }
 
     #endregion
+
 
 }

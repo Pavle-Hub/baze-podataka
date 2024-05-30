@@ -48,117 +48,110 @@
             // 
             // ProslediObezbedjenje
             // 
-            ProslediObezbedjenje.Location = new System.Drawing.Point(128, 399);
-            ProslediObezbedjenje.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            ProslediObezbedjenje.Location = new System.Drawing.Point(112, 299);
             ProslediObezbedjenje.Name = "ProslediObezbedjenje";
-            ProslediObezbedjenje.Size = new System.Drawing.Size(136, 49);
+            ProslediObezbedjenje.Size = new System.Drawing.Size(119, 37);
             ProslediObezbedjenje.TabIndex = 0;
-            ProslediObezbedjenje.Text = "Prosledi";
+            ProslediObezbedjenje.Text = "prosledi";
             ProslediObezbedjenje.UseVisualStyleBackColor = true;
             ProslediObezbedjenje.Click += ProslediObezbedjenje_Click;
             // 
             // textBox1
             // 
-            textBox1.Location = new System.Drawing.Point(200, 32);
-            textBox1.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            textBox1.Location = new System.Drawing.Point(175, 24);
             textBox1.MaxLength = 13;
             textBox1.Name = "textBox1";
-            textBox1.Size = new System.Drawing.Size(114, 27);
+            textBox1.Size = new System.Drawing.Size(100, 23);
             textBox1.TabIndex = 1;
             // 
             // textBox2
             // 
-            textBox2.Location = new System.Drawing.Point(200, 80);
-            textBox2.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            textBox2.Location = new System.Drawing.Point(175, 60);
             textBox2.Name = "textBox2";
-            textBox2.Size = new System.Drawing.Size(114, 27);
+            textBox2.Size = new System.Drawing.Size(100, 23);
             textBox2.TabIndex = 2;
             // 
             // textBox3
             // 
-            textBox3.Location = new System.Drawing.Point(200, 134);
-            textBox3.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            textBox3.Location = new System.Drawing.Point(175, 100);
             textBox3.Name = "textBox3";
-            textBox3.Size = new System.Drawing.Size(114, 27);
+            textBox3.Size = new System.Drawing.Size(100, 23);
             textBox3.TabIndex = 3;
             // 
             // textBox5
             // 
-            textBox5.Location = new System.Drawing.Point(200, 244);
-            textBox5.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            textBox5.Location = new System.Drawing.Point(175, 183);
             textBox5.Name = "textBox5";
-            textBox5.Size = new System.Drawing.Size(114, 27);
+            textBox5.Size = new System.Drawing.Size(100, 23);
             textBox5.TabIndex = 5;
             // 
             // textBox6
             // 
-            textBox6.Location = new System.Drawing.Point(200, 349);
-            textBox6.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            textBox6.Location = new System.Drawing.Point(175, 262);
             textBox6.Name = "textBox6";
-            textBox6.Size = new System.Drawing.Size(114, 27);
+            textBox6.Size = new System.Drawing.Size(100, 23);
             textBox6.TabIndex = 6;
             // 
             // datumRodj
             // 
             datumRodj.CustomFormat = "dd. MMM yyyy.";
             datumRodj.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            datumRodj.Location = new System.Drawing.Point(200, 297);
-            datumRodj.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            datumRodj.Location = new System.Drawing.Point(175, 223);
             datumRodj.Name = "datumRodj";
-            datumRodj.Size = new System.Drawing.Size(114, 27);
+            datumRodj.Size = new System.Drawing.Size(100, 23);
             datumRodj.TabIndex = 7;
             // 
             // label1
             // 
             label1.AutoSize = true;
-            label1.Location = new System.Drawing.Point(86, 35);
+            label1.Location = new System.Drawing.Point(75, 26);
             label1.Name = "label1";
-            label1.Size = new System.Drawing.Size(92, 20);
+            label1.Size = new System.Drawing.Size(74, 15);
             label1.TabIndex = 8;
             label1.Text = "Maticni broj:";
             // 
             // label2
             // 
             label2.AutoSize = true;
-            label2.Location = new System.Drawing.Point(141, 83);
+            label2.Location = new System.Drawing.Point(123, 62);
             label2.Name = "label2";
-            label2.Size = new System.Drawing.Size(37, 20);
+            label2.Size = new System.Drawing.Size(30, 15);
             label2.TabIndex = 9;
             label2.Text = "Ime:";
             // 
             // label3
             // 
             label3.AutoSize = true;
-            label3.Location = new System.Drawing.Point(113, 137);
+            label3.Location = new System.Drawing.Point(99, 103);
             label3.Name = "label3";
-            label3.Size = new System.Drawing.Size(65, 20);
+            label3.Size = new System.Drawing.Size(52, 15);
             label3.TabIndex = 10;
             label3.Text = "Prezime:";
             // 
             // label5
             // 
             label5.AutoSize = true;
-            label5.Location = new System.Drawing.Point(55, 247);
+            label5.Location = new System.Drawing.Point(48, 185);
             label5.Name = "label5";
-            label5.Size = new System.Drawing.Size(123, 20);
+            label5.Size = new System.Drawing.Size(98, 15);
             label5.TabIndex = 12;
             label5.Text = "Borilacka vestina:";
             // 
             // label6
             // 
             label6.AutoSize = true;
-            label6.Location = new System.Drawing.Point(62, 302);
+            label6.Location = new System.Drawing.Point(54, 226);
             label6.Name = "label6";
-            label6.Size = new System.Drawing.Size(116, 20);
+            label6.Size = new System.Drawing.Size(92, 15);
             label6.TabIndex = 13;
             label6.Text = "Datum rodjenja:";
             // 
             // label7
             // 
             label7.AutoSize = true;
-            label7.Location = new System.Drawing.Point(57, 352);
+            label7.Location = new System.Drawing.Point(50, 264);
             label7.Name = "label7";
-            label7.Size = new System.Drawing.Size(121, 20);
+            label7.Size = new System.Drawing.Size(95, 15);
             label7.TabIndex = 14;
             label7.Text = "Redni broj ekipe:";
             label7.Click += label7_Click;
@@ -166,9 +159,9 @@
             // label4
             // 
             label4.AutoSize = true;
-            label4.Location = new System.Drawing.Point(146, 191);
+            label4.Location = new System.Drawing.Point(128, 143);
             label4.Name = "label4";
-            label4.Size = new System.Drawing.Size(32, 20);
+            label4.Size = new System.Drawing.Size(27, 15);
             label4.TabIndex = 15;
             label4.Text = "Pol:";
             // 
@@ -176,19 +169,18 @@
             // 
             comboBox1.FormattingEnabled = true;
             comboBox1.Items.AddRange(new object[] { "M", "Z" });
-            comboBox1.Location = new System.Drawing.Point(200, 188);
-            comboBox1.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            comboBox1.Location = new System.Drawing.Point(175, 141);
             comboBox1.Name = "comboBox1";
-            comboBox1.Size = new System.Drawing.Size(114, 28);
+            comboBox1.Size = new System.Drawing.Size(100, 23);
             comboBox1.TabIndex = 16;
             // 
             // ObezbedjenjeForm
             // 
-            AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
+            AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             BackgroundImage = (System.Drawing.Image)resources.GetObject("$this.BackgroundImage");
             BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            ClientSize = new System.Drawing.Size(394, 477);
+            ClientSize = new System.Drawing.Size(345, 358);
             Controls.Add(comboBox1);
             Controls.Add(label4);
             Controls.Add(label7);
@@ -204,7 +196,6 @@
             Controls.Add(textBox2);
             Controls.Add(textBox1);
             Controls.Add(ProslediObezbedjenje);
-            Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             Name = "ObezbedjenjeForm";
             Text = "ObezbedjenjeForm";
             ResumeLayout(false);

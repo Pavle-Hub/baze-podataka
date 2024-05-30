@@ -2,7 +2,7 @@
 {
     public class Vozilo
     {
-        public virtual string RegistarskaOznaka { get; protected set; }
+        public virtual string RegistarskaOznaka { get;  set; }
         public virtual string Boja { get; set; }
         public virtual string? Tip { get; set; }
         public virtual string? Model { get; set; }

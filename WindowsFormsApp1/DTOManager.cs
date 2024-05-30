@@ -469,6 +469,53 @@ namespace WindowsFormsApp1
 
             return lista;
         }
+        public static void dodajVozilo(VoziloDTO v)
+        {
+            try
+            {
+                ISession s = DataLayer.GetSession();
+
+                Vozilo vozilo = new Vozilo();
+                vozilo.RegistarskaOznaka = v.RegOznaka;
+                vozilo.Boja = v.Boja;
+                vozilo.Tip = v.Tip;
+                vozilo.Model = v.Model;
+                vozilo.Proizvodjac = v.Proizvodjac;
+                vozilo.DatumOd = v.DatumOd;
+                vozilo.DatumDo = v.DatumDo;
+
+
+                vozilo.RegistrovanNaRegCentar = s.Load<RegionalniCentar>(v.RC.Id);
+                vozilo.EkipaKojaGaDuzi = s.Load<Ekipa>(v.DuziGaEkipa.RedniBroj);
+
+                s.SaveOrUpdate(vozilo);
+                s.Flush();
+                s.Close();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Oh no\n" + ex.Message);
+            }
+        }
+        public static void obrisiVozilo(string registarskaOznaka)
+        {
+            try
+            {
+                ISession s = DataLayer.GetSession();
+
+                Vozilo vozilo = s.Load<Vozilo>(registarskaOznaka);
+                s.Delete(vozilo);
+                s.Flush();
+
+                s.Close();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Oh no\n" + ex.Message);
+            }
+        }
+
+
 
         #endregion
 
@@ -745,6 +792,108 @@ namespace WindowsFormsApp1
 
             return lista;
         }
+        #endregion
+
+
+        #region RegionalniCentar
+        public static List<RegionalniCentarDTO> PopuniRegionalneCentre()
+        {
+            List<RegionalniCentarDTO> lista = new List<RegionalniCentarDTO>();
+            try
+            {
+                ISession s = DataLayer.GetSession();
+
+                IEnumerable<RegionalniCentar> centri = from rc in s.Query<RegionalniCentar>()
+                                                       select rc;
+
+                foreach (RegionalniCentar rc in centri)
+                {
+                    string imeMenadzera = rc.AngazovanMenadzer != null ? rc.AngazovanMenadzer.Ime + " " + rc.AngazovanMenadzer.Prezime : "N/A";
+
+                    RegionalniCentarDTO rcDTO = new RegionalniCentarDTO(rc.Id, rc.Adresa, imeMenadzera);
+
+                    rcDTO.BrojeviTelefona = rc.BrojeviTelefona.Select(t => t.Telefon.ToString()).ToList();
+                    rcDTO.ImenaGradova = rc.ImenaGradova.Select(g => g.Grad).ToList();  // Koristimo g.Grad za naziv grada
+                    rcDTO.RegOznakaVozila = rc.Vozila.Select(v => v.RegistarskaOznaka).ToList();
+
+                    lista.Add(rcDTO);
+                }
+
+                s.Close();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Oh no\n" + ex.Message);
+            }
+
+            return lista;
+        }
+
+
+        #endregion
+
+        #region Ekipa
+        public static List<EkipaDTO> PopuniEkipe()
+        {
+            List<EkipaDTO> lista = new List<EkipaDTO>();
+            try
+            {
+                ISession s = DataLayer.GetSession();
+
+                IEnumerable<Ekipa> ekipe = from e in s.Query<Ekipa>()
+                                           select e;
+
+                foreach (Ekipa ek in ekipe)
+                {
+                    EkipaDTO ekipaDTO = new EkipaDTO(ek.RedniBroj);
+
+                    // Popunjavanje podataka o vođi ekipe
+                    if (ek.Vodja != null)
+                    {
+                        ekipaDTO.Vodja = new FizickoObezbedjenjeDTO
+                        {
+                            MaticniBroj = ek.Vodja.MaticniBroj,
+                            Ime = ek.Vodja.Ime,
+                            Prezime = ek.Vodja.Prezime
+                        };
+                    }
+
+                    // Popunjavanje imena članova ekipe
+                    ekipaDTO.ImenaClanova = ek.Clanovi.Select(c => c.Ime + " " + c.Prezime).ToList();
+
+                    // Popunjavanje smena ekipe
+                    ekipaDTO.SmeneEkipe = ek.Smene.Select(smena => new SmenaDTO()
+                    {
+                        Id = smena.Id,
+                        VremePocetka = smena.VremePocetka,
+                        VremeKraja = smena.VremeKraja
+                    }).ToList();
+
+                    // Popunjavanje intervencija ekipe
+                    ekipaDTO.IntervencijeEkipe = ek.Intervencija.Select(intervencija => new IntervencijaDTO()
+                    {
+                        Id = intervencija.Id,
+                        Datum = intervencija.Datum,
+                        Vreme = intervencija.Vreme,
+                        Tip = intervencija.Tip
+                    }).ToList();
+
+                    // Popunjavanje registarske oznake vozila koje ekipa koristi
+                    ekipaDTO.RegOznakaVozila = ek.DuziVozilo != null ? ek.DuziVozilo.RegistarskaOznaka : "N/A";
+
+                    lista.Add(ekipaDTO);
+                }
+
+                s.Close();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Oh no\n" + ex.Message);
+            }
+
+            return lista;
+        }
+
         #endregion
     }
 }
