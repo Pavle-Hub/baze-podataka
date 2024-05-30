@@ -52,6 +52,7 @@
             izbrisiSmenu.TabIndex = 1;
             izbrisiSmenu.Text = "Izbrisi";
             izbrisiSmenu.UseVisualStyleBackColor = true;
+            izbrisiSmenu.Click += izbrisiSmenu_Click;
             // 
             // listBoxSmena
             // 
@@ -71,6 +72,7 @@
             izmeniSmenu.TabIndex = 3;
             izmeniSmenu.Text = "Izmeni";
             izmeniSmenu.UseVisualStyleBackColor = true;
+            izmeniSmenu.Click += izmeniSmenu_Click;
             // 
             // SmenaForm
             // 
