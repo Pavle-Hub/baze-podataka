@@ -150,6 +150,7 @@ namespace WindowsFormsApp1
         {
             RedniBroj = redniBroj;
         }
+        
     }
 
     #endregion
@@ -269,6 +270,7 @@ namespace WindowsFormsApp1
             EkipaZaSmenu = ekipa;
             ObjektiZaSmenu = new List<ObuhvataDTO>();
         }
+        public  SmenaDTO() { }
     }
 
     #endregion
@@ -293,6 +295,7 @@ namespace WindowsFormsApp1
             IntervencijaObjekta = intervencijaObjekta;
             IntervencijaEkipe = intervencijaEkipe;
         }
+        public IntervencijaDTO() { }
     }
 
     #endregion
@@ -378,6 +381,10 @@ namespace WindowsFormsApp1
             Proizvodjac = proizvodjac;
             DatumOd = datumOd;
             DatumDo = datumDo;
+        }
+        public VoziloDTO()
+        {
+
         }
     }
 

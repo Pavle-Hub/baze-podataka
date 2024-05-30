@@ -33,11 +33,9 @@
             textBox3 = new System.Windows.Forms.TextBox();
             textBox4 = new System.Windows.Forms.TextBox();
             textBox5 = new System.Windows.Forms.TextBox();
-            textBox6 = new System.Windows.Forms.TextBox();
             datumRodj = new System.Windows.Forms.DateTimePicker();
             dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
             ProslediMenadzera = new System.Windows.Forms.Button();
-            textBox7 = new System.Windows.Forms.TextBox();
             label6 = new System.Windows.Forms.Label();
             label1 = new System.Windows.Forms.Label();
             label2 = new System.Windows.Forms.Label();
@@ -46,6 +44,8 @@
             label5 = new System.Windows.Forms.Label();
             label7 = new System.Windows.Forms.Label();
             label8 = new System.Windows.Forms.Label();
+            comboBox1 = new System.Windows.Forms.ComboBox();
+            comboBox2 = new System.Windows.Forms.ComboBox();
             SuspendLayout();
             // 
             // textBox1
@@ -83,18 +83,11 @@
             textBox5.Size = new System.Drawing.Size(124, 23);
             textBox5.TabIndex = 7;
             // 
-            // textBox6
-            // 
-            textBox6.Location = new System.Drawing.Point(117, 154);
-            textBox6.Name = "textBox6";
-            textBox6.Size = new System.Drawing.Size(124, 23);
-            textBox6.TabIndex = 8;
-            // 
             // datumRodj
             // 
             datumRodj.CustomFormat = "dd. MMM yyyy.";
             datumRodj.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            datumRodj.Location = new System.Drawing.Point(221, 212);
+            datumRodj.Location = new System.Drawing.Point(229, 217);
             datumRodj.Name = "datumRodj";
             datumRodj.Size = new System.Drawing.Size(124, 23);
             datumRodj.TabIndex = 9;
@@ -103,31 +96,25 @@
             // 
             dateTimePicker1.CustomFormat = "dd. MMM yyyy.";
             dateTimePicker1.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            dateTimePicker1.Location = new System.Drawing.Point(91, 212);
+            dateTimePicker1.Location = new System.Drawing.Point(99, 217);
             dateTimePicker1.Name = "dateTimePicker1";
             dateTimePicker1.Size = new System.Drawing.Size(124, 23);
             dateTimePicker1.TabIndex = 10;
             // 
             // ProslediMenadzera
             // 
-            ProslediMenadzera.Location = new System.Drawing.Point(128, 270);
+            ProslediMenadzera.Location = new System.Drawing.Point(117, 262);
             ProslediMenadzera.Name = "ProslediMenadzera";
             ProslediMenadzera.Size = new System.Drawing.Size(140, 37);
             ProslediMenadzera.TabIndex = 19;
             ProslediMenadzera.Text = "Prosledi";
             ProslediMenadzera.UseVisualStyleBackColor = true;
-            // 
-            // textBox7
-            // 
-            textBox7.Location = new System.Drawing.Point(117, 183);
-            textBox7.Name = "textBox7";
-            textBox7.Size = new System.Drawing.Size(124, 23);
-            textBox7.TabIndex = 20;
+            ProslediMenadzera.Click += ProslediVozilo_Click;
             // 
             // label6
             // 
             label6.AutoSize = true;
-            label6.Location = new System.Drawing.Point(3, 220);
+            label6.Location = new System.Drawing.Point(11, 223);
             label6.Name = "label6";
             label6.Size = new System.Drawing.Size(82, 15);
             label6.TabIndex = 23;
@@ -196,11 +183,31 @@
             label8.TabIndex = 30;
             label8.Text = "Redni broj ekipe:";
             // 
+            // comboBox1
+            // 
+            comboBox1.FormattingEnabled = true;
+            comboBox1.Location = new System.Drawing.Point(117, 188);
+            comboBox1.Name = "comboBox1";
+            comboBox1.Size = new System.Drawing.Size(120, 23);
+            comboBox1.TabIndex = 31;
+            comboBox1.SelectedIndexChanged += comboBox1_SelectedIndexChanged;
+            // 
+            // comboBox2
+            // 
+            comboBox2.FormattingEnabled = true;
+            comboBox2.Items.AddRange(new object[] { "" });
+            comboBox2.Location = new System.Drawing.Point(117, 159);
+            comboBox2.Name = "comboBox2";
+            comboBox2.Size = new System.Drawing.Size(120, 23);
+            comboBox2.TabIndex = 32;
+            // 
             // dodajVozilo
             // 
             AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            ClientSize = new System.Drawing.Size(420, 319);
+            ClientSize = new System.Drawing.Size(380, 339);
+            Controls.Add(comboBox2);
+            Controls.Add(comboBox1);
             Controls.Add(label8);
             Controls.Add(label7);
             Controls.Add(label5);
@@ -209,11 +216,9 @@
             Controls.Add(label2);
             Controls.Add(label1);
             Controls.Add(label6);
-            Controls.Add(textBox7);
             Controls.Add(ProslediMenadzera);
             Controls.Add(dateTimePicker1);
             Controls.Add(datumRodj);
-            Controls.Add(textBox6);
             Controls.Add(textBox5);
             Controls.Add(textBox4);
             Controls.Add(textBox3);
@@ -232,11 +237,9 @@
         private System.Windows.Forms.TextBox textBox3;
         private System.Windows.Forms.TextBox textBox4;
         private System.Windows.Forms.TextBox textBox5;
-        private System.Windows.Forms.TextBox textBox6;
         private System.Windows.Forms.DateTimePicker datumRodj;
         private System.Windows.Forms.DateTimePicker dateTimePicker1;
         private System.Windows.Forms.Button ProslediMenadzera;
-        private System.Windows.Forms.TextBox textBox7;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
@@ -245,5 +248,7 @@
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.ComboBox comboBox1;
+        private System.Windows.Forms.ComboBox comboBox2;
     }
 }

@@ -93,6 +93,7 @@
             button5.TabIndex = 4;
             button5.Text = "Regionalni centri";
             button5.UseVisualStyleBackColor = false;
+            button5.Click += button5_Click;
             // 
             // button6
             // 
@@ -121,6 +122,7 @@
             Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             Name = "OstaloForm";
             Text = "OstaloForm";
+            Load += OstaloForm_Load;
             ResumeLayout(false);
         }
 
