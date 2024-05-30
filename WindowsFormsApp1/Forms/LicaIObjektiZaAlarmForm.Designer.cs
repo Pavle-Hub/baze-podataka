@@ -49,9 +49,9 @@
             listView1.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] { ColumnMatBr, ColumnIme, ColumnPrezime, ColumnDatum, ColumnPol });
             listView1.FullRowSelect = true;
             listView1.GridLines = true;
-            listView1.Location = new System.Drawing.Point(39, 67);
+            listView1.Location = new System.Drawing.Point(12, 67);
             listView1.Name = "listView1";
-            listView1.Size = new System.Drawing.Size(664, 244);
+            listView1.Size = new System.Drawing.Size(707, 244);
             listView1.TabIndex = 4;
             listView1.UseCompatibleStateImageBehavior = false;
             listView1.View = System.Windows.Forms.View.Details;
@@ -110,7 +110,7 @@
             listView2.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] { columnHeader1, columnHeader2, columnHeader3, columnHeader4 });
             listView2.FullRowSelect = true;
             listView2.GridLines = true;
-            listView2.Location = new System.Drawing.Point(39, 375);
+            listView2.Location = new System.Drawing.Point(12, 381);
             listView2.Name = "listView2";
             listView2.Size = new System.Drawing.Size(664, 79);
             listView2.TabIndex = 3;

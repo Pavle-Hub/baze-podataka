@@ -155,7 +155,7 @@ namespace WindowsFormsApp1
 
         public EkipaDTO(int redniBroj)
         {
-            RedniBroj = redniBroj;
+            this.RedniBroj = redniBroj;
         }
         
     }
@@ -228,14 +228,18 @@ namespace WindowsFormsApp1
 
     public class UltrazvucniSenzorDTO : AlarmniSistemDTO
     {
-        public double? MinFrekvencija;
-        public double? MaxFrekvencija;
+        public int? MinFrekvencija;
+        public int? MaxFrekvencija;
 
-        public UltrazvucniSenzorDTO(int id, string proizvodjac, int? godinaProizvodnje, DateTime datumInstalacije, Objekat objekat, double? minFrek, double? maxFrekv)
+        public UltrazvucniSenzorDTO(int id, string proizvodjac, int? godinaProizvodnje, DateTime datumInstalacije, Objekat objekat, int? minFrek, int? maxFrekv)
             : base(id, proizvodjac, godinaProizvodnje, datumInstalacije, objekat)
         {
             MinFrekvencija = minFrek;
             MaxFrekvencija = maxFrekv;
+        }
+        public UltrazvucniSenzorDTO()
+        {
+
         }
     }
 
@@ -250,16 +254,26 @@ namespace WindowsFormsApp1
             HorRezolucija = horRez;
             VerRezolucija = verRez;
         }
+
+        public DetektorToplotnogOdrazaDTO()
+        {
+
+        }
     }
 
     public class DetektorPokretaDTO : AlarmniSistemDTO
     {
-        public double? Osetljivost;
+        public int? Osetljivost;
 
-        public DetektorPokretaDTO(int id, string proizvodjac, int? godinaProizvodnje, DateTime datumInstalacije, Objekat objekat, double? osetljivost)
+        public DetektorPokretaDTO(int id, string proizvodjac, int? godinaProizvodnje, DateTime datumInstalacije, Objekat objekat, int? osetljivost)
             : base(id, proizvodjac, godinaProizvodnje, datumInstalacije, objekat)
         {
             Osetljivost = osetljivost;
+        }
+
+        public DetektorPokretaDTO()
+        {
+
         }
     }
 
@@ -285,9 +299,6 @@ namespace WindowsFormsApp1
             EkipaZaSmenu = ekipa;
             ObjektiZaSmenu = new List<ObuhvataDTO>();
         }
-        public  SmenaDTO() { }
-    }
-
         public SmenaDTO(int id, DateTime vremePocetka, DateTime vremeKraja, Ekipa ekipa)
         {
             Id = id;
@@ -297,6 +308,7 @@ namespace WindowsFormsApp1
             ObjektiZaSmenu = new List<ObuhvataDTO>();
         }
     }
+
 
     #endregion
 

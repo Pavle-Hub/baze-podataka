@@ -48,7 +48,7 @@ namespace WindowsFormsApp1.Forms
             alsis.LiceKojeOdrzava = DTOManager.vratiListuTehnickih(alsis.Id);
             foreach(TehnickoLiceDTO tl in alsis.LiceKojeOdrzava)
             {
-                ListViewItem item = new ListViewItem(new string[] { tl.MaticniBroj.ToString(), tl.Ime, tl.Prezime, tl.DatumRodjenja.ToString() });
+                ListViewItem item = new ListViewItem(new string[] { tl.MaticniBroj.ToString(), tl.Ime, tl.Prezime, tl.DatumRodjenja.ToString(), tl.Pol.ToString() });
                 this.listView1.Items.Add(item);
             }
         }

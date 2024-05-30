@@ -649,6 +649,111 @@ namespace WindowsFormsApp1
             }
             return lista;
         }
+
+        public static void dodajUltrazvucniSenzor(UltrazvucniSenzorDTO uzs)
+        {
+            try
+            {
+                ISession s = DataLayer.GetSession();
+
+                AlarmniSistem als = new AlarmniSistem();
+                als.Id = uzs.Id;
+                als.Proizvodjac = uzs.Proizvodjac;
+                als.GodinaProizvodnje = uzs.GodinaProizvodnje;
+                als.DatumInstalacije = uzs.DatumInstalacije;
+                als.UltrazvucniSenzor = 'T';
+                als.MinFrekvencija = uzs.MinFrekvencija;
+                als.MaxFrekvencija = uzs.MaxFrekvencija;
+                als.DetektorPokreta = 'F';
+                als.Osetljivost = null;
+                als.DetektorToplotnogOdraza = 'F';
+                als.HorRezolucija = null;
+                als.VerRezolucija = null;
+                als.Objekat = null;
+                als.Odrzava = null;
+
+                s.SaveOrUpdate(als);
+
+                s.Flush();
+
+                s.Close();
+
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Oh no\n" + ex.Message);
+            }
+        }
+
+        public static void dodajToplotniOdraz(DetektorToplotnogOdrazaDTO dto)
+        {
+            try
+            {
+                ISession s = DataLayer.GetSession();
+
+                AlarmniSistem als = new AlarmniSistem();
+                als.Id = dto.Id;
+                als.Proizvodjac = dto.Proizvodjac;
+                als.GodinaProizvodnje = dto.GodinaProizvodnje;
+                als.DatumInstalacije = dto.DatumInstalacije;
+                als.UltrazvucniSenzor = 'F';
+                als.MinFrekvencija = null;
+                als.MaxFrekvencija = null;
+                als.DetektorPokreta = 'F';
+                als.Osetljivost = null;
+                als.DetektorToplotnogOdraza = 'T';
+                als.HorRezolucija = dto.HorRezolucija;
+                als.VerRezolucija = dto.VerRezolucija;
+                als.Objekat = null;
+                als.Odrzava = null;
+
+                s.SaveOrUpdate(als);
+
+                s.Flush();
+
+                s.Close();
+
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Oh no\n" + ex.Message);
+            }
+        }
+
+        public static void dodajDetektorPokreta(DetektorPokretaDTO dp)
+        {
+            try
+            {
+                ISession s = DataLayer.GetSession();
+
+                AlarmniSistem als = new AlarmniSistem();
+                als.Id = dp.Id;
+                als.Proizvodjac = dp.Proizvodjac;
+                als.GodinaProizvodnje = dp.GodinaProizvodnje;
+                als.DatumInstalacije = dp.DatumInstalacije;
+                als.UltrazvucniSenzor = 'F';
+                als.MinFrekvencija = null;
+                als.MaxFrekvencija = null;
+                als.DetektorPokreta = 'T';
+                als.Osetljivost = dp.Osetljivost;
+                als.DetektorToplotnogOdraza = 'F';
+                als.HorRezolucija = null;
+                als.VerRezolucija = null;
+                als.Objekat = null;
+                als.Odrzava = null;
+
+                s.SaveOrUpdate(als);
+
+                s.Flush();
+
+                s.Close();
+
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Oh no\n" + ex.Message);
+            }
+        }
         #endregion
 
         #region Objekat
@@ -774,41 +879,6 @@ namespace WindowsFormsApp1
                 foreach (Ekipa ek in ekipe)
                 {
                     EkipaDTO ekipaDTO = new EkipaDTO(ek.RedniBroj);
-
-                    // Popunjavanje podataka o vođi ekipe
-                    if (ek.Vodja != null)
-                    {
-                        ekipaDTO.Vodja = new FizickoObezbedjenjeDTO
-                        {
-                            MaticniBroj = ek.Vodja.MaticniBroj,
-                            Ime = ek.Vodja.Ime,
-                            Prezime = ek.Vodja.Prezime
-                        };
-                    }
-
-                    // Popunjavanje imena članova ekipe
-                    ekipaDTO.ImenaClanova = ek.Clanovi.Select(c => c.Ime + " " + c.Prezime).ToList();
-
-                    // Popunjavanje smena ekipe
-                    ekipaDTO.SmeneEkipe = ek.Smene.Select(smena => new SmenaDTO()
-                    {
-                        Id = smena.Id,
-                        VremePocetka = smena.VremePocetka,
-                        VremeKraja = smena.VremeKraja
-                    }).ToList();
-
-                    // Popunjavanje intervencija ekipe
-                    ekipaDTO.IntervencijeEkipe = ek.Intervencija.Select(intervencija => new IntervencijaDTO()
-                    {
-                        Id = intervencija.Id,
-                        Datum = intervencija.Datum,
-                        Vreme = intervencija.Vreme,
-                        Tip = intervencija.Tip
-                    }).ToList();
-
-                    // Popunjavanje registarske oznake vozila koje ekipa koristi
-                    ekipaDTO.RegOznakaVozila = ek.DuziVozilo != null ? ek.DuziVozilo.RegistarskaOznaka : "N/A";
-
                     lista.Add(ekipaDTO);
                 }
 

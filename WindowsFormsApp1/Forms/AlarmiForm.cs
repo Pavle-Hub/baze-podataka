@@ -115,5 +115,13 @@ namespace WindowsFormsApp1.Forms
             DialogResult dlg = frm.ShowDialog();
 
         }
+
+        private void dodajAlarmDugme_Click(object sender, EventArgs e)
+        {
+            dodajAlarmniSistemForm frm = new dodajAlarmniSistemForm();
+            DialogResult dlg = frm.ShowDialog();
+
+            PopuniListuAlarmniSistem();
+        }
     }
 }

@@ -34,6 +34,9 @@
             button2 = new System.Windows.Forms.Button();
             button3 = new System.Windows.Forms.Button();
             button4 = new System.Windows.Forms.Button();
+            dodajAlarmDugme = new System.Windows.Forms.Button();
+            izmeniAlarmDugme = new System.Windows.Forms.Button();
+            obrisiAlarmDugme = new System.Windows.Forms.Button();
             SuspendLayout();
             // 
             // listBox1
@@ -43,7 +46,7 @@
             listBox1.HorizontalScrollbar = true;
             listBox1.Location = new System.Drawing.Point(11, 32);
             listBox1.Name = "listBox1";
-            listBox1.Size = new System.Drawing.Size(321, 444);
+            listBox1.Size = new System.Drawing.Size(321, 544);
             listBox1.TabIndex = 0;
             listBox1.MouseDoubleClick += listBox1_MouseDoubleClick;
             // 
@@ -61,7 +64,7 @@
             // button2
             // 
             button2.BackColor = System.Drawing.SystemColors.GradientActiveCaption;
-            button2.Location = new System.Drawing.Point(370, 139);
+            button2.Location = new System.Drawing.Point(370, 97);
             button2.Name = "button2";
             button2.Size = new System.Drawing.Size(250, 59);
             button2.TabIndex = 2;
@@ -72,7 +75,7 @@
             // button3
             // 
             button3.BackColor = System.Drawing.SystemColors.GradientActiveCaption;
-            button3.Location = new System.Drawing.Point(370, 243);
+            button3.Location = new System.Drawing.Point(370, 162);
             button3.Name = "button3";
             button3.Size = new System.Drawing.Size(250, 59);
             button3.TabIndex = 3;
@@ -83,13 +86,44 @@
             // button4
             // 
             button4.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
-            button4.Location = new System.Drawing.Point(370, 396);
+            button4.Location = new System.Drawing.Point(370, 519);
             button4.Name = "button4";
-            button4.Size = new System.Drawing.Size(250, 80);
+            button4.Size = new System.Drawing.Size(250, 57);
             button4.TabIndex = 4;
             button4.Text = "Nazad";
             button4.UseVisualStyleBackColor = false;
             button4.Click += button4_Click;
+            // 
+            // dodajAlarmDugme
+            // 
+            dodajAlarmDugme.BackColor = System.Drawing.SystemColors.GradientActiveCaption;
+            dodajAlarmDugme.Location = new System.Drawing.Point(370, 275);
+            dodajAlarmDugme.Name = "dodajAlarmDugme";
+            dodajAlarmDugme.Size = new System.Drawing.Size(250, 60);
+            dodajAlarmDugme.TabIndex = 5;
+            dodajAlarmDugme.Text = "Dodaj";
+            dodajAlarmDugme.UseVisualStyleBackColor = false;
+            dodajAlarmDugme.Click += dodajAlarmDugme_Click;
+            // 
+            // izmeniAlarmDugme
+            // 
+            izmeniAlarmDugme.BackColor = System.Drawing.SystemColors.GradientActiveCaption;
+            izmeniAlarmDugme.Location = new System.Drawing.Point(370, 341);
+            izmeniAlarmDugme.Name = "izmeniAlarmDugme";
+            izmeniAlarmDugme.Size = new System.Drawing.Size(250, 60);
+            izmeniAlarmDugme.TabIndex = 6;
+            izmeniAlarmDugme.Text = "Izmeni";
+            izmeniAlarmDugme.UseVisualStyleBackColor = false;
+            // 
+            // obrisiAlarmDugme
+            // 
+            obrisiAlarmDugme.BackColor = System.Drawing.SystemColors.GradientActiveCaption;
+            obrisiAlarmDugme.Location = new System.Drawing.Point(370, 407);
+            obrisiAlarmDugme.Name = "obrisiAlarmDugme";
+            obrisiAlarmDugme.Size = new System.Drawing.Size(250, 60);
+            obrisiAlarmDugme.TabIndex = 7;
+            obrisiAlarmDugme.Text = "Obrisi";
+            obrisiAlarmDugme.UseVisualStyleBackColor = false;
             // 
             // AlarmiForm
             // 
@@ -97,7 +131,10 @@
             AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             BackgroundImage = (System.Drawing.Image)resources.GetObject("$this.BackgroundImage");
             BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            ClientSize = new System.Drawing.Size(656, 504);
+            ClientSize = new System.Drawing.Size(656, 597);
+            Controls.Add(obrisiAlarmDugme);
+            Controls.Add(izmeniAlarmDugme);
+            Controls.Add(dodajAlarmDugme);
             Controls.Add(button4);
             Controls.Add(button3);
             Controls.Add(button2);
@@ -116,5 +153,8 @@
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.Button button3;
         private System.Windows.Forms.Button button4;
+        private System.Windows.Forms.Button dodajAlarmDugme;
+        private System.Windows.Forms.Button izmeniAlarmDugme;
+        private System.Windows.Forms.Button obrisiAlarmDugme;
     }
 }
