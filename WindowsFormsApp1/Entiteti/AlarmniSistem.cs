@@ -2,7 +2,7 @@
 {
     public class AlarmniSistem
     { 
-        public virtual int Id { get; protected set; }
+        public virtual int Id { get;  set; }
         public virtual string Proizvodjac { get; set; }
         public virtual int? GodinaProizvodnje { get; set; }
         public virtual char UltrazvucniSenzor { get; set; } = 'N';

@@ -186,20 +186,25 @@
             // comboBox1
             // 
             comboBox1.FormattingEnabled = true;
-            comboBox1.Location = new System.Drawing.Point(117, 188);
+            comboBox1.Location = new System.Drawing.Point(117, 159);
             comboBox1.Name = "comboBox1";
-            comboBox1.Size = new System.Drawing.Size(120, 23);
+            comboBox1.Size = new System.Drawing.Size(121, 23);
             comboBox1.TabIndex = 31;
-            comboBox1.SelectedIndexChanged += comboBox1_SelectedIndexChanged;
+            comboBox1.SelectedIndexChanged += VoziloDialog_Load;
+            comboBox1.TextUpdate += VoziloDialog_Load;
             // 
             // comboBox2
             // 
             comboBox2.FormattingEnabled = true;
-            comboBox2.Items.AddRange(new object[] { "" });
-            comboBox2.Location = new System.Drawing.Point(117, 159);
+            comboBox2.Location = new System.Drawing.Point(117, 188);
             comboBox2.Name = "comboBox2";
-            comboBox2.Size = new System.Drawing.Size(120, 23);
+            comboBox2.Size = new System.Drawing.Size(121, 23);
             comboBox2.TabIndex = 32;
+            comboBox2.DropDown += comboBox1_SelectedIndexChanged;
+            comboBox2.SelectedIndexChanged += comboBox1_SelectedIndexChanged;
+            comboBox2.SelectionChangeCommitted += comboBox1_SelectedIndexChanged;
+            comboBox2.TextUpdate += VoziloDialog_Load;
+            comboBox2.SelectedValueChanged += comboBox1_SelectedIndexChanged;
             // 
             // dodajVozilo
             // 

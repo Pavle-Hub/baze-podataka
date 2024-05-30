@@ -114,5 +114,13 @@ namespace WindowsFormsApp1.Forms
             LicaIObjektiZaAlarmForm frm = new LicaIObjektiZaAlarmForm(alsis);
             DialogResult dlg = frm.ShowDialog();
         }
+
+        private void dodajAlarmDugme_Click(object sender, EventArgs e)
+        {
+            dodajAlarmniSistemForm frm = new dodajAlarmniSistemForm();
+            DialogResult dlg = frm.ShowDialog();
+
+            PopuniListuAlarmniSistem();
+        }
     }
 }

@@ -6,7 +6,7 @@
         {
             Table("ALARMNI_SISTEM");
 
-            Id(x => x.Id, "ID_ALARMA").GeneratedBy.TriggerIdentity();
+            Id(x => x.Id).GeneratedBy.Sequence("ALARMNI_SISTEM_ID_SEQ").Column("ID_ALARMA");
 
             Map(x => x.Proizvodjac).Column("PROIZVODJAC");
             Map(x => x.GodinaProizvodnje).Column("GODINA_PROIZVODNJE");

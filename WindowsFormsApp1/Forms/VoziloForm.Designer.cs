@@ -70,6 +70,7 @@
             izmeniVozilo.TabIndex = 8;
             izmeniVozilo.Text = "Izmeni";
             izmeniVozilo.UseVisualStyleBackColor = false;
+            izmeniVozilo.Click += izmeniVozilo_Click;
             // 
             // button1
             // 
