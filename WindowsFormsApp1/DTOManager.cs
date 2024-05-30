@@ -378,6 +378,97 @@ namespace WindowsFormsApp1
         }
         #endregion
 
-       
+        #region MenGradovi
+
+        public static IList<string> dodajMenadzeruGradove(MenadzerDTO m)
+        {
+            IList<string> gradovi = new List<string>();
+
+            try
+            {
+                ISession s = DataLayer.GetSession();
+
+                List<MenGradovi> listagradova = s.Query<MenGradovi>().Fetch(x => x.Menadzer).Where(x => x.Menadzer.MaticniBroj == m.MaticniBroj).ToList();
+
+                foreach (MenGradovi gr in listagradova)
+                {
+                    gradovi.Add(gr.Grad);
+                }
+                s.Close();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Oh no\n" + ex.Message);
+            }
+            return gradovi;
+        }
+
+        public static void dodajMenadzeruGrad(string grad, MenadzerDTO m)
+        {
+            try
+            {
+                ISession s = DataLayer.GetSession();
+
+                MenGradovi gr = new MenGradovi();
+                gr.Menadzer = s.Load<Menadzer>(m.MaticniBroj);
+                gr.Grad = grad;
+                s.Save(gr);
+
+                s.Flush();
+                s.Close();
+            }
+            catch(Exception ex)
+            {
+                MessageBox.Show("Oh no\n" + ex.Message);
+            }
+        }
+
+        public static void obrisiMenadzeruGrad(string grad, MenadzerDTO m)
+        {
+            try
+            {
+                ISession s = DataLayer.GetSession();
+
+                MenGradovi gr = s.Query<MenGradovi>().Fetch(x => x.Menadzer).Where(x => x.Menadzer.MaticniBroj == m.MaticniBroj && x.Grad == grad).FirstOrDefault();
+                s.Delete(gr);
+
+                s.Flush();
+                s.Close();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Oh no\n" + ex.Message);
+            }
+        }
+        #endregion
+
+        #region Vozilo
+        public static List<VoziloDTO> PopuniVozila()
+        {
+            List<VoziloDTO> lista = new List<VoziloDTO>();
+            try
+            {
+                ISession s = DataLayer.GetSession();
+
+                IEnumerable<Vozilo> vozila = from v in s.Query<Vozilo>()
+                                             select v;
+
+                foreach (Vozilo vv in vozila)
+                {
+                    VoziloDTO voziloDTO = new VoziloDTO(vv.RegistarskaOznaka, vv.Boja, vv.Tip, vv.Model, vv.Proizvodjac, vv.DatumOd, vv.DatumDo);
+                    lista.Add(voziloDTO);
+                }
+
+                s.Close();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Oh no\n" + ex.Message);
+            }
+
+            return lista;
+        }
+
+        #endregion
     }
 }

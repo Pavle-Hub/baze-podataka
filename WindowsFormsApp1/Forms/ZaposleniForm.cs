@@ -235,5 +235,21 @@ namespace WindowsFormsApp1.Forms
 
             PopuniListuMenadzera();
         }
+
+        private void button8_Click(object sender, EventArgs e)
+        {
+            if(listBox3.SelectedItems.Count == 0)
+            {
+                MessageBox.Show("Izaberite menadzera cije gradove zelite da vidite!");
+                return;
+            }
+            else
+            {
+                long maticniBrojMenadzer = Convert.ToInt64((listBox3.SelectedItem).ToString().Substring(0, 13));
+                MenadzerDTO m = DTOManager.vratiMenadzera(maticniBrojMenadzer);
+                GradoviMenadzeraForm frm = new GradoviMenadzeraForm(m);
+                DialogResult dlg = frm.ShowDialog();
+            }
+        }
     }
 }

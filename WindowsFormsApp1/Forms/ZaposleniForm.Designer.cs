@@ -198,6 +198,7 @@
             button8.TabIndex = 13;
             button8.Text = "Gradovi";
             button8.UseVisualStyleBackColor = false;
+            button8.Click += button8_Click;
             // 
             // button9
             // 

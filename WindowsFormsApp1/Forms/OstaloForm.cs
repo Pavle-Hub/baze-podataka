@@ -21,5 +21,14 @@ namespace WindowsFormsApp1.Forms
         {
 
         }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            Hide();
+            VoziloForm f = new VoziloForm();
+            f.ShowDialog();
+
+            Show();
+        }
     }
 }
