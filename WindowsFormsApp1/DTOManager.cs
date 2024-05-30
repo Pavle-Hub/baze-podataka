@@ -497,6 +497,24 @@ namespace WindowsFormsApp1
                 MessageBox.Show("Oh no\n" + ex.Message);
             }
         }
+        public static void obrisiVozilo(string registarskaOznaka)
+        {
+            try
+            {
+                ISession s = DataLayer.GetSession();
+
+                Vozilo vozilo = s.Load<Vozilo>(registarskaOznaka);
+                s.Delete(vozilo);
+                s.Flush();
+
+                s.Close();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Oh no\n" + ex.Message);
+            }
+        }
+
 
 
         #endregion

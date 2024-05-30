@@ -1,5 +1,6 @@
 ﻿using System.Drawing;
 
+
 namespace WindowsFormsApp1
 {
     #region Zaposleni
@@ -157,7 +158,11 @@ namespace WindowsFormsApp1
         {
             RedniBroj = redniBroj;
         }
-        
+        public EkipaDTO()
+        {
+
+        }
+
     }
 
     #endregion
@@ -277,17 +282,6 @@ namespace WindowsFormsApp1
         public IList<ObuhvataDTO> ObjektiZaSmenu;
 
         public SmenaDTO() { }
-        public SmenaDTO(int id, DateTime vremePocetka, DateTime vremeKraja, EkipaDTO ekipa)
-        {
-            Id = id;
-            VremePocetka = vremePocetka;
-            VremeKraja = vremeKraja;
-            EkipaZaSmenu = ekipa;
-            ObjektiZaSmenu = new List<ObuhvataDTO>();
-        }
-        public  SmenaDTO() { }
-    }
-
         public SmenaDTO(int id, DateTime vremePocetka, DateTime vremeKraja, Ekipa ekipa)
         {
             Id = id;
@@ -296,7 +290,11 @@ namespace WindowsFormsApp1
             EkipaSmene = ekipa;
             ObjektiZaSmenu = new List<ObuhvataDTO>();
         }
+
     }
+
+
+
 
     #endregion
 
@@ -339,7 +337,7 @@ namespace WindowsFormsApp1
         public IList<AlarmniSistemDTO> AlarmniSistemi;
 
         public ObjekatDTO(int id, string adresa, string tip, float? povrsina)
-        { 
+        {
             Id = id;
             Adresa = adresa;
             Tip = tip;
@@ -419,5 +417,6 @@ namespace WindowsFormsApp1
     }
 
     #endregion
+
 
 }
