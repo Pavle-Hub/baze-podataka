@@ -214,10 +214,10 @@ namespace WindowsFormsApp1
 
     public class UltrazvucniSenzorDTO : AlarmniSistemDTO
     {
-        public double MinFrekvencija;
-        public double MaxFrekvencija;
+        public double? MinFrekvencija;
+        public double? MaxFrekvencija;
 
-        public UltrazvucniSenzorDTO(int id, string proizvodjac, int godinaProizvodnje, DateTime datumInstalacije, ObjekatDTO objekat, double minFrek, double maxFrekv)
+        public UltrazvucniSenzorDTO(int id, string proizvodjac, int? godinaProizvodnje, DateTime datumInstalacije, Objekat objekat, double? minFrek, double? maxFrekv)
             : base(id, proizvodjac, godinaProizvodnje, datumInstalacije, objekat)
         {
             MinFrekvencija = minFrek;
@@ -227,10 +227,10 @@ namespace WindowsFormsApp1
 
     public class DetektorToplotnogOdrazaDTO : AlarmniSistemDTO
     {
-        public int HorRezolucija;
-        public int VerRezolucija;
+        public int? HorRezolucija;
+        public int? VerRezolucija;
 
-        public DetektorToplotnogOdrazaDTO(int id, string proizvodjac, int godinaProizvodnje, DateTime datumInstalacije, ObjekatDTO objekat, int horRez, int verRez)
+        public DetektorToplotnogOdrazaDTO(int id, string proizvodjac, int? godinaProizvodnje, DateTime datumInstalacije, Objekat objekat, int? horRez, int? verRez)
             : base(id, proizvodjac, godinaProizvodnje, datumInstalacije, objekat)
         {
             HorRezolucija = horRez;
@@ -240,9 +240,9 @@ namespace WindowsFormsApp1
 
     public class DetektorPokretaDTO : AlarmniSistemDTO
     {
-        public double Osetljivost;
+        public double? Osetljivost;
 
-        public DetektorPokretaDTO(int id, string proizvodjac, int godinaProizvodnje, DateTime datumInstalacije, ObjekatDTO objekat, double osetljivost)
+        public DetektorPokretaDTO(int id, string proizvodjac, int? godinaProizvodnje, DateTime datumInstalacije, Objekat objekat, double? osetljivost)
             : base(id, proizvodjac, godinaProizvodnje, datumInstalacije, objekat)
         {
             Osetljivost = osetljivost;

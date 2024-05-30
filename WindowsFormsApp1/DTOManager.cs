@@ -497,6 +497,82 @@ namespace WindowsFormsApp1
 
             return lista;
         }
+        public static List<DetektorToplotnogOdrazaDTO> PopuniToplotniAlarmniSistem()
+        {
+            List<DetektorToplotnogOdrazaDTO> lista = new List<DetektorToplotnogOdrazaDTO>();
+            try
+            {
+                ISession s = DataLayer.GetSession();
+
+                IEnumerable<AlarmniSistem> lica = from o in s.Query<AlarmniSistem>().Where(x => x.DetektorToplotnogOdraza == 'T')
+                                                  select o;
+
+                foreach (AlarmniSistem a in lica)
+                {
+                    DetektorToplotnogOdrazaDTO b = new DetektorToplotnogOdrazaDTO(a.Id, a.Proizvodjac, a.GodinaProizvodnje, a.DatumInstalacije, a.Objekat, a.HorRezolucija, a.VerRezolucija);
+                    lista.Add(b);
+                }
+
+                s.Close();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Oh no\n" + ex.Message);
+            }
+
+            return lista;
+        }
+        public static List<DetektorPokretaDTO> PopuniPokretniAlarmniSistem()
+        {
+            List<DetektorPokretaDTO> lista = new List<DetektorPokretaDTO>();
+            try
+            {
+                ISession s = DataLayer.GetSession();
+
+                IEnumerable<AlarmniSistem> lica = from o in s.Query<AlarmniSistem>().Where(x => x.DetektorPokreta == 'T')
+                                                  select o;
+
+                foreach (AlarmniSistem a in lica)
+                {
+                    DetektorPokretaDTO b = new DetektorPokretaDTO(a.Id, a.Proizvodjac, a.GodinaProizvodnje, a.DatumInstalacije, a.Objekat, a.Osetljivost);
+                    lista.Add(b);
+                }
+
+                s.Close();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Oh no\n" + ex.Message);
+            }
+
+            return lista;
+        }
+
+        public static List<UltrazvucniSenzorDTO> PopuniZvucniAlarmniSistem()
+        {
+            List<UltrazvucniSenzorDTO> lista = new List<UltrazvucniSenzorDTO>();
+            try
+            {
+                ISession s = DataLayer.GetSession();
+
+                IEnumerable<AlarmniSistem> lica = from o in s.Query<AlarmniSistem>().Where(x => x.UltrazvucniSenzor == 'T')
+                                                  select o;
+
+                foreach (AlarmniSistem a in lica)
+                {
+                    UltrazvucniSenzorDTO b = new UltrazvucniSenzorDTO(a.Id, a.Proizvodjac, a.GodinaProizvodnje, a.DatumInstalacije, a.Objekat, a.MinFrekvencija, a.MaxFrekvencija);
+                    lista.Add(b);
+                }
+
+                s.Close();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Oh no\n" + ex.Message);
+            }
+
+            return lista;
+        }
         #endregion
     }
 }
