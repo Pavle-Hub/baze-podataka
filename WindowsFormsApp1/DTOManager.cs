@@ -1,4 +1,5 @@
-﻿using System;
+﻿using NHibernate.SqlCommand;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -417,7 +418,7 @@ namespace WindowsFormsApp1
                 s.Flush();
                 s.Close();
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 MessageBox.Show("Oh no\n" + ex.Message);
             }
@@ -573,6 +574,75 @@ namespace WindowsFormsApp1
 
             return lista;
         }
+
+        public static AlarmniSistemDTO vratiAlarmniSistem(int id)
+        {
+            AlarmniSistemDTO alsis = new AlarmniSistemDTO();
+            try
+            {
+                ISession s = DataLayer.GetSession();
+
+                AlarmniSistem alarm = s.Load<AlarmniSistem>(id);
+                alsis = new AlarmniSistemDTO(alarm.Id, alarm.Proizvodjac, alarm.GodinaProizvodnje, alarm.DatumInstalacije, alarm.Objekat);
+
+                s.Close();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Oh no\n" + ex.Message);
+            }
+            return alsis;
+        }
+
+        public static List<TehnickoLiceDTO> vratiListuTehnickih(int id)
+        {
+            List<TehnickoLiceDTO> lista = new List<TehnickoLiceDTO>();
+            try
+            {
+                ISession s = DataLayer.GetSession();
+
+                var query = s.Query<Odrzava>()
+                             .Where(x => x.AlarmniSistem.Id == id)
+                             .Select(x => new TehnickoLiceDTO
+                             {
+                                 MaticniBroj = x.TehnickoLice.MaticniBroj,
+                                 Ime = x.TehnickoLice.Ime,
+                                 Prezime = x.TehnickoLice.Prezime,
+                                 Pol = x.TehnickoLice.Pol,
+                                 DatumRodjenja = x.TehnickoLice.DatumRodjenja
+                             });
+
+                lista = query.ToList();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Oh no\n" + ex.Message);
+            }
+            return lista;
+        }
+        #endregion
+
+        #region Objekat
+
+        public static ObjekatDTO vratiObjekat(int id)
+        {
+            ObjekatDTO o = new ObjekatDTO();
+            try
+            {
+                ISession s = DataLayer.GetSession();
+
+                Objekat obj = s.Load<Objekat>(id);
+                o = new ObjekatDTO(obj.Id, obj.Adresa, obj.TipObjekta, obj.Povrsina);
+
+                s.Close();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Oh no\n" + ex.Message);
+            }
+            return o;
+        }
+
         #endregion
     }
 }

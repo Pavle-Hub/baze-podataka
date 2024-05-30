@@ -40,10 +40,12 @@
             // 
             listBox1.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
             listBox1.FormattingEnabled = true;
+            listBox1.HorizontalScrollbar = true;
             listBox1.Location = new System.Drawing.Point(11, 32);
             listBox1.Name = "listBox1";
             listBox1.Size = new System.Drawing.Size(321, 444);
             listBox1.TabIndex = 0;
+            listBox1.MouseDoubleClick += listBox1_MouseDoubleClick;
             // 
             // button1
             // 

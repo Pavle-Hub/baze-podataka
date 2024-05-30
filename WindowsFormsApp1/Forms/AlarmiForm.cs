@@ -101,5 +101,19 @@ namespace WindowsFormsApp1.Forms
         {
             this.Close();
         }
+
+        private void listBox1_MouseDoubleClick(object sender, MouseEventArgs e)
+        {
+            if (listBox1.SelectedItems.Count == 0)
+            {
+                MessageBox.Show("Izaberite alarm cije podatke zelite da vidite!");
+                return;
+            }
+            int idAlarma = Int32.Parse((listBox1.SelectedItem).ToString().Split(' ')[0]);
+            AlarmniSistemDTO alsis = DTOManager.vratiAlarmniSistem(idAlarma);
+            LicaIObjektiZaAlarmForm frm = new LicaIObjektiZaAlarmForm(alsis);
+            DialogResult dlg = frm.ShowDialog();
+
+        }
     }
 }
