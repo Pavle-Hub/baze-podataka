@@ -6,7 +6,7 @@
         {
             Table("GRADOVI_MENADZER");
 
-            Id(x => x.Id, "ID_GRADA").GeneratedBy.TriggerIdentity();
+            Id(x => x.Id).GeneratedBy.Sequence("PRODUCT_ID_SEQ").Column("ID_GRADA");
 
             Map(x => x.Grad, "IME_GRADA");
 
