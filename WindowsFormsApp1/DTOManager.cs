@@ -666,6 +666,60 @@ namespace WindowsFormsApp1
             return smena;
         }
 
+        public static List<ObjekatDTO> vratiListuObjekataSmene(int id)
+        {
+            List<ObjekatDTO> lista = new List<ObjekatDTO>();
+            try
+            {
+                ISession s = DataLayer.GetSession();
+
+                var query = s.Query<Obuhvata>()
+                             .Where(x => x.Smena.Id == id)
+                             .Select(x => new ObjekatDTO
+                             {
+                                 Id = x.Objekat.Id,
+                                 Adresa = x.Objekat.Adresa,
+                                 Tip = x.Objekat.TipObjekta,
+                                 Povrsina = x.Objekat.Povrsina,                             
+                             });
+
+                lista = query.ToList();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Oh no\n" + ex.Message);
+            }
+            return lista;
+        }
+
+        public static List<FizickoObezbedjenjeDTO> vratiListuClanovaEkipeSmene(int rb)
+        {
+            List<FizickoObezbedjenjeDTO> lista = new List<FizickoObezbedjenjeDTO>();
+            try
+            {
+                ISession s = DataLayer.GetSession();
+
+                var query = s.Query<FizickoObezbedjenje>()
+                             .Where(x => x.PripadaEkipi.RedniBroj == rb)
+                             .Select(x => new FizickoObezbedjenjeDTO
+                             {
+                                 MaticniBroj = x.MaticniBroj,
+                                 Ime = x.Ime,
+                                 Prezime = x.Prezime,
+                                 Pol = x.Pol,
+                                 DatumRodjenja = x.DatumRodjenja,
+                                 BorilackaVestina = x.BorilackaVestina
+                             });
+
+                lista = query.ToList();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Oh no\n" + ex.Message);
+            }
+            return lista;
+        }
+
         public static List<SmenaDTO> PopuniSmenu()
         {
             List<SmenaDTO> lista = new List<SmenaDTO>();
