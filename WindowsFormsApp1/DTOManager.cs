@@ -514,7 +514,7 @@ namespace WindowsFormsApp1
                 MessageBox.Show("Oh no\n" + ex.Message);
             }
         }
-
+        
 
 
         #endregion
@@ -739,7 +739,6 @@ namespace WindowsFormsApp1
             return lista;
         }
         #endregion
-
 
         #region RegionalniCentar
         public static List<RegionalniCentarDTO> PopuniRegionalneCentre()
