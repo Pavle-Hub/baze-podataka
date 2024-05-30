@@ -17,7 +17,7 @@ namespace WindowsFormsApp1.Forms
             InitializeComponent();
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void prikaziEkipe_Click(object sender, EventArgs e)
         {
 
         }

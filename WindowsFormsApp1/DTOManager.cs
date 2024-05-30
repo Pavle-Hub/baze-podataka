@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using WindowsFormsApp1;
 
 namespace WindowsFormsApp1
 {
@@ -138,7 +139,7 @@ namespace WindowsFormsApp1
 
                 s.Close();
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 MessageBox.Show("Oh no\n" + ex.Message);
             }
@@ -374,6 +375,34 @@ namespace WindowsFormsApp1
             {
                 MessageBox.Show("Oh no\n" + ex.Message);
             }
+        }
+        #endregion
+
+        #region AlarmniSistem
+        public static List<AlarmniSistemDTO> PopuniAlarmniSistem()
+        {
+            List<AlarmniSistemDTO> lista = new List<AlarmniSistemDTO>();
+            try
+            {
+                ISession s = DataLayer.GetSession();
+
+                IEnumerable<AlarmniSistem> lica = from o in s.Query<AlarmniSistem>()
+                                                  select o;
+
+                foreach (AlarmniSistem a in lica)
+                {
+                    AlarmniSistemDTO b = new AlarmniSistemDTO(a.Id, a.Proizvodjac, a.GodinaProizvodnje, a.DatumInstalacije, a.Objekat);
+                    lista.Add(b);
+                }
+
+                s.Close();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Oh no\n" + ex.Message);
+            }
+
+            return lista;
         }
         #endregion
     }

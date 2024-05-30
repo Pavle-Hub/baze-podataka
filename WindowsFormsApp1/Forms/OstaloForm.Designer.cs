@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(OstaloForm));
-            button1 = new System.Windows.Forms.Button();
+            prikaziEkipe = new System.Windows.Forms.Button();
             button2 = new System.Windows.Forms.Button();
             button3 = new System.Windows.Forms.Button();
             button4 = new System.Windows.Forms.Button();
@@ -37,17 +37,17 @@
             button6 = new System.Windows.Forms.Button();
             SuspendLayout();
             // 
-            // button1
+            // prikaziEkipe
             // 
-            button1.BackColor = System.Drawing.SystemColors.GradientActiveCaption;
-            button1.Location = new System.Drawing.Point(68, 27);
-            button1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            button1.Name = "button1";
-            button1.Size = new System.Drawing.Size(131, 112);
-            button1.TabIndex = 0;
-            button1.Text = "Ekipe";
-            button1.UseVisualStyleBackColor = false;
-            button1.Click += button1_Click;
+            prikaziEkipe.BackColor = System.Drawing.SystemColors.GradientActiveCaption;
+            prikaziEkipe.Location = new System.Drawing.Point(68, 27);
+            prikaziEkipe.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            prikaziEkipe.Name = "prikaziEkipe";
+            prikaziEkipe.Size = new System.Drawing.Size(131, 112);
+            prikaziEkipe.TabIndex = 0;
+            prikaziEkipe.Text = "Ekipe";
+            prikaziEkipe.UseVisualStyleBackColor = false;
+            prikaziEkipe.Click += prikaziEkipe_Click;
             // 
             // button2
             // 
@@ -116,7 +116,7 @@
             Controls.Add(button4);
             Controls.Add(button3);
             Controls.Add(button2);
-            Controls.Add(button1);
+            Controls.Add(prikaziEkipe);
             Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             Name = "OstaloForm";
             Text = "OstaloForm";
@@ -125,7 +125,7 @@
 
         #endregion
 
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button prikaziEkipe;
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.Button button3;
         private System.Windows.Forms.Button button4;

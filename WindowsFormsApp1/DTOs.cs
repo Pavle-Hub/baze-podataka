@@ -183,12 +183,13 @@ namespace WindowsFormsApp1
 
         public int Id;
         public string Proizvodjac;
-        public int GodinaProizvodnje;
+        public int? GodinaProizvodnje;
         public DateTime DatumInstalacije;
         public ObjekatDTO ObjekatKomePripada;
+        public Objekat Obj;
         public IList<TehnickoLiceDTO> LiceKojeOdrzava;
 
-        public AlarmniSistemDTO(int id, string proizvodjac, int godinaProizvodnje, DateTime datumInstalacije, ObjekatDTO objekat)
+        public AlarmniSistemDTO(int id, string proizvodjac, int? godinaProizvodnje, DateTime datumInstalacije, ObjekatDTO objekat)
         {
             Id = id;
             Proizvodjac = proizvodjac;
@@ -197,7 +198,19 @@ namespace WindowsFormsApp1
             ObjekatKomePripada = objekat;
             LiceKojeOdrzava = new List<TehnickoLiceDTO>();
         }
+
+        public AlarmniSistemDTO(int id, string proizvodjac, int? godinaProizvodnje, DateTime datumInstalacije, Objekat objekat)
+        {
+            Id = id;
+            Proizvodjac = proizvodjac;
+            GodinaProizvodnje = godinaProizvodnje;
+            DatumInstalacije = datumInstalacije;
+            Obj = objekat;
+            LiceKojeOdrzava = new List<TehnickoLiceDTO>();
+        }
     }
+
+
 
     public class UltrazvucniSenzorDTO : AlarmniSistemDTO
     {
