@@ -23,7 +23,7 @@ namespace WindowsFormsApp1.Forms
         {
         }
 
-        private bool ValidacijaKontrola()
+        private bool ValidacijaKontrolaFizickoObezbedjenje()
         {
             if (String.IsNullOrEmpty(textBox1.Text))
             {
@@ -110,7 +110,7 @@ namespace WindowsFormsApp1.Forms
         private void ProslediObezbedjenje_Click(object sender, EventArgs e)
         {
             
-            if (!ValidacijaKontrola())
+            if (!ValidacijaKontrolaFizickoObezbedjenje())
                 return;
 
             int redniBrojEkipe;

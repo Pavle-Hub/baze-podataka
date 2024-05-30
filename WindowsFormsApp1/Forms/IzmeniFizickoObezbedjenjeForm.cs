@@ -37,7 +37,7 @@ namespace WindowsFormsApp1.Forms
             textBox4.Text = fo.PEkipi.RedniBroj.ToString();
         }
 
-        private bool ValidacijaKontrola()
+        private bool ValidacijaKontrolaFizickoObezbedjenje()
         {
             if (String.IsNullOrEmpty(textBox1.Text))
             {
@@ -103,7 +103,7 @@ namespace WindowsFormsApp1.Forms
 
         private void ProslediDugme_Click(object sender, EventArgs e)
         {
-            if (!ValidacijaKontrola())
+            if (!ValidacijaKontrolaFizickoObezbedjenje())
                 return;
             int redniBrojEkipe;
             fo.Ime = textBox1.Text;
