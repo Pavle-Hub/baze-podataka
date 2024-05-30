@@ -44,54 +44,48 @@
             // 
             // textBox1
             // 
-            textBox1.Location = new System.Drawing.Point(163, 60);
-            textBox1.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            textBox1.Location = new System.Drawing.Point(143, 45);
             textBox1.Name = "textBox1";
-            textBox1.Size = new System.Drawing.Size(141, 27);
+            textBox1.Size = new System.Drawing.Size(124, 23);
             textBox1.TabIndex = 2;
             // 
             // textBox2
             // 
-            textBox2.Location = new System.Drawing.Point(163, 116);
-            textBox2.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            textBox2.Location = new System.Drawing.Point(143, 87);
             textBox2.Name = "textBox2";
-            textBox2.Size = new System.Drawing.Size(141, 27);
+            textBox2.Size = new System.Drawing.Size(124, 23);
             textBox2.TabIndex = 3;
             // 
             // textBox3
             // 
-            textBox3.Location = new System.Drawing.Point(163, 176);
-            textBox3.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            textBox3.Location = new System.Drawing.Point(143, 132);
             textBox3.Name = "textBox3";
-            textBox3.Size = new System.Drawing.Size(141, 27);
+            textBox3.Size = new System.Drawing.Size(124, 23);
             textBox3.TabIndex = 4;
             // 
             // datumRodj
             // 
             datumRodj.CustomFormat = "dd. MMM yyyy.";
             datumRodj.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            datumRodj.Location = new System.Drawing.Point(163, 238);
-            datumRodj.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            datumRodj.Location = new System.Drawing.Point(143, 178);
             datumRodj.Name = "datumRodj";
-            datumRodj.Size = new System.Drawing.Size(141, 27);
+            datumRodj.Size = new System.Drawing.Size(124, 23);
             datumRodj.TabIndex = 8;
             // 
             // comboBox1
             // 
             comboBox1.FormattingEnabled = true;
             comboBox1.Items.AddRange(new object[] { "M", "Z" });
-            comboBox1.Location = new System.Drawing.Point(163, 304);
-            comboBox1.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            comboBox1.Location = new System.Drawing.Point(143, 228);
             comboBox1.Name = "comboBox1";
-            comboBox1.Size = new System.Drawing.Size(141, 28);
+            comboBox1.Size = new System.Drawing.Size(124, 23);
             comboBox1.TabIndex = 17;
             // 
             // ProslediMenadzera
             // 
-            ProslediMenadzera.Location = new System.Drawing.Point(128, 388);
-            ProslediMenadzera.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            ProslediMenadzera.Location = new System.Drawing.Point(112, 291);
             ProslediMenadzera.Name = "ProslediMenadzera";
-            ProslediMenadzera.Size = new System.Drawing.Size(136, 49);
+            ProslediMenadzera.Size = new System.Drawing.Size(119, 37);
             ProslediMenadzera.TabIndex = 18;
             ProslediMenadzera.Text = "Prosledi";
             ProslediMenadzera.UseVisualStyleBackColor = true;
@@ -100,55 +94,55 @@
             // label1
             // 
             label1.AutoSize = true;
-            label1.Location = new System.Drawing.Point(40, 63);
+            label1.Location = new System.Drawing.Point(35, 47);
             label1.Name = "label1";
-            label1.Size = new System.Drawing.Size(92, 20);
+            label1.Size = new System.Drawing.Size(74, 15);
             label1.TabIndex = 19;
             label1.Text = "Maticni broj:";
             // 
             // label2
             // 
             label2.AutoSize = true;
-            label2.Location = new System.Drawing.Point(95, 119);
+            label2.Location = new System.Drawing.Point(83, 89);
             label2.Name = "label2";
-            label2.Size = new System.Drawing.Size(37, 20);
+            label2.Size = new System.Drawing.Size(30, 15);
             label2.TabIndex = 20;
             label2.Text = "Ime:";
             // 
             // label3
             // 
             label3.AutoSize = true;
-            label3.Location = new System.Drawing.Point(67, 179);
+            label3.Location = new System.Drawing.Point(59, 134);
             label3.Name = "label3";
-            label3.Size = new System.Drawing.Size(65, 20);
+            label3.Size = new System.Drawing.Size(52, 15);
             label3.TabIndex = 21;
             label3.Text = "Prezime:";
             // 
             // label6
             // 
             label6.AutoSize = true;
-            label6.Location = new System.Drawing.Point(16, 243);
+            label6.Location = new System.Drawing.Point(14, 182);
             label6.Name = "label6";
-            label6.Size = new System.Drawing.Size(116, 20);
+            label6.Size = new System.Drawing.Size(92, 15);
             label6.TabIndex = 22;
             label6.Text = "Datum rodjenja:";
             // 
             // label4
             // 
             label4.AutoSize = true;
-            label4.Location = new System.Drawing.Point(100, 307);
+            label4.Location = new System.Drawing.Point(88, 230);
             label4.Name = "label4";
-            label4.Size = new System.Drawing.Size(32, 20);
+            label4.Size = new System.Drawing.Size(27, 15);
             label4.TabIndex = 23;
             label4.Text = "Pol:";
             // 
             // dodajMenadzeraForm
             // 
-            AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
+            AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             BackgroundImage = (System.Drawing.Image)resources.GetObject("$this.BackgroundImage");
             BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            ClientSize = new System.Drawing.Size(394, 477);
+            ClientSize = new System.Drawing.Size(345, 358);
             Controls.Add(label4);
             Controls.Add(label6);
             Controls.Add(label3);
@@ -160,7 +154,6 @@
             Controls.Add(textBox3);
             Controls.Add(textBox2);
             Controls.Add(textBox1);
-            Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             Name = "dodajMenadzeraForm";
             Text = "dodajMenadzeraForm";
             ResumeLayout(false);

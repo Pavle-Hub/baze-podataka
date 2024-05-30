@@ -13,7 +13,7 @@ namespace WindowsFormsApp1.Mapiranja
         {
             Table("VOZILO");
 
-            Id(x => x.RegistarskaOznaka, "REGISTARSKA_OZNAKA").GeneratedBy.TriggerIdentity();
+            Id(x => x.RegistarskaOznaka, "REGISTRASKA_OZNAKA").GeneratedBy.Assigned();
 
             Map(x => x.Boja, "BOJA");
             Map(x => x.Tip, "TIP");

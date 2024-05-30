@@ -376,5 +376,37 @@ namespace WindowsFormsApp1
             }
         }
         #endregion
+
+
+        #region Vozilo
+        public static List<VoziloDTO> PopuniVozila()
+        {
+            List<VoziloDTO> lista = new List<VoziloDTO>();
+            try
+            {
+                ISession s = DataLayer.GetSession();
+
+                IEnumerable<Vozilo> vozila = from v in s.Query<Vozilo>()
+                                             select v;
+
+                foreach (Vozilo vv in vozila)
+                {
+                    VoziloDTO voziloDTO = new VoziloDTO(vv.RegistarskaOznaka, vv.Boja, vv.Tip, vv.Model, vv.Proizvodjac, vv.DatumOd, vv.DatumDo);
+                    lista.Add(voziloDTO);
+                }
+
+                s.Close();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Oh no\n" + ex.Message);
+            }
+
+            return lista;
+        }
+
+        #endregion
+
+
     }
 }

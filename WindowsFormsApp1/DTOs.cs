@@ -356,6 +356,16 @@ namespace WindowsFormsApp1
             RC = rC;
             DuziGaEkipa = duziGaEkipa;
         }
+        public VoziloDTO(string registarskaOznaka, string boja, string? tip, string? model, string? proizvodjac, DateTime datumOd, DateTime datumDo)
+        {
+            RegOznaka = registarskaOznaka;
+            Boja = boja;
+            Tip = tip;
+            Model = model;
+            Proizvodjac = proizvodjac;
+            DatumOd = datumOd;
+            DatumDo = datumDo;
+        }
     }
 
     #endregion
