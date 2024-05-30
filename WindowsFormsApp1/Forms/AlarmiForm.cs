@@ -113,7 +113,6 @@ namespace WindowsFormsApp1.Forms
             AlarmniSistemDTO alsis = DTOManager.vratiAlarmniSistem(idAlarma);
             LicaIObjektiZaAlarmForm frm = new LicaIObjektiZaAlarmForm(alsis);
             DialogResult dlg = frm.ShowDialog();
-
         }
     }
 }

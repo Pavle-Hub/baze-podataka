@@ -61,6 +61,7 @@
             listBoxSmena.Name = "listBoxSmena";
             listBoxSmena.Size = new System.Drawing.Size(331, 304);
             listBoxSmena.TabIndex = 2;
+            listBoxSmena.MouseDoubleClick += listBoxSmena_MouseDoubleClick;
             // 
             // izmeniSmenu
             // 
