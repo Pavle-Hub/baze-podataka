@@ -31,6 +31,12 @@ namespace WindowsFormsApp1.Forms
             Show();
         }
 
+        private void button2_Click(object sender, EventArgs e)
+        {
+            SmenaForm s = new SmenaForm();
+            s.ShowDialog();
+        }
+
         private void OstaloForm_Load(object sender, EventArgs e)
         {
 

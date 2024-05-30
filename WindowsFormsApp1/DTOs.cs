@@ -27,7 +27,14 @@ namespace WindowsFormsApp1
 
             OdrzavaAS = new List<AlarmniSistemDTO>();
         }
-
+        public TehnickoLiceDTO(long maticniBroj, string ime, string prezime, char? pol, DateTime datumRodjenja)
+        {
+            MaticniBroj = maticniBroj;
+            Ime = ime;
+            Prezime = prezime;
+            Pol = pol;
+            DatumRodjenja = datumRodjenja;
+        }
         public TehnickoLiceDTO()
         {
 
@@ -209,6 +216,12 @@ namespace WindowsFormsApp1
             Obj = objekat;
             LiceKojeOdrzava = new List<TehnickoLiceDTO>();
         }
+
+        public AlarmniSistemDTO()
+        {
+
+        }
+
     }
 
 
@@ -260,8 +273,10 @@ namespace WindowsFormsApp1
         public DateTime VremePocetka;
         public DateTime VremeKraja;
         public EkipaDTO EkipaZaSmenu;
+        public Ekipa EkipaSmene;
         public IList<ObuhvataDTO> ObjektiZaSmenu;
 
+        public SmenaDTO() { }
         public SmenaDTO(int id, DateTime vremePocetka, DateTime vremeKraja, EkipaDTO ekipa)
         {
             Id = id;
@@ -271,6 +286,16 @@ namespace WindowsFormsApp1
             ObjektiZaSmenu = new List<ObuhvataDTO>();
         }
         public  SmenaDTO() { }
+    }
+
+        public SmenaDTO(int id, DateTime vremePocetka, DateTime vremeKraja, Ekipa ekipa)
+        {
+            Id = id;
+            VremePocetka = vremePocetka;
+            VremeKraja = vremeKraja;
+            EkipaSmene = ekipa;
+            ObjektiZaSmenu = new List<ObuhvataDTO>();
+        }
     }
 
     #endregion
@@ -307,13 +332,13 @@ namespace WindowsFormsApp1
         public int Id;
         public string Adresa;
         public string Tip;
-        public float Povrsina;
+        public float? Povrsina;
         public IList<int> KontaktTelefoni;
         public IList<ObuhvataDTO> SmeneZaObjekat;
         public IList<IntervencijaDTO> Intervencije;
         public IList<AlarmniSistemDTO> AlarmniSistemi;
 
-        public ObjekatDTO(int id, string adresa, string tip, float povrsina)
+        public ObjekatDTO(int id, string adresa, string tip, float? povrsina)
         { 
             Id = id;
             Adresa = adresa;
@@ -323,6 +348,11 @@ namespace WindowsFormsApp1
             SmeneZaObjekat = new List<ObuhvataDTO>();
             Intervencije = new List<IntervencijaDTO>();
             AlarmniSistemi = new List<AlarmniSistemDTO>();
+        }
+
+        public ObjekatDTO()
+        {
+
         }
     }
 
