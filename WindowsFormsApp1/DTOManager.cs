@@ -644,5 +644,53 @@ namespace WindowsFormsApp1
         }
 
         #endregion
+
+        #region Smena
+
+        public static SmenaDTO vratiSmenu(int id)
+        {
+            SmenaDTO smena = new SmenaDTO();
+            try
+            {
+                ISession s = DataLayer.GetSession();
+
+                Smena sm = s.Load<Smena>(id);
+                smena = new SmenaDTO(sm.Id, sm.VremePocetka, sm.VremeKraja, sm.EkipaZaSmenu);
+
+                s.Close();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Oh no\n" + ex.Message);
+            }
+            return smena;
+        }
+
+        public static List<SmenaDTO> PopuniSmenu()
+        {
+            List<SmenaDTO> lista = new List<SmenaDTO>();
+            try
+            {
+                ISession s = DataLayer.GetSession();
+
+                IEnumerable<Smena> smene = from v in s.Query<Smena>()
+                                             select v;
+
+                foreach (Smena sm in smene)
+                {
+                    SmenaDTO smenaDTO = new SmenaDTO(sm.Id, sm.VremePocetka, sm.VremeKraja, sm.EkipaZaSmenu);
+                    lista.Add(smenaDTO);
+                }
+
+                s.Close();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Oh no\n" + ex.Message);
+            }
+
+            return lista;
+        }
+        #endregion
     }
 }

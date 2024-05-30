@@ -13,7 +13,7 @@
 
             References(x => x.EkipaZaSmenu).Column("REDNI_BROJ_EKIPE").LazyLoad();
 
-            HasMany(x => x.ObjektiZaSmenu).KeyColumn("ID_SMENE").LazyLoad().Cascade.All().Inverse(); ;
+            HasMany(x => x.ObjektiZaSmenu).KeyColumn("ID_SMENE").LazyLoad().Cascade.All().Inverse();
         }
     }
 }

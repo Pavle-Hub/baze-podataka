@@ -272,14 +272,25 @@ namespace WindowsFormsApp1
         public DateTime VremePocetka;
         public DateTime VremeKraja;
         public EkipaDTO EkipaZaSmenu;
+        public Ekipa EkipaSmene;
         public IList<ObuhvataDTO> ObjektiZaSmenu;
 
+        public SmenaDTO() { }
         public SmenaDTO(int id, DateTime vremePocetka, DateTime vremeKraja, EkipaDTO ekipa)
         {
             Id = id;
             VremePocetka = vremePocetka;
             VremeKraja = vremeKraja;
             EkipaZaSmenu = ekipa;
+            ObjektiZaSmenu = new List<ObuhvataDTO>();
+        }
+
+        public SmenaDTO(int id, DateTime vremePocetka, DateTime vremeKraja, Ekipa ekipa)
+        {
+            Id = id;
+            VremePocetka = vremePocetka;
+            VremeKraja = vremeKraja;
+            EkipaSmene = ekipa;
             ObjektiZaSmenu = new List<ObuhvataDTO>();
         }
     }
