@@ -19,6 +19,7 @@ namespace WindowsFormsApp1.Forms
 
 
 
+
         private void dodajVozilo_Click(object sender, EventArgs e)
         {
             dodajVozilo frm = new dodajVozilo();
@@ -57,5 +58,51 @@ namespace WindowsFormsApp1.Forms
         {
 
         }
+
+        private void izbrisiVozilo_Click_1(object sender, EventArgs e)
+        {
+            if (listBox1.SelectedItems.Count == 0)
+            {
+                MessageBox.Show("Izaberite vozilo koje zelite da obrisete!");
+                return;
+            }
+
+            string registarskaOznaka = listBox1.SelectedItem.ToString().Split(' ')[0];
+            string poruka = "Da li zelite da obrisete izabrano vozilo?";
+            string title = "Pitanje";
+            MessageBoxButtons buttons = MessageBoxButtons.OKCancel;
+            DialogResult result = MessageBox.Show(poruka, title, buttons);
+
+            if (result == DialogResult.OK)
+            {
+                DTOManager.obrisiVozilo(registarskaOznaka);
+                MessageBox.Show("Uspesno obrisano vozilo!");
+                this.PopuniListuVozila();
+            }
+        }
+
+        private void izmeniVozilo_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        //private void izmeniVozilo_Click(object sender, EventArgs e)
+        //{
+        //    if (listBox1.SelectedItems.Count == 0)
+        //    {
+        //        MessageBox.Show("Izaberite vozilo cije podatke zelite da izmenite!");
+        //        return;
+        //    }
+
+        //    string registarskaOznaka = (listBox1.SelectedItem).ToString().Split(' ')[0];
+        //    VoziloDTO vozilo = DTOManager.vratiVozilo(registarskaOznaka);
+        //    IzmeniVoziloForm frm = new IzmeniVoziloForm(vozilo);
+        //    DialogResult dlg = frm.ShowDialog();
+
+        //    if (dlg == DialogResult.OK)
+        //    {
+        //        PopuniListuVozila();
+        //    }
+        //}
     }
 }

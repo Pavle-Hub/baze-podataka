@@ -32,6 +32,20 @@ namespace WindowsFormsApp1.Forms
             }
         }
 
+        private void listBoxSmena_MouseDoubleClick(object sender, MouseEventArgs e)
+        {
+            if (listBoxSmena.SelectedItems.Count == 0)
+            {
+                MessageBox.Show("Izaberite smenu cije podatke zelite da vidite!");
+                return;
+            }
+            int idSmene = Int32.Parse((listBoxSmena.SelectedItem).ToString().Split(' ')[0]);
+            SmenaDTO sm = DTOManager.vratiSmenu(idSmene);
+            ObjektiZaSmenuForm frm = new ObjektiZaSmenuForm(sm);
+            DialogResult dlg = frm.ShowDialog();
+
+        }
+
         private void dodajSmenu_Click(object sender, EventArgs e)
         {
             dodajSmenuForm frm = new dodajSmenuForm();

@@ -1,4 +1,6 @@
-﻿using System.Drawing;
+﻿using Microsoft.Identity.Client;
+using System.Drawing;
+
 
 namespace WindowsFormsApp1
 {
@@ -151,13 +153,19 @@ namespace WindowsFormsApp1
         public IList<string> ImenaClanova;
         public IList<SmenaDTO> SmeneEkipe;
         public IList<IntervencijaDTO> IntervencijeEkipe;
+        public IList<FizickoObezbedjenjeDTO> clanoviEkipe;
         public string RegOznakaVozila;
 
         public EkipaDTO(int redniBroj)
         {
-            this.RedniBroj = redniBroj;
+            RedniBroj = redniBroj;    
+            clanoviEkipe = new List<FizickoObezbedjenjeDTO>();
         }
-        
+        public EkipaDTO()
+        {
+
+        }
+
     }
 
     #endregion
@@ -288,7 +296,8 @@ namespace WindowsFormsApp1
         public DateTime VremeKraja;
         public EkipaDTO EkipaZaSmenu;
         public Ekipa EkipaSmene;
-        public IList<ObuhvataDTO> ObjektiZaSmenu;
+        public IList<ObjekatDTO> ObjektiZaSmenu;
+        public IList<FizickoObezbedjenjeDTO> clanoviSmene;
 
         public SmenaDTO() { }
         public SmenaDTO(int id, DateTime vremePocetka, DateTime vremeKraja, EkipaDTO ekipa)
@@ -297,17 +306,21 @@ namespace WindowsFormsApp1
             VremePocetka = vremePocetka;
             VremeKraja = vremeKraja;
             EkipaZaSmenu = ekipa;
-            ObjektiZaSmenu = new List<ObuhvataDTO>();
+            ObjektiZaSmenu = new List<ObjekatDTO>();
         }
+
         public SmenaDTO(int id, DateTime vremePocetka, DateTime vremeKraja, Ekipa ekipa)
         {
             Id = id;
             VremePocetka = vremePocetka;
             VremeKraja = vremeKraja;
             EkipaSmene = ekipa;
-            ObjektiZaSmenu = new List<ObuhvataDTO>();
+            ObjektiZaSmenu = new List<ObjekatDTO>();
         }
+
     }
+
+
 
 
     #endregion
@@ -351,7 +364,7 @@ namespace WindowsFormsApp1
         public IList<AlarmniSistemDTO> AlarmniSistemi;
 
         public ObjekatDTO(int id, string adresa, string tip, float? povrsina)
-        { 
+        {
             Id = id;
             Adresa = adresa;
             Tip = tip;
@@ -431,5 +444,6 @@ namespace WindowsFormsApp1
     }
 
     #endregion
+
 
 }
