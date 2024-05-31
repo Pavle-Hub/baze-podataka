@@ -514,7 +514,7 @@ namespace WindowsFormsApp1
                 MessageBox.Show("Oh no\n" + ex.Message);
             }
         }
-        
+
 
 
         #endregion
@@ -766,6 +766,149 @@ namespace WindowsFormsApp1
 
                 s.Close();
 
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Oh no\n" + ex.Message);
+            }
+        }
+
+        public static AlarmniSistemDTO vratiAlarmniSistemZaIzmenu(int id)
+        {
+            AlarmniSistemDTO als = new AlarmniSistemDTO();
+            try
+            {
+                ISession s = DataLayer.GetSession();
+
+                AlarmniSistem alarm = s.Load<AlarmniSistem>(id);
+                if (alarm.DetektorPokreta == 'T')
+                {
+                    als = new DetektorPokretaDTO(alarm.Id, alarm.Proizvodjac, alarm.GodinaProizvodnje, alarm.DatumInstalacije, alarm.Objekat, alarm.Osetljivost);
+                }
+                else if (alarm.UltrazvucniSenzor == 'T')
+                {
+                    als = new UltrazvucniSenzorDTO(alarm.Id, alarm.Proizvodjac, alarm.GodinaProizvodnje, alarm.DatumInstalacije, alarm.Objekat, alarm.MinFrekvencija, alarm.MaxFrekvencija);
+                }
+                else if (alarm.DetektorToplotnogOdraza == 'T')
+                {
+                    als = new DetektorToplotnogOdrazaDTO(alarm.Id, alarm.Proizvodjac, alarm.GodinaProizvodnje, alarm.DatumInstalacije, alarm.Objekat, alarm.HorRezolucija, alarm.VerRezolucija);
+                }
+                s.Close();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Oh no\n" + ex.Message);
+            }
+            return als;
+        }
+
+        public static DetektorPokretaDTO azurirajDetektorPokreta(DetektorPokretaDTO dp)
+        {
+            try
+            {
+                ISession s = DataLayer.GetSession();
+
+                AlarmniSistem alarm = s.Load<AlarmniSistem>(dp.Id);
+
+                alarm.Proizvodjac = dp.Proizvodjac;
+                alarm.GodinaProizvodnje = dp.GodinaProizvodnje;
+                alarm.UltrazvucniSenzor = 'F';
+                alarm.MinFrekvencija = null;
+                alarm.MaxFrekvencija = null;
+                alarm.DetektorPokreta = 'T';
+                alarm.Osetljivost = dp.Osetljivost;
+                alarm.DetektorToplotnogOdraza = 'F';
+                alarm.HorRezolucija = null;
+                alarm.VerRezolucija = null;
+                alarm.DatumInstalacije = dp.DatumInstalacije;
+
+                s.Update(alarm);
+                s.Flush();
+
+                s.Close();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Oh no\n" + ex.Message);
+            }
+            return dp;
+        }
+
+        public static DetektorToplotnogOdrazaDTO azurirajDetektorToplote(DetektorToplotnogOdrazaDTO dp)
+        {
+            try
+            {
+                ISession s = DataLayer.GetSession();
+
+                AlarmniSistem alarm = s.Load<AlarmniSistem>(dp.Id);
+
+                alarm.Proizvodjac = dp.Proizvodjac;
+                alarm.GodinaProizvodnje = dp.GodinaProizvodnje;
+                alarm.UltrazvucniSenzor = 'F';
+                alarm.MinFrekvencija = null;
+                alarm.MaxFrekvencija = null;
+                alarm.DetektorPokreta = 'F';
+                alarm.Osetljivost = null;
+                alarm.DetektorToplotnogOdraza = 'T';
+                alarm.HorRezolucija = dp.HorRezolucija;
+                alarm.VerRezolucija = dp.VerRezolucija;
+                alarm.DatumInstalacije = dp.DatumInstalacije;
+
+                s.Update(alarm);
+                s.Flush();
+
+                s.Close();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Oh no\n" + ex.Message);
+            }
+            return dp;
+        }
+
+        public static UltrazvucniSenzorDTO azurirajUltrazvuk(UltrazvucniSenzorDTO dp)
+        {
+            try
+            {
+                ISession s = DataLayer.GetSession();
+
+                AlarmniSistem alarm = s.Load<AlarmniSistem>(dp.Id);
+
+                alarm.Proizvodjac = dp.Proizvodjac;
+                alarm.GodinaProizvodnje = dp.GodinaProizvodnje;
+                alarm.UltrazvucniSenzor = 'T';
+                alarm.MinFrekvencija = dp.MinFrekvencija;
+                alarm.MaxFrekvencija = dp.MaxFrekvencija;
+                alarm.DetektorPokreta = 'F';
+                alarm.Osetljivost = null;
+                alarm.DetektorToplotnogOdraza = 'F';
+                alarm.HorRezolucija = null;
+                alarm.VerRezolucija = null;
+                alarm.DatumInstalacije = dp.DatumInstalacije;
+
+                s.Update(alarm);
+                s.Flush();
+
+                s.Close();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Oh no\n" + ex.Message);
+            }
+            return dp;
+        }
+
+        public static void obrisiAlarm(int id)
+        {
+            try
+            {
+                ISession s = DataLayer.GetSession();
+
+                AlarmniSistem a = s.Load<AlarmniSistem>(id);
+                s.Delete(a);
+                s.Flush();
+
+                s.Close();
             }
             catch (Exception ex)
             {

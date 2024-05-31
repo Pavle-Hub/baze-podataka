@@ -50,9 +50,9 @@ namespace WindowsFormsApp1.Forms
             foreach (DetektorToplotnogOdrazaDTO a in lista)
             {
                 if (a.Obj != null)
-                    listBox1.Items.Add(a.Id + " - " + a.Proizvodjac + " " + a.GodinaProizvodnje + " - " + a.DatumInstalacije.ToString().Split(' ')[0] + " - " + a.Obj.Id + " - " + a.HorRezolucija + " - " + a.VerRezolucija);
+                    listBox1.Items.Add(a.Id + " - " + a.Proizvodjac + " - " + a.GodinaProizvodnje + " - " + a.DatumInstalacije.ToString().Split(' ')[0] + " - " + a.Obj.Id + " - " + a.HorRezolucija + " - " + a.VerRezolucija);
                 else
-                    listBox1.Items.Add(a.Id + " - " + a.Proizvodjac + " " + a.GodinaProizvodnje + " - " + a.DatumInstalacije.ToString().Split(' ')[0] + " -  null" + " - " + a.HorRezolucija + " - " + a.VerRezolucija);
+                    listBox1.Items.Add(a.Id + " - " + a.Proizvodjac + " - " + a.GodinaProizvodnje + " - " + a.DatumInstalacije.ToString().Split(' ')[0] + " -  null" + " - " + a.HorRezolucija + " - " + a.VerRezolucija);
             }
         }
 
@@ -73,9 +73,9 @@ namespace WindowsFormsApp1.Forms
             foreach (DetektorPokretaDTO a in lista)
             {
                 if (a.Obj != null)
-                    listBox1.Items.Add(a.Id + " - " + a.Proizvodjac + " " + a.GodinaProizvodnje + " - " + a.DatumInstalacije.ToString().Split(' ')[0] + " - " + a.Obj.Id + " - " + a.Osetljivost);
+                    listBox1.Items.Add(a.Id + " - " + a.Proizvodjac + " - " + a.GodinaProizvodnje + " - " + a.DatumInstalacije.ToString().Split(' ')[0] + " - " + a.Obj.Id + " - " + a.Osetljivost);
                 else
-                    listBox1.Items.Add(a.Id + " - " + a.Proizvodjac + " " + a.GodinaProizvodnje + " - " + a.DatumInstalacije.ToString().Split(' ')[0] + " -  null" + " - " + a.Osetljivost);
+                    listBox1.Items.Add(a.Id + " - " + a.Proizvodjac + " - " + a.GodinaProizvodnje + " - " + a.DatumInstalacije.ToString().Split(' ')[0] + " -  null" + " - " + a.Osetljivost);
             }
         }
 
@@ -91,9 +91,9 @@ namespace WindowsFormsApp1.Forms
             foreach (UltrazvucniSenzorDTO a in lista)
             {
                 if (a.Obj != null)
-                    listBox1.Items.Add(a.Id + " - " + a.Proizvodjac + " " + a.GodinaProizvodnje + " - " + a.DatumInstalacije.ToString().Split(' ')[0] + " - " + a.Obj.Id + " - " + a.MinFrekvencija + " - " + a.MaxFrekvencija);
+                    listBox1.Items.Add(a.Id + " - " + a.Proizvodjac + " - " + a.GodinaProizvodnje + " - " + a.DatumInstalacije.ToString().Split(' ')[0] + " - " + a.Obj.Id + " - " + a.MinFrekvencija + " - " + a.MaxFrekvencija);
                 else
-                    listBox1.Items.Add(a.Id + " - " + a.Proizvodjac + " " + a.GodinaProizvodnje + " - " + a.DatumInstalacije.ToString().Split(' ')[0] + " -  null" + " - " + a.MinFrekvencija + " - " + a.MaxFrekvencija);
+                    listBox1.Items.Add(a.Id + " - " + a.Proizvodjac + " - " + a.GodinaProizvodnje + " - " + a.DatumInstalacije.ToString().Split(' ')[0] + " -  null" + " - " + a.MinFrekvencija + " - " + a.MaxFrekvencija);
             }
         }
 
@@ -121,6 +121,55 @@ namespace WindowsFormsApp1.Forms
             DialogResult dlg = frm.ShowDialog();
 
             PopuniListuAlarmniSistem();
+        }
+
+        private void izmeniAlarmDugme_Click(object sender, EventArgs e)
+        {
+            if (listBox1.SelectedItems.Count == 0)
+            {
+                MessageBox.Show("Izaberite Alarm koji zelite da izmenite");
+                return;
+            }
+            int idAlarma = Convert.ToInt32((listBox1.SelectedItem).ToString().Split(' ')[0]);
+            var alarm = DTOManager.vratiAlarmniSistemZaIzmenu(idAlarma);
+            if (alarm is DetektorPokretaDTO dt)
+            {
+                IzmeniDetektorPokretaForm frm = new IzmeniDetektorPokretaForm(dt);
+                DialogResult dlg = frm.ShowDialog();
+            }
+            else if (alarm is DetektorToplotnogOdrazaDTO dto)
+            {
+                IzmeniDetektorToploteForm frm = new IzmeniDetektorToploteForm(dto);
+                DialogResult dlg = frm.ShowDialog();
+            }
+            else if (alarm is UltrazvucniSenzorDTO us)
+            {
+                IzmeniUltrazvucniSenzorForm frm = new IzmeniUltrazvucniSenzorForm(us);
+                DialogResult dlg = frm.ShowDialog();
+            }
+            PopuniListuAlarmniSistem();
+        }
+
+        private void obrisiAlarmDugme_Click(object sender, EventArgs e)
+        {
+            if(listBox1.SelectedItems.Count == 0)
+            {
+                MessageBox.Show("Izaberite alarm koji zelite da obrisete!");
+                return;
+            }
+
+            int idalarma = Convert.ToInt32((listBox1.SelectedItem).ToString().Split(' ')[0]);
+            string poruka = "Da li zelite da obrisete izabrani alarm?";
+            string title = "Pitanje";
+            MessageBoxButtons buttons = MessageBoxButtons.OKCancel;
+            DialogResult result = MessageBox.Show(poruka, title, buttons);
+
+            if(result == DialogResult.OK)
+            {
+                DTOManager.obrisiAlarm(idalarma);
+                MessageBox.Show("Uspesno obrisan alarm!");
+                this.PopuniListuAlarmniSistem();
+            }
         }
     }
 }

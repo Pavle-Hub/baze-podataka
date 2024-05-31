@@ -114,6 +114,7 @@
             izmeniAlarmDugme.TabIndex = 6;
             izmeniAlarmDugme.Text = "Izmeni";
             izmeniAlarmDugme.UseVisualStyleBackColor = false;
+            izmeniAlarmDugme.Click += izmeniAlarmDugme_Click;
             // 
             // obrisiAlarmDugme
             // 
@@ -124,6 +125,7 @@
             obrisiAlarmDugme.TabIndex = 7;
             obrisiAlarmDugme.Text = "Obrisi";
             obrisiAlarmDugme.UseVisualStyleBackColor = false;
+            obrisiAlarmDugme.Click += obrisiAlarmDugme_Click;
             // 
             // AlarmiForm
             // 

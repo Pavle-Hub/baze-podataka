@@ -93,7 +93,7 @@ namespace WindowsFormsApp1.Forms
 
         private void button1_Click(object sender, EventArgs e)
         {
-            if(checkBox1.Checked == false && checkBox2.Checked == false && checkBox3.Checked == false)
+            if (checkBox1.Checked == false && checkBox2.Checked == false && checkBox3.Checked == false)
             {
                 MessageBox.Show("Izaberite kog tipa ce biti alarmni sistem!");
                 return;
@@ -109,7 +109,7 @@ namespace WindowsFormsApp1.Forms
 
                 DTOManager.dodajUltrazvucniSenzor(uzs);
             }
-            else if(checkBox2.Checked == true)
+            else if (checkBox2.Checked == true)
             {
                 DetektorToplotnogOdrazaDTO dto = new DetektorToplotnogOdrazaDTO();
                 dto.Proizvodjac = textBox1.Text;
@@ -120,7 +120,7 @@ namespace WindowsFormsApp1.Forms
 
                 DTOManager.dodajToplotniOdraz(dto);
             }
-            else if(checkBox3.Checked == true)
+            else if (checkBox3.Checked == true)
             {
                 DetektorPokretaDTO dp = new DetektorPokretaDTO();
                 dp.Proizvodjac = textBox1.Text;
@@ -130,6 +130,11 @@ namespace WindowsFormsApp1.Forms
 
                 DTOManager.dodajDetektorPokreta(dp);
             }
+            this.Close();
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
             this.Close();
         }
     }

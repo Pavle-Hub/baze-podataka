@@ -53,6 +53,7 @@
             textBox7 = new System.Windows.Forms.TextBox();
             label12 = new System.Windows.Forms.Label();
             button1 = new System.Windows.Forms.Button();
+            button2 = new System.Windows.Forms.Button();
             SuspendLayout();
             // 
             // checkBox1
@@ -261,13 +262,24 @@
             // button1
             // 
             button1.BackColor = System.Drawing.SystemColors.GradientActiveCaption;
-            button1.Location = new System.Drawing.Point(527, 74);
+            button1.Location = new System.Drawing.Point(527, 37);
             button1.Name = "button1";
-            button1.Size = new System.Drawing.Size(181, 123);
+            button1.Size = new System.Drawing.Size(181, 96);
             button1.TabIndex = 23;
             button1.Text = "Prosledi";
             button1.UseVisualStyleBackColor = false;
             button1.Click += button1_Click;
+            // 
+            // button2
+            // 
+            button2.BackColor = System.Drawing.SystemColors.GradientActiveCaption;
+            button2.Location = new System.Drawing.Point(527, 160);
+            button2.Name = "button2";
+            button2.Size = new System.Drawing.Size(181, 61);
+            button2.TabIndex = 24;
+            button2.Text = "Nazad";
+            button2.UseVisualStyleBackColor = false;
+            button2.Click += button2_Click;
             // 
             // dodajAlarmniSistemForm
             // 
@@ -276,6 +288,7 @@
             BackgroundImage = (System.Drawing.Image)resources.GetObject("$this.BackgroundImage");
             BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             ClientSize = new System.Drawing.Size(817, 568);
+            Controls.Add(button2);
             Controls.Add(button1);
             Controls.Add(label12);
             Controls.Add(textBox7);
@@ -332,5 +345,6 @@
         private System.Windows.Forms.TextBox textBox7;
         private System.Windows.Forms.Label label12;
         private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button button2;
     }
 }
