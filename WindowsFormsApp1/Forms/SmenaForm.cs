@@ -58,5 +58,36 @@ namespace WindowsFormsApp1.Forms
         {
             PopuniListuSmena();
         }
+
+        private void izbrisiSmenu_Click(object sender, EventArgs e)
+        {
+            if (listBoxSmena.SelectedItems.Count == 0)
+            {
+                MessageBox.Show("Izaberite obezbedjenje koje zelite da obrisete!");
+                return;
+            }
+            int idSmene = Convert.ToInt32((listBoxSmena.SelectedItem).ToString().Substring(0, 2));
+            string poruka = "Da li zelite da obrisete izabranog zaposlenog?";
+            string title = "Pitanje";
+            MessageBoxButtons buttons = MessageBoxButtons.OKCancel;
+            DialogResult result = MessageBox.Show(poruka, title, buttons);
+
+            if (result == DialogResult.OK)
+            {
+                DTOManager.obrisiSmenu(idSmene);
+                MessageBox.Show("Uspesno obrisano fizicko obezbedjenje!");
+                this.PopuniListuSmena();
+            }
+
+
+        }
+
+        private void izmeniSmenu_Click(object sender, EventArgs e)
+        {
+            IzmeniSmenuForm frm = new IzmeniSmenuForm();
+            DialogResult dlg = frm.ShowDialog();
+
+            PopuniListuSmena();
+        }
     }
 }

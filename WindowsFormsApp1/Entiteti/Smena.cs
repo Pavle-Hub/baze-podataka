@@ -2,7 +2,7 @@
 {
     public class Smena
     {
-        public virtual int Id { get; protected set; }
+        public virtual int Id { get; set; }
         public virtual DateTime VremePocetka { get; set; }
         public virtual DateTime VremeKraja { get; set; }
         public virtual Ekipa EkipaZaSmenu { get; set; }

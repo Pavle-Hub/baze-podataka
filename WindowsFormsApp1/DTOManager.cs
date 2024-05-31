@@ -942,6 +942,79 @@ namespace WindowsFormsApp1
 
         #region Smena
 
+        public static void dodajSmenu(SmenaDTO sme)
+        {
+            try
+            {
+                ISession s = DataLayer.GetSession();
+
+                Smena sm = new Smena();
+                sm.Id = sme.Id;
+                sm.VremePocetka = sme.VremePocetka;
+                sm.VremeKraja = sme.VremeKraja;
+                sm.EkipaZaSmenu = sme.EkipaSmene;
+                
+
+                s.SaveOrUpdate(sm);
+
+                s.Flush();
+
+                s.Close();
+
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Oh no\n" + ex.Message);
+            }
+        }
+
+        public static void obrisiSmenu(int id)
+        {
+            try
+            {
+                ISession s = DataLayer.GetSession();
+
+                Smena m = s.Load<Smena>(id);
+                s.Delete(m);
+                s.Flush();
+
+                s.Close();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Oh no\n" + ex.Message);
+            }
+        }
+
+        public static SmenaDTO azurirajSmenu(SmenaDTO fo, int redniBrojEkipe)
+        {
+            try
+            {
+                ISession s = DataLayer.GetSession();
+
+                Smena sm = s.Load<Smena>(fo.Id);
+
+                sm.Id = fo.Id;
+                sm.VremePocetka = fo.VremePocetka;
+                sm.VremeKraja = fo.VremeKraja;                
+                if (redniBrojEkipe == -1)
+                    sm.EkipaZaSmenu = null;
+                else
+                    sm.EkipaZaSmenu = s.Load<Ekipa>(redniBrojEkipe);
+
+                s.Update(sm);
+                s.Flush();
+
+                s.Close();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Oh no\n" + ex.Message);
+            }
+
+            return fo;
+        }
+
         public static SmenaDTO vratiSmenu(int id)
         {
             SmenaDTO smena = new SmenaDTO();
@@ -959,6 +1032,25 @@ namespace WindowsFormsApp1
                 MessageBox.Show("Oh no\n" + ex.Message);
             }
             return smena;
+        }
+
+        public static EkipaDTO vratiEkipuSmene(int id)
+        {
+            SmenaDTO smena = new SmenaDTO();
+            try
+            {
+                ISession s = DataLayer.GetSession();
+
+                Smena sm = s.Load<Smena>(id);
+                smena = new SmenaDTO(sm.Id, sm.VremePocetka, sm.VremeKraja, sm.EkipaZaSmenu);
+
+                s.Close();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Oh no\n" + ex.Message);
+            }
+            return smena.EkipaZaSmenu;
         }
 
         public static List<ObjekatDTO> vratiListuObjekataSmene(int id)

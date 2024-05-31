@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            button1 = new System.Windows.Forms.Button();
+            proslediSmenu = new System.Windows.Forms.Button();
             textBox1 = new System.Windows.Forms.TextBox();
             label1 = new System.Windows.Forms.Label();
             label2 = new System.Windows.Forms.Label();
@@ -39,14 +39,15 @@
             dateTimePicker2 = new System.Windows.Forms.DateTimePicker();
             SuspendLayout();
             // 
-            // button1
+            // proslediSmenu
             // 
-            button1.Location = new System.Drawing.Point(111, 216);
-            button1.Name = "button1";
-            button1.Size = new System.Drawing.Size(63, 32);
-            button1.TabIndex = 0;
-            button1.Text = "button1";
-            button1.UseVisualStyleBackColor = true;
+            proslediSmenu.Location = new System.Drawing.Point(111, 216);
+            proslediSmenu.Name = "proslediSmenu";
+            proslediSmenu.Size = new System.Drawing.Size(63, 32);
+            proslediSmenu.TabIndex = 0;
+            proslediSmenu.Text = "Prosledi";
+            proslediSmenu.UseVisualStyleBackColor = true;
+            proslediSmenu.Click += ProslediSmenu_Click;
             // 
             // textBox1
             // 
@@ -127,7 +128,7 @@
             Controls.Add(label2);
             Controls.Add(label1);
             Controls.Add(textBox1);
-            Controls.Add(button1);
+            Controls.Add(proslediSmenu);
             Name = "dodajSmenuForm";
             Text = "dodajSmenuForm";
             ResumeLayout(false);
@@ -136,7 +137,7 @@
 
         #endregion
 
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button proslediSmenu;
         private System.Windows.Forms.TextBox textBox1;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
