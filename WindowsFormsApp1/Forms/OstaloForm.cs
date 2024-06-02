@@ -19,7 +19,8 @@ namespace WindowsFormsApp1.Forms
 
         private void prikaziEkipe_Click(object sender, EventArgs e)
         {
-
+            EkipaForm frm = new EkipaForm();
+            DialogResult dlg = frm.ShowDialog();
         }
 
         private void button4_Click(object sender, EventArgs e)

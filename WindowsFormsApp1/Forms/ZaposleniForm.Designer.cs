@@ -68,6 +68,7 @@
             listBox2.Name = "listBox2";
             listBox2.Size = new System.Drawing.Size(387, 224);
             listBox2.TabIndex = 1;
+            listBox2.MouseDoubleClick += listBox2_MouseDoubleClick;
             // 
             // listBox3
             // 

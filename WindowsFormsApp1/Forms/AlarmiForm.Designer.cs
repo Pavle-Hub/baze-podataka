@@ -30,13 +30,13 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(AlarmiForm));
             listBox1 = new System.Windows.Forms.ListBox();
-            button1 = new System.Windows.Forms.Button();
             button2 = new System.Windows.Forms.Button();
             button3 = new System.Windows.Forms.Button();
             button4 = new System.Windows.Forms.Button();
             dodajAlarmDugme = new System.Windows.Forms.Button();
             izmeniAlarmDugme = new System.Windows.Forms.Button();
             obrisiAlarmDugme = new System.Windows.Forms.Button();
+            button1 = new System.Windows.Forms.Button();
             SuspendLayout();
             // 
             // listBox1
@@ -48,18 +48,8 @@
             listBox1.Name = "listBox1";
             listBox1.Size = new System.Drawing.Size(321, 544);
             listBox1.TabIndex = 0;
+            listBox1.SelectedIndexChanged += listBox1_SelectedIndexChanged;
             listBox1.MouseDoubleClick += listBox1_MouseDoubleClick;
-            // 
-            // button1
-            // 
-            button1.BackColor = System.Drawing.SystemColors.GradientActiveCaption;
-            button1.Location = new System.Drawing.Point(370, 32);
-            button1.Name = "button1";
-            button1.Size = new System.Drawing.Size(250, 59);
-            button1.TabIndex = 1;
-            button1.Text = "Prikaži toplotne alarme";
-            button1.UseVisualStyleBackColor = false;
-            button1.Click += button1_Click;
             // 
             // button2
             // 
@@ -127,6 +117,17 @@
             obrisiAlarmDugme.UseVisualStyleBackColor = false;
             obrisiAlarmDugme.Click += obrisiAlarmDugme_Click;
             // 
+            // button1
+            // 
+            button1.BackColor = System.Drawing.SystemColors.GradientActiveCaption;
+            button1.Location = new System.Drawing.Point(370, 32);
+            button1.Name = "button1";
+            button1.Size = new System.Drawing.Size(250, 59);
+            button1.TabIndex = 1;
+            button1.Text = "Prikaži toplotne alarme";
+            button1.UseVisualStyleBackColor = false;
+            button1.Click += button1_Click;
+            // 
             // AlarmiForm
             // 
             AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
@@ -151,12 +152,12 @@
         #endregion
 
         private System.Windows.Forms.ListBox listBox1;
-        private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.Button button3;
         private System.Windows.Forms.Button button4;
         private System.Windows.Forms.Button dodajAlarmDugme;
         private System.Windows.Forms.Button izmeniAlarmDugme;
         private System.Windows.Forms.Button obrisiAlarmDugme;
+        private System.Windows.Forms.Button button1;
     }
 }

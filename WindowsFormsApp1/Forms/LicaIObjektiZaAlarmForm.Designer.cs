@@ -55,6 +55,7 @@
             listView1.TabIndex = 4;
             listView1.UseCompatibleStateImageBehavior = false;
             listView1.View = System.Windows.Forms.View.Details;
+            listView1.MouseDoubleClick += listView1_MouseDoubleClick;
             // 
             // ColumnMatBr
             // 

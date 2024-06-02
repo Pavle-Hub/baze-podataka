@@ -7,13 +7,13 @@
 
             Table("EKIPA");
 
-            Id(x => x.RedniBroj, "REDNI_BROJ").GeneratedBy.TriggerIdentity(); // primarni kljuc
+            Id(x => x.RedniBroj).GeneratedBy.Sequence("PRODUCT_ID_SEQ").Column("REDNI_BROJ"); // primarni kljuc
 
             References(x => x.Vodja).Column("MATICNI_BROJ_VODJE").LazyLoad(); // 1:1 veza JE_VODJA
 
             HasMany(x => x.Clanovi).KeyColumn("REDNI_BROJ_EKIPE").LazyLoad().Cascade.All().Inverse(); // 1:N EKIPA - FIZICKO_OBEZBEDJENJE
 
-            HasMany(x => x.Smene).KeyColumn("REDNI_BR0J_EKIPE").Cascade.All().LazyLoad().Inverse(); // 1:N EKIPA - SMENA
+            HasMany(x => x.Smene).KeyColumn("REDNI_BROJ_EKIPE").Cascade.All().LazyLoad().Inverse(); // 1:N EKIPA - SMENA
 
             HasMany(x => x.Intervencija).KeyColumn("ID_EKIPE").LazyLoad().Cascade.All().Inverse(); // M:N veza Intervencija
 

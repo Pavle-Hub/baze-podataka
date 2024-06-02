@@ -1,6 +1,8 @@
-﻿using NHibernate.SqlCommand;
+﻿using Microsoft.Identity.Client;
+using NHibernate.SqlCommand;
 using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -377,6 +379,49 @@ namespace WindowsFormsApp1
                 MessageBox.Show("Oh no\n" + ex.Message);
             }
         }
+
+        public static List<AlarmniSistemDTO> vratiListuAlarma(long maticni)
+        {
+            List<AlarmniSistemDTO> lista = new List<AlarmniSistemDTO>();
+            try
+            {
+                ISession s = DataLayer.GetSession();
+
+                var query = s.Query<Odrzava>()
+                             .Where(x => x.TehnickoLice.MaticniBroj == maticni)
+                             .Select(x => new AlarmniSistemDTO
+                             {
+                                 Id = x.AlarmniSistem.Id,
+                                 Proizvodjac = x.AlarmniSistem.Proizvodjac,
+                                 GodinaProizvodnje = x.AlarmniSistem.GodinaProizvodnje
+                             }) ;
+
+                lista = query.ToList();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Oh no\n" + ex.Message);
+            }
+            return lista;
+        }
+        public static List<long> VratiDostupneClanove()
+        {
+            List<long> dostupniClanovi = new List<long>();
+            try
+            {
+                ISession s = DataLayer.GetSession();
+                dostupniClanovi = s.Query<FizickoObezbedjenje>()
+                                .Where(c => c.PripadaEkipi == null)
+                                .Select(c => c.MaticniBroj)
+                                .ToList();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Greška pri dohvatu dostupnih članova: " + ex.Message);
+            }
+            return dostupniClanovi;
+        }
+
         #endregion
 
         #region MenGradovi
@@ -915,6 +960,31 @@ namespace WindowsFormsApp1
                 MessageBox.Show("Oh no\n" + ex.Message);
             }
         }
+
+        public static bool dodajObjekatAlarmu(int idObjekta, AlarmniSistemDTO alarm)
+        {
+            try
+            {
+                ISession s = DataLayer.GetSession();
+
+                Objekat o = s.Load<Objekat>(idObjekta);
+                AlarmniSistem a = s.Load<AlarmniSistem>(alarm.Id);
+
+                a.Objekat = o;
+
+                s.Update(a);
+                s.Flush();
+
+                s.Close();
+
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Ne postoji objekat sa datim ID-om!");
+                return false;
+            }
+            return true;
+        }
         #endregion
 
         #region Objekat
@@ -1198,6 +1268,223 @@ namespace WindowsFormsApp1
             return lista;
         }
 
+        public static List<EkipaDTO> VratiSveEkipeSaClanovima()
+        {
+            List<EkipaDTO> ekipeDTO = new List<EkipaDTO>();
+            try
+            {
+                ISession s = DataLayer.GetSession();
+
+                var clanovi = s.Query<FizickoObezbedjenje>()
+                               .Where(c => c.PripadaEkipi != null)
+                               .ToList();
+                var ekipe = s.Query<Ekipa>().ToList();
+
+                ekipeDTO = ekipe.Select(e => new EkipaDTO
+                {
+                    RedniBroj = e.RedniBroj,
+                    clanoviEkipe = clanovi
+                                  .Where(c => c.PripadaEkipi.RedniBroj == e.RedniBroj)
+                                  .Select(c => new FizickoObezbedjenjeDTO
+                                  {
+                                      MaticniBroj = c.MaticniBroj,
+                                      Ime = c.Ime,
+                                      Prezime = c.Prezime
+                                  })
+                                  .ToList(),
+                    Vodja = e.Vodja != null
+                        ? new FizickoObezbedjenjeDTO
+                        {
+                            MaticniBroj = e.Vodja.MaticniBroj,
+                            Ime = e.Vodja.Ime,
+                            Prezime = e.Vodja.Prezime
+                        }
+                        : null
+                }).ToList();
+
+                s.Close();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Greška pri dohvatu ekipa: " + ex.Message);
+            }
+
+            return ekipeDTO;
+        }
+
+        public static void DodajNovuEkipu(long[] maticniBrojeviClanova)
+        {
+            try
+            {
+                ISession s = DataLayer.GetSession();
+                ITransaction tx = s.BeginTransaction();
+
+                Ekipa novaEkipa = new Ekipa();
+                s.Save(novaEkipa);
+                s.Flush();
+
+                foreach (long mb in maticniBrojeviClanova)
+                {
+                    FizickoObezbedjenje clan = s.Load<FizickoObezbedjenje>(mb);
+                    clan.PripadaEkipi = novaEkipa;
+                    s.Update(clan);
+                }
+
+                tx.Commit();
+                s.Close();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Greška pri dodavanju nove ekipe: " + ex.Message);
+            }
+        }
+
+
+        #endregion
+
+        #region Odrzavanje
+
+        public static void dodajOdrzavanje(OdrzavaDTO odrzavanje, AlarmniSistemDTO alarm, long maticni)
+        {
+            Odrzava o = new Odrzava();
+            try
+            {
+                ISession s = DataLayer.GetSession();
+
+                AlarmniSistem alarmniSistem = s.Load<AlarmniSistem>(alarm.Id);
+                TehnickoLice tehnickoLice = s.Load<TehnickoLice>(maticni);
+
+                o.AlarmniSistem = alarmniSistem;
+                o.TehnickoLice = tehnickoLice;
+                o.DatumOd = odrzavanje.DatumOd;
+                o.DatumDo = odrzavanje.DatumDo;
+
+                s.Save(o);
+                s.Flush();
+                s.Close();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Oh no\n" + ex.Message);
+            }
+        }
+
+        public static OdrzavaDTO vratiOdrzavanje(AlarmniSistemDTO alarm, TehnickoLiceDTO tl)
+        {
+            OdrzavaDTO o = new OdrzavaDTO();
+            try
+            {
+                ISession s = DataLayer.GetSession();
+
+                var odrzava = s.Query<Odrzava>()
+                              .Where(x => x.TehnickoLice.MaticniBroj == tl.MaticniBroj && x.AlarmniSistem.Id == alarm.Id)
+                              .SingleOrDefault();
+
+                if (odrzava != null)
+                {
+                    o = new OdrzavaDTO
+                    {
+                        Id = odrzava.Id,
+                        DatumOd = odrzava.DatumOd,
+                        DatumDo = odrzava.DatumDo
+                    };
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Došlo je do greške prilikom vraćanja održavanja: " + ex.Message);
+            }
+
+            return o;
+        }
+        public static void PostaviVodju(int ekipaId, long maticniBrojVodje)
+        {
+            try
+            {
+                ISession s = DataLayer.GetSession();
+
+                    Ekipa ekipa = s.Get<Ekipa>(ekipaId);
+
+                    FizickoObezbedjenje clan = s.Load<FizickoObezbedjenje>(maticniBrojVodje);
+
+                    ekipa.Vodja = clan;
+                    s.Update(ekipa);
+                    s.Flush();
+                    s.Close();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Greška: " + ex.Message);
+            }
+        }
+
+        public static EkipaDTO vratiEkipu(int id)
+        {
+            EkipaDTO ekipa = new EkipaDTO();
+            try
+            {
+                ISession s = DataLayer.GetSession();
+
+                Ekipa e = s.Get<Ekipa>(id);
+
+                if (e != null)
+                {
+                    ekipa.RedniBroj = e.RedniBroj;
+                    ekipa.clanoviEkipe = s.Query<FizickoObezbedjenje>()
+                                          .Where(c => c.PripadaEkipi.RedniBroj == e.RedniBroj)
+                                          .Select(c => new FizickoObezbedjenjeDTO
+                                          {
+                                              MaticniBroj = c.MaticniBroj
+                                          })
+                                          .ToList();
+                }
+
+                s.Close();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Oh no\n{ex.Message}");
+            }
+
+            return ekipa;
+        }
+
+        public static void ObrisiEkipu(int ekipaId)
+        {
+            try
+            {
+                using (ISession s = DataLayer.GetSession())
+                {
+                    using (ITransaction transaction = s.BeginTransaction())
+                    {
+                        Ekipa ekipa = s.Get<Ekipa>(ekipaId);
+
+                        if (ekipa != null)
+                        {
+                            var clanovi = s.Query<FizickoObezbedjenje>()
+                                           .Where(c => c.PripadaEkipi.RedniBroj == ekipa.RedniBroj)
+                                           .ToList();
+
+                            foreach (var clan in clanovi)
+                            {
+                                clan.PripadaEkipi = null;
+                                s.Update(clan);
+                            }
+                            s.Delete(ekipa);
+                            transaction.Commit();
+                        }
+                        else
+                        {
+                            MessageBox.Show("Ekipa sa datim ID-om ne postoji.");
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Došlo je do greške: {ex.Message}");
+            }
+        }
         #endregion
     }
 }

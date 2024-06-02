@@ -238,7 +238,7 @@ namespace WindowsFormsApp1.Forms
 
         private void button8_Click(object sender, EventArgs e)
         {
-            if(listBox3.SelectedItems.Count == 0)
+            if (listBox3.SelectedItems.Count == 0)
             {
                 MessageBox.Show("Izaberite menadzera cije gradove zelite da vidite!");
                 return;
@@ -250,6 +250,19 @@ namespace WindowsFormsApp1.Forms
                 GradoviMenadzeraForm frm = new GradoviMenadzeraForm(m);
                 DialogResult dlg = frm.ShowDialog();
             }
+        }
+
+        private void listBox2_MouseDoubleClick(object sender, MouseEventArgs e)
+        {
+            if (listBox2.SelectedItems.Count == 0)
+            {
+                MessageBox.Show("Izaberite tehnicko lice cije podatke zelite da vidite!");
+                return;
+            }
+            long maticniBroj = Int64.Parse((listBox2.SelectedItem).ToString().Split(' ')[0]);
+            TehnickoLiceDTO tl = DTOManager.vratiTehnickoLice(maticniBroj);
+            ListaAlarmaZaTehnickoForm frm = new ListaAlarmaZaTehnickoForm(tl);
+            DialogResult dlg = frm.ShowDialog();
         }
     }
 }

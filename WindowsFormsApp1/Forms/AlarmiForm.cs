@@ -17,7 +17,7 @@ namespace WindowsFormsApp1.Forms
             InitializeComponent();
         }
 
-
+        private int previousSelectedIndex = -1;
 
         private void PopuniListuAlarmniSistem()
         {
@@ -117,9 +117,19 @@ namespace WindowsFormsApp1.Forms
 
         private void dodajAlarmDugme_Click(object sender, EventArgs e)
         {
-            dodajAlarmniSistemForm frm = new dodajAlarmniSistemForm();
-            DialogResult dlg = frm.ShowDialog();
 
+            if (listBox1.SelectedItems.Count == 0)
+            {
+                IzborZaAlarmIliOdrzavanjeForm frm = new IzborZaAlarmIliOdrzavanjeForm();
+                DialogResult dlg = frm.ShowDialog();
+            }
+            else if (listBox1.SelectedItems.Count != 0)
+            {
+                int idAlarma = Convert.ToInt32((listBox1.SelectedItem).ToString().Split(' ')[0]);
+                AlarmniSistemDTO alarm = DTOManager.vratiAlarmniSistem(idAlarma);
+                IzborZaAlarmIliOdrzavanjeForm frm = new IzborZaAlarmIliOdrzavanjeForm(alarm);
+                DialogResult dlg = frm.ShowDialog();
+            }
             PopuniListuAlarmniSistem();
         }
 
@@ -152,7 +162,7 @@ namespace WindowsFormsApp1.Forms
 
         private void obrisiAlarmDugme_Click(object sender, EventArgs e)
         {
-            if(listBox1.SelectedItems.Count == 0)
+            if (listBox1.SelectedItems.Count == 0)
             {
                 MessageBox.Show("Izaberite alarm koji zelite da obrisete!");
                 return;
@@ -164,11 +174,24 @@ namespace WindowsFormsApp1.Forms
             MessageBoxButtons buttons = MessageBoxButtons.OKCancel;
             DialogResult result = MessageBox.Show(poruka, title, buttons);
 
-            if(result == DialogResult.OK)
+            if (result == DialogResult.OK)
             {
                 DTOManager.obrisiAlarm(idalarma);
                 MessageBox.Show("Uspesno obrisan alarm!");
                 this.PopuniListuAlarmniSistem();
+            }
+        }
+
+        private void listBox1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if(listBox1.SelectedIndex == previousSelectedIndex)
+            {
+                listBox1.ClearSelected();
+                previousSelectedIndex = -1;
+            }
+            else
+            {
+                previousSelectedIndex = listBox1.SelectedIndex;
             }
         }
     }

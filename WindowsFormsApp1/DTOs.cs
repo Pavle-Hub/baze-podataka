@@ -177,16 +177,20 @@ namespace WindowsFormsApp1
         public int Id;
         public AlarmniSistemDTO AlarmniSistem;
         public TehnickoLiceDTO TehnickoLice;
-        public DateOnly DatumOd;
-        public DateOnly DatumDo;
+        public DateTime DatumOd;
+        public DateTime DatumDo;
 
-        public OdrzavaDTO(int id, AlarmniSistemDTO alarmniSistem, TehnickoLiceDTO tehnickoLice, DateOnly datumOd, DateOnly datumDo)
+        public OdrzavaDTO(int id, AlarmniSistemDTO alarmniSistem, TehnickoLiceDTO tehnickoLice, DateTime datumOd, DateTime datumDo)
         {
             Id = id;
             AlarmniSistem = alarmniSistem;
             TehnickoLice = tehnickoLice;
             DatumOd = datumOd;
             DatumDo = datumDo;
+        }
+        public OdrzavaDTO()
+        {
+
         }
     }
 
