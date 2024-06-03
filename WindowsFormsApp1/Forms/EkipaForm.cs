@@ -127,5 +127,81 @@ namespace WindowsFormsApp1.Forms
         {
             this.Close();
         }
+
+        private void listView1_MouseDoubleClick(object sender, MouseEventArgs e)
+        {
+            if (listView1.SelectedItems.Count > 0)
+            {
+                var selectedItem = listView1.SelectedItems[0];
+                int ekipaId = int.Parse(selectedItem.SubItems[0].Text);
+
+                var vozilo = DTOManager.VratiVoziloZaEkipu(ekipaId);
+
+                if (vozilo != null)
+                {
+                    MessageBox.Show($"Registarska oznaka: {vozilo.RegOznaka}\n Datum od: {vozilo.DatumOd}\n Datum do: {vozilo.DatumDo}");
+                }
+                else
+                {
+                    MessageBox.Show("Nema vozila vezanog za ovu ekipu.");
+                }
+            }
+        }
+
+        private void smeneDugme_Click(object sender, EventArgs e)
+        {
+            if (listView1.SelectedItems.Count > 0)
+            {
+                var selectedItem = listView1.SelectedItems[0];
+                int ekipaId = int.Parse(selectedItem.SubItems[0].Text);
+                var smene = DTOManager.VratiSmeneZaEkipu(ekipaId);
+
+                if (smene != null && smene.Any())
+                {
+                    StringBuilder sb = new StringBuilder();
+                    foreach (var smena in smene)
+                    {
+                        sb.AppendLine($"Vreme početka: {smena.VremePocetka}, Vreme kraja: {smena.VremeKraja}");
+                    }
+                    MessageBox.Show(sb.ToString(), "Smene za izabranu ekipu");
+                }
+                else
+                {
+                    MessageBox.Show("Nema smena vezanih za ovu ekipu.");
+                }
+            }
+            else
+            {
+                MessageBox.Show("Izaberite ekipu ciju smenu zelite da vidite!");
+            }
+        }
+
+        private void intervencijeDugme_Click(object sender, EventArgs e)
+        {
+            if (listView1.SelectedItems.Count == 0)
+            {
+                MessageBox.Show("Molimo vas da selektujete ekipu.");
+                return;
+            }
+            int ekipaId = int.Parse(listView1.SelectedItems[0].SubItems[0].Text);
+
+            List<IntervencijaDTO> intervencije = DTOManager.VratiIntervencijeEkipe(ekipaId);
+
+            if (intervencije.Count == 0)
+            {
+                MessageBox.Show("Ova ekipa nema intervencije.");
+                return;
+            }
+
+            StringBuilder sb = new StringBuilder();
+            sb.AppendLine("Intervencije ekipe:");
+
+            foreach (var intervencija in intervencije)
+            {
+                sb.AppendLine($"Adresa: {intervencija.adresaObjekta}, Datum: {intervencija.Datum}, Vreme: {intervencija.Vreme}, Tip: {intervencija.Tip}");
+            }
+
+            MessageBox.Show(sb.ToString());
+        }
     }
 }

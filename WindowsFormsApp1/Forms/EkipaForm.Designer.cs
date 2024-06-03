@@ -54,6 +54,7 @@
             listView1.UseCompatibleStateImageBehavior = false;
             listView1.View = System.Windows.Forms.View.Details;
             listView1.SelectedIndexChanged += listView1_SelectedIndexChanged;
+            listView1.MouseDoubleClick += listView1_MouseDoubleClick;
             // 
             // columnHeader1
             // 
@@ -115,21 +116,23 @@
             // 
             // smeneDugme
             // 
-            smeneDugme.Location = new System.Drawing.Point(609, 203);
+            smeneDugme.Location = new System.Drawing.Point(609, 175);
             smeneDugme.Name = "smeneDugme";
             smeneDugme.Size = new System.Drawing.Size(215, 55);
             smeneDugme.TabIndex = 4;
             smeneDugme.Text = "Smene za ekipu";
             smeneDugme.UseVisualStyleBackColor = true;
+            smeneDugme.Click += smeneDugme_Click;
             // 
             // intervencijeDugme
             // 
-            intervencijeDugme.Location = new System.Drawing.Point(609, 264);
+            intervencijeDugme.Location = new System.Drawing.Point(609, 236);
             intervencijeDugme.Name = "intervencijeDugme";
             intervencijeDugme.Size = new System.Drawing.Size(215, 55);
             intervencijeDugme.TabIndex = 5;
             intervencijeDugme.Text = "Intervencije ekipe";
             intervencijeDugme.UseVisualStyleBackColor = true;
+            intervencijeDugme.Click += intervencijeDugme_Click;
             // 
             // EkipaForm
             // 

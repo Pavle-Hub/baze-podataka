@@ -339,6 +339,7 @@ namespace WindowsFormsApp1
         public string Tip;
         public ObjekatDTO IntervencijaObjekta;
         public EkipaDTO IntervencijaEkipe;
+        public string adresaObjekta;
 
         public IntervencijaDTO(int id, DateTime datum, DateTime vreme, string tip, ObjekatDTO intervencijaObjekta, EkipaDTO intervencijaEkipe)
         {

@@ -560,7 +560,35 @@ namespace WindowsFormsApp1
             }
         }
 
+        public static VoziloDTO VratiVoziloZaEkipu(int ekipaId)
+        {
+            VoziloDTO voziloDTO = null;
+            try
+            {
+                using (ISession s = DataLayer.GetSession())
+                {
+                    var vozilo = s.Query<Vozilo>()
+                                  .FirstOrDefault(v => v.EkipaKojaGaDuzi.RedniBroj == ekipaId);
 
+                    if (vozilo != null)
+                    {
+                        voziloDTO = new VoziloDTO
+                        {
+                            RegOznaka = vozilo.RegistarskaOznaka,
+                            DatumOd = vozilo.DatumOd,
+                            DatumDo = vozilo.DatumDo
+                        };
+                    }
+
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Došlo je do greške: " + ex.Message);
+            }
+
+            return voziloDTO;
+        }
 
         #endregion
 
@@ -1202,6 +1230,32 @@ namespace WindowsFormsApp1
 
             return lista;
         }
+
+        public static List<SmenaDTO> VratiSmeneZaEkipu(int ekipaId)
+        {
+            List<SmenaDTO> smeneDTO = new List<SmenaDTO>();
+            try
+            {
+                using (ISession s = DataLayer.GetSession())
+                {
+                    var smene = s.Query<Smena>()
+                                 .Where(sm => sm.EkipaZaSmenu.RedniBroj == ekipaId)
+                                 .ToList();
+
+                    smeneDTO = smene.Select(sm => new SmenaDTO
+                    {
+                        VremePocetka = sm.VremePocetka,
+                        VremeKraja = sm.VremeKraja
+                    }).ToList();
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Došlo je do greške: " + ex.Message);
+            }
+
+            return smeneDTO;
+        }
         #endregion
 
         #region RegionalniCentar
@@ -1485,6 +1539,39 @@ namespace WindowsFormsApp1
                 MessageBox.Show($"Došlo je do greške: {ex.Message}");
             }
         }
+        #endregion
+
+        #region Intervencija
+
+        public static List<IntervencijaDTO> VratiIntervencijeEkipe(int ekipaId)
+        {
+            List<IntervencijaDTO> intervencijeDTO = new List<IntervencijaDTO>();
+            try
+            {
+                using (ISession s = DataLayer.GetSession())
+                {
+                    var intervencije = s.Query<Intervencija>()
+                                         .Where(i => i.Ekipa.RedniBroj == ekipaId)
+                                         .Select(i => new IntervencijaDTO
+                                         {
+                                             adresaObjekta = i.Objekat.Adresa,
+                                             Datum = i.Datum,
+                                             Vreme = i.Vreme,
+                                             Tip = i.Tip
+                                         })
+                                         .ToList();
+
+                    intervencijeDTO = intervencije;
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Došlo je do greške: " + ex.Message);
+            }
+
+            return intervencijeDTO;
+        }
+
         #endregion
     }
 }
