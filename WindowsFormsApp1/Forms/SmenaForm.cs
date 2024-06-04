@@ -34,15 +34,25 @@ namespace WindowsFormsApp1.Forms
 
         private void listBoxSmena_MouseDoubleClick(object sender, MouseEventArgs e)
         {
-            if (listBoxSmena.SelectedItems.Count == 0)
+            if (listBoxSmena.SelectedItem == null)
             {
-                MessageBox.Show("Izaberite smenu cije podatke zelite da vidite!");
+                MessageBox.Show("Molimo vas da selektujete smenu.");
                 return;
             }
-            int idSmene = Int32.Parse((listBoxSmena.SelectedItem).ToString().Split(' ')[0]);
-            SmenaDTO sm = DTOManager.vratiSmenu(idSmene);
-            ObjektiZaSmenuForm frm = new ObjektiZaSmenuForm(sm);
-            DialogResult dlg = frm.ShowDialog();
+
+            int smenaId = int.Parse(listBoxSmena.SelectedItem.ToString().Split(' ')[0]);
+
+            SmenaDTO smena = DTOManager.VratiPodatkeOSmeni(smenaId);
+           // smena.ObjektiZaSmenu = DTOManager.VratiListuObjekataSmene(smenaId);
+
+            if (smena == null)
+            {
+                MessageBox.Show("Nisu pronađeni podaci za selektovanu smenu.");
+                return;
+            }
+
+            ObjektiZaSmenuForm formSmenaDetalji = new ObjektiZaSmenuForm(smena);
+            formSmenaDetalji.ShowDialog();
 
         }
 
@@ -63,11 +73,11 @@ namespace WindowsFormsApp1.Forms
         {
             if (listBoxSmena.SelectedItems.Count == 0)
             {
-                MessageBox.Show("Izaberite obezbedjenje koje zelite da obrisete!");
+                MessageBox.Show("Izaberite smenu koju zelite da obrisete!");
                 return;
             }
             int idSmene = Convert.ToInt32((listBoxSmena.SelectedItem).ToString().Substring(0, 2));
-            string poruka = "Da li zelite da obrisete izabranog zaposlenog?";
+            string poruka = "Da li zelite da obrisete izabranu smenu?";
             string title = "Pitanje";
             MessageBoxButtons buttons = MessageBoxButtons.OKCancel;
             DialogResult result = MessageBox.Show(poruka, title, buttons);
@@ -75,7 +85,7 @@ namespace WindowsFormsApp1.Forms
             if (result == DialogResult.OK)
             {
                 DTOManager.obrisiSmenu(idSmene);
-                MessageBox.Show("Uspesno obrisano fizicko obezbedjenje!");
+                MessageBox.Show("Uspesno obrisana smena!");
                 this.PopuniListuSmena();
             }
 
@@ -88,6 +98,11 @@ namespace WindowsFormsApp1.Forms
             DialogResult dlg = frm.ShowDialog();
 
             PopuniListuSmena();
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            this.Close();
         }
     }
 }

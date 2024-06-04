@@ -8,6 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using WindowsFormsApp1.Entiteti;
 
 namespace WindowsFormsApp1.Forms
 {
@@ -25,32 +26,40 @@ namespace WindowsFormsApp1.Forms
         {
             InitializeComponent();
             smena = sm;
+            PopuniDetalje();
         }
 
-        public void popuniListuObjekta()
+        private void PopuniDetalje()
         {
-            smena.ObjektiZaSmenu = DTOManager.vratiListuObjekataSmene(smena.Id);
-            foreach (ObjekatDTO obj in smena.ObjektiZaSmenu)
+            listView1.Items.Clear();
+            foreach (var objekat in smena.ObjektiZaSmenu)
             {
-                ListViewItem item = new ListViewItem(new string[] { obj.Id.ToString(), obj.Tip, obj.Povrsina.ToString(), obj.Adresa });
-                this.listView1.Items.Add(item);
+                var item = new ListViewItem((objekat.Id).ToString());
+                item.SubItems.Add(objekat.Adresa);
+                item.SubItems.Add(objekat.Tip);
+                item.SubItems.Add((objekat.Povrsina).ToString());
+                listView1.Items.Add(item);
             }
-        }
 
-        public void popuniListuClanovaEkipeSmene()
-        {
-            smena.clanoviSmene = DTOManager.vratiListuClanovaEkipeSmene(smena.Id);
-            foreach (FizickoObezbedjenjeDTO fo in smena.clanoviSmene)
+            listView2.Items.Clear();
+            foreach (var clan in smena.EkipaZaSmenu.clanoviEkipe)
             {
-                ListViewItem item = new ListViewItem(new string[] { fo.MaticniBroj.ToString(), fo.Ime, fo.Prezime, fo.DatumRodjenja.ToString(), fo.Pol.ToString(), fo.BorilackaVestina});
-                this.listView2.Items.Add(item);
+                var item = new ListViewItem(clan.MaticniBroj.ToString());
+                item.SubItems.Add(clan.Ime);
+                item.SubItems.Add(clan.Prezime);
+                listView2.Items.Add(item);
             }
+
         }
 
         private void ObjektiZaSmenuForm_Load(object sender, EventArgs e)
         {
-            popuniListuObjekta();
-            popuniListuClanovaEkipeSmene();
+            
+        }
+
+        private void listView1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }

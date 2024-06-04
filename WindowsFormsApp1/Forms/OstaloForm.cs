@@ -25,17 +25,14 @@ namespace WindowsFormsApp1.Forms
 
         private void button4_Click(object sender, EventArgs e)
         {
-            Hide();
-            VoziloForm f = new VoziloForm();
-            f.ShowDialog();
-
-            Show();
+            VoziloForm frm = new VoziloForm();
+            DialogResult dlg = frm.ShowDialog();
         }
 
         private void button2_Click(object sender, EventArgs e)
         {
-            SmenaForm s = new SmenaForm();
-            s.ShowDialog();
+            SmenaForm frm = new SmenaForm();
+            DialogResult dl = frm.ShowDialog();
         }
 
         private void OstaloForm_Load(object sender, EventArgs e)
@@ -45,11 +42,8 @@ namespace WindowsFormsApp1.Forms
 
         private void button5_Click(object sender, EventArgs e)
         {
-            Hide();
-            RegionalniCentarForm f = new RegionalniCentarForm();
-            f.ShowDialog();
-
-            Show();
+            RegionalniCentarForm frm = new RegionalniCentarForm();
+            DialogResult dlg = frm.ShowDialog();
         }
     }
 }

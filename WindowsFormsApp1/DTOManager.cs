@@ -1132,43 +1132,32 @@ namespace WindowsFormsApp1
             return smena;
         }
 
-        public static EkipaDTO vratiEkipuSmene(int id)
-        {
-            SmenaDTO smena = new SmenaDTO();
-            try
-            {
-                ISession s = DataLayer.GetSession();
-
-                Smena sm = s.Load<Smena>(id);
-                smena = new SmenaDTO(sm.Id, sm.VremePocetka, sm.VremeKraja, sm.EkipaZaSmenu);
-
-                s.Close();
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Oh no\n" + ex.Message);
-            }
-            return smena.EkipaZaSmenu;
-        }
-
-        public static List<ObjekatDTO> vratiListuObjekataSmene(int id)
+        public static List<ObjekatDTO> VratiListuObjekataSmene(int id)
         {
             List<ObjekatDTO> lista = new List<ObjekatDTO>();
             try
             {
-                ISession s = DataLayer.GetSession();
+                using (ISession s = DataLayer.GetSession())
+                {
+                    var smena = s.Load<Smena>(id);
+                    if (smena == null)
+                    {
+                        MessageBox.Show($"Smena sa ID {id} ne postoji.");
+                        return lista;
+                    }
 
-                var query = s.Query<Obuhvata>()
-                             .Where(x => x.Smena.Id == id)
-                             .Select(x => new ObjekatDTO
-                             {
-                                 Id = x.Objekat.Id,
-                                 Adresa = x.Objekat.Adresa,
-                                 Tip = x.Objekat.TipObjekta,
-                                 Povrsina = x.Objekat.Povrsina,                             
-                             });
+                    var query = s.Query<Obuhvata>()
+                                 .Where(x => x.Smena.Id == id)
+                                 .Select(x => new ObjekatDTO
+                                 {
+                                     Id = x.Objekat.Id,
+                                     Adresa = x.Objekat.Adresa,
+                                     Tip = x.Objekat.TipObjekta,
+                                     Povrsina = x.Objekat.Povrsina
+                                 });
 
-                lista = query.ToList();
+                    lista = query.ToList();
+                }
             }
             catch (Exception ex)
             {
@@ -1256,6 +1245,49 @@ namespace WindowsFormsApp1
 
             return smeneDTO;
         }
+
+        public static SmenaDTO VratiPodatkeOSmeni(int smenaId)
+        {
+            SmenaDTO smenaDTO = null;
+            try
+            {
+                using (ISession s = DataLayer.GetSession())
+                {
+                    Smena smena = s.Load<Smena>(smenaId);
+
+                    smenaDTO = new SmenaDTO
+                    {
+                        Id = smena.Id,
+                        EkipaZaSmenu = new EkipaDTO
+                        {
+                            RedniBroj = smena.EkipaZaSmenu.RedniBroj,
+                            clanoviEkipe = smena.EkipaZaSmenu.Clanovi.Select(cl => new FizickoObezbedjenjeDTO
+                            {
+                                MaticniBroj = cl.MaticniBroj,
+                                Ime = cl.Ime,
+                                Prezime = cl.Prezime
+                            }).ToList()
+                        },
+                        ObjektiZaSmenu = s.Query<Obuhvata>()
+                                          .Where(ob => ob.Smena.Id == smenaId)
+                                          .Select(ob => new ObjekatDTO
+                                          {
+                                              Id = ob.Objekat.Id,
+                                              Adresa = ob.Objekat.Adresa,
+                                              Tip = ob.Objekat.TipObjekta,
+                                              Povrsina = ob.Objekat.Povrsina
+                                          }).ToList()
+                    };
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Došlo je do greške: " + ex.Message);
+            }
+
+            return smenaDTO;
+        }
+
         #endregion
 
         #region RegionalniCentar

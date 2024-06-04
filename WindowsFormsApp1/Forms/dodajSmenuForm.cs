@@ -27,13 +27,13 @@ namespace WindowsFormsApp1.Forms
             SmenaDTO s = new SmenaDTO();
 
             s.Id = int.Parse(textBox1.Text);
-            s.EkipaZaSmenu = DTOManager.vratiEkipuSmene(int.Parse(textBox2.Text));
+            s.EkipaZaSmenu = DTOManager.vratiEkipu(int.Parse(textBox2.Text));
             s.VremePocetka = dateTimePicker1.Value;
             s.VremeKraja = dateTimePicker2.Value;           
 
             DTOManager.dodajSmenu(s);
 
-            MessageBox.Show("Uspesno dodato novo tehnicko lice!");
+            MessageBox.Show("Uspesno dodata nova smena!");
             this.Close();
         }
 
