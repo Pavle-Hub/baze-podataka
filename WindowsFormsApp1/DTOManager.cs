@@ -589,6 +589,83 @@ namespace WindowsFormsApp1
 
             return voziloDTO;
         }
+        public static VoziloDTO VratiVoziloPoRegistarskojOznaci(string registarskaOznaka)
+        {
+            VoziloDTO voziloDTO = null;
+            try
+            {
+                using (ISession s = DataLayer.GetSession())
+                {
+                    var vozilo = s.Query<Vozilo>()
+                                  .Where(v => v.RegistarskaOznaka == registarskaOznaka)
+                                  .Select(v => new VoziloDTO
+                                  {
+                                      RegOznaka = v.RegistarskaOznaka,
+                                      Boja = v.Boja,
+                                      Tip = v.Tip,
+                                      Model = v.Model,
+                                      Proizvodjac = v.Proizvodjac,
+                                      DatumOd = v.DatumOd,
+                                      DatumDo = v.DatumDo,
+                                      RC = new RegionalniCentarDTO
+                                      {
+                                          Id = v.RegistrovanNaRegCentar.Id,
+                                          Adresa = v.RegistrovanNaRegCentar.Adresa
+                                      },
+                                      DuziGaEkipa = v.EkipaKojaGaDuzi != null ? new EkipaDTO
+                                      {
+                                          RedniBroj = v.EkipaKojaGaDuzi.RedniBroj
+                                      } : null
+                                  })
+                                  .FirstOrDefault();
+
+                    voziloDTO = vozilo;
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Došlo je do greške: {ex.Message}");
+            }
+
+            return voziloDTO;
+        }
+
+        public static void IzmeniVozilo(VoziloDTO voziloDTO)
+        {
+            try
+            {
+                using (ISession s = DataLayer.GetSession())
+                {
+                    using (ITransaction transaction = s.BeginTransaction())
+                    {
+                        Vozilo vozilo = s.Get<Vozilo>(voziloDTO.RegOznaka);
+
+                        if (vozilo != null)
+                        {
+                            vozilo.Boja = voziloDTO.Boja;
+                            vozilo.Tip = voziloDTO.Tip;
+                            vozilo.Model = voziloDTO.Model;
+                            vozilo.Proizvodjac = voziloDTO.Proizvodjac;
+                            vozilo.DatumOd = voziloDTO.DatumOd;
+                            vozilo.DatumDo = voziloDTO.DatumDo;
+                            vozilo.RegistrovanNaRegCentar = s.Get<RegionalniCentar>(voziloDTO.RC.Id);
+                            vozilo.EkipaKojaGaDuzi = s.Get<Ekipa>(voziloDTO.DuziGaEkipa.RedniBroj);
+
+                            s.Update(vozilo);
+                            transaction.Commit();
+                        }
+                        else
+                        {
+                            MessageBox.Show("Vozilo nije pronađeno.");
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Došlo je do greške prilikom izmene vozila: {ex.Message}");
+            }
+        }
 
         #endregion
 
@@ -1324,6 +1401,25 @@ namespace WindowsFormsApp1
             return lista;
         }
 
+        public static List<int> VratiSveRegionalneCentre()
+        {
+            List<int> regionalniCentri = new List<int>();
+            try
+            {
+                using (ISession s = DataLayer.GetSession())
+                {
+                    regionalniCentri = s.Query<RegionalniCentar>()
+                                        .Select(rc => rc.Id)
+                                        .ToList();
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Došlo je do greške: {ex.Message}");
+            }
+            return regionalniCentri;
+        }
+
 
         #endregion
 
@@ -1425,6 +1521,25 @@ namespace WindowsFormsApp1
             }
         }
 
+        public static List<int> VratiEkipeBezVozila()
+        {
+            List<int> ekipeBezVozila = new List<int>();
+            try
+            {
+                using (ISession s = DataLayer.GetSession())
+                {
+                    ekipeBezVozila = s.Query<Ekipa>()
+                                      .Where(e => e.DuziVozilo == null)
+                                      .Select(e => e.RedniBroj)
+                                      .ToList();
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Došlo je do greške: {ex.Message}");
+            }
+            return ekipeBezVozila;
+        }
 
         #endregion
 

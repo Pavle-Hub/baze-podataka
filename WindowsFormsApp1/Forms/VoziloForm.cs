@@ -83,26 +83,54 @@ namespace WindowsFormsApp1.Forms
 
         private void izmeniVozilo_Click(object sender, EventArgs e)
         {
-
+            if (listBox1.SelectedItems.Count == 0)
+            {
+                MessageBox.Show("Morate izabrati vozilo koje zelite izmeniti!");
+                return;
+            }
+            else
+            {
+                var regOznakaVozila = (listBox1.SelectedItem).ToString().Split(' ')[0];
+                VoziloDTO vozilo = DTOManager.VratiVoziloPoRegistarskojOznaci(regOznakaVozila);
+                if (vozilo == null)
+                {
+                    MessageBox.Show("Odabrano vozilo ne postoji u bazi podataka!");
+                    return;
+                }
+                IzmeniVoziloForm frm = new IzmeniVoziloForm(vozilo);
+                DialogResult dlg = frm.ShowDialog();
+                this.PopuniListuVozila();
+            }
         }
 
-        //private void izmeniVozilo_Click(object sender, EventArgs e)
-        //{
-        //    if (listBox1.SelectedItems.Count == 0)
-        //    {
-        //        MessageBox.Show("Izaberite vozilo cije podatke zelite da izmenite!");
-        //        return;
-        //    }
+        private void button1_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
 
-        //    string registarskaOznaka = (listBox1.SelectedItem).ToString().Split(' ')[0];
-        //    VoziloDTO vozilo = DTOManager.vratiVozilo(registarskaOznaka);
-        //    IzmeniVoziloForm frm = new IzmeniVoziloForm(vozilo);
-        //    DialogResult dlg = frm.ShowDialog();
+        private void listBox1_MouseDoubleClick(object sender, MouseEventArgs e)
+        {
+            if (listBox1.SelectedItems.Count == 0)
+            {
+                MessageBox.Show("Morate izabrati vozilo!");
+                return;
+            }
 
-        //    if (dlg == DialogResult.OK)
-        //    {
-        //        PopuniListuVozila();
-        //    }
-        //}
+            string selectedRegistarskaOznaka = (listBox1.SelectedItem).ToString().Split(' ')[0];
+            VoziloDTO voziloDTO = DTOManager.VratiVoziloPoRegistarskojOznaci(selectedRegistarskaOznaka);
+
+            if (voziloDTO == null)
+            {
+                MessageBox.Show("Odabrano vozilo ne postoji u bazi podataka!");
+                return;
+            }
+
+            string message = $"Regionalni centar:\n" +
+                             $"Id RC: {voziloDTO.RC.Id}\n" +
+                             $"Adresa: {voziloDTO.RC.Adresa}\n\n" +
+                             $"Broj ekipe: {voziloDTO.DuziGaEkipa.RedniBroj}";
+
+            MessageBox.Show(message, "Informacije o vozilu", MessageBoxButtons.OK, MessageBoxIcon.Information);
+        }
     }
 }

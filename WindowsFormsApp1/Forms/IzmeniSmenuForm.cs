@@ -18,6 +18,11 @@ namespace WindowsFormsApp1.Forms
         {
             InitializeComponent();
         }
+        public IzmeniSmenuForm(SmenaDTO s)
+        {
+            InitializeComponent();
+            smenaDTO = s;
+        }
 
         private void proslediSmenu_Click(object sender, EventArgs e)
         {
@@ -33,7 +38,7 @@ namespace WindowsFormsApp1.Forms
 
             DTOManager.azurirajSmenu(smenaDTO, redniBrojEkipe);
 
-            MessageBox.Show("Uspesno azurirano fizicko obezbedjenje!");
+            MessageBox.Show("Uspesno azurirana semena!");
             this.Close();
         }
     }

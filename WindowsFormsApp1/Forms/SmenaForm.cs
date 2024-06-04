@@ -94,6 +94,7 @@ namespace WindowsFormsApp1.Forms
 
         private void izmeniSmenu_Click(object sender, EventArgs e)
         {
+            
             IzmeniSmenuForm frm = new IzmeniSmenuForm();
             DialogResult dlg = frm.ShowDialog();
 

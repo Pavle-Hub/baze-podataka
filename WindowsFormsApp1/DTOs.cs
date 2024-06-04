@@ -137,7 +137,18 @@ namespace WindowsFormsApp1
             ImenaGradova = new List<string>();
             RegOznakaVozila = new List<string>();
         }
+        public RegionalniCentarDTO(int id, string adresa)
+        {
+            Id = id;
+            Adresa = adresa;
+            BrojeviTelefona = new List<string>();
+            ImenaGradova = new List<string>();
+            RegOznakaVozila = new List<string>();
+        }
+        public RegionalniCentarDTO()
+        {
 
+        }
 
     }
 
@@ -155,6 +166,7 @@ namespace WindowsFormsApp1
         public IList<IntervencijaDTO> IntervencijeEkipe;
         public IList<FizickoObezbedjenjeDTO> clanoviEkipe;
         public string RegOznakaVozila;
+        public Vozilo DuziVozilo;
 
         public EkipaDTO(int redniBroj)
         {

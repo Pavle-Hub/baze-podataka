@@ -19,105 +19,37 @@ namespace WindowsFormsApp1.Forms
         public dodajVozilo()
         {
             InitializeComponent();
-            popuni();
+            PopuniComboBoxove();
         }
         private void VoziloDialog_Load(object sender, EventArgs e)
         {
-            comboBox1.DropDownStyle = ComboBoxStyle.DropDownList;
-            comboBox2.DropDownStyle = ComboBoxStyle.DropDownList;
-
-            IList<RegionalniCentarDTO> regs = DTOManager.PopuniRegionalneCentre();
-            IList<EkipaDTO> ekipe = DTOManager.PopuniEkipe();
-
-            comboBox1.DataSource = regs;
-            comboBox1.DisplayMember = "Adresa";  // Prikaži adresu u ComboBox-u
-            comboBox1.ValueMember = "Id";        // Koristi Id kao vrednost
-
-            comboBox2.DataSource = ekipe;
-            comboBox2.DisplayMember = "RedniBroj"; // Prikaži redni broj ekipe u ComboBox-u
-            comboBox2.ValueMember = "RedniBroj";   // Koristi RedniBroj kao vrednost
-
-            if (!Nov)
-            {
-                textBox1.Enabled = false;
-                textBox1.Text = voz.RegOznaka;
-                textBox2.Text = voz.Proizvodjac;
-                textBox3.Text = voz.Model;
-                textBox4.Text = voz.Boja;
-                textBox5.Text = voz.Tip;
-                dateTimePicker1.Value = voz.DatumOd;
-                datumRodj.Value = voz.DatumDo;
-
-                // Postavljanje selektovanog Regionalnog Centra
-                for (int i = 0; i < regs.Count; i++)
-                {
-                    if (regs[i].Id == voz.RC.Id)
-                    {
-                        comboBox1.SelectedIndex = i;
-                        break;
-                    }
-                }
-
-                // Postavljanje selektovane Ekipe
-                for (int i = 0; i < ekipe.Count; i++)
-                {
-                    if (ekipe[i].RedniBroj == voz.DuziGaEkipa.RedniBroj)
-                    {
-                        comboBox2.SelectedIndex = i;
-                        break;
-                    }
-                }
-            }
+            PopuniComboBoxove();
         }
 
-        private void popuni()
+        private void PopuniComboBoxove()
         {
-            comboBox1.DropDownStyle = ComboBoxStyle.DropDownList;
-            comboBox2.DropDownStyle = ComboBoxStyle.DropDownList;
-
-            IList<RegionalniCentarDTO> regs = DTOManager.PopuniRegionalneCentre();
-            IList<EkipaDTO> ekipe = DTOManager.PopuniEkipe();
-
-            comboBox1.DataSource = regs;
-            comboBox1.DisplayMember = "Adresa";  // Prikaži adresu u ComboBox-u
-            comboBox1.ValueMember = "Id";        // Koristi Id kao vrednost
-
-            comboBox2.DataSource = ekipe;
-            comboBox2.DisplayMember = "RedniBroj"; // Prikaži redni broj ekipe u ComboBox-u
-            comboBox2.ValueMember = "RedniBroj";   // Koristi RedniBroj kao vrednost
-
-            if (!Nov)
+            try
             {
-                textBox1.Enabled = false;
-                textBox1.Text = voz.RegOznaka;
-                textBox2.Text = voz.Proizvodjac;
-                textBox3.Text = voz.Model;
-                textBox4.Text = voz.Boja;
-                textBox5.Text = voz.Tip;
-                dateTimePicker1.Value = voz.DatumOd;
-                datumRodj.Value = voz.DatumDo;
-
-                // Postavljanje selektovanog Regionalnog Centra
-                for (int i = 0; i < regs.Count; i++)
+                List<int> ekipeBezVozila = DTOManager.VratiEkipeBezVozila();
+                comboBox1.Items.Clear();
+                foreach (var ekipa in ekipeBezVozila)
                 {
-                    if (regs[i].Id == voz.RC.Id)
-                    {
-                        comboBox1.SelectedIndex = i;
-                        break;
-                    }
+                    comboBox1.Items.Add(ekipa);
                 }
 
-                // Postavljanje selektovane Ekipe
-                for (int i = 0; i < ekipe.Count; i++)
+                List<int> regionalniCentri = DTOManager.VratiSveRegionalneCentre();
+                comboBox2.Items.Clear();
+                foreach (var centar in regionalniCentri)
                 {
-                    if (ekipe[i].RedniBroj == voz.DuziGaEkipa.RedniBroj)
-                    {
-                        comboBox2.SelectedIndex = i;
-                        break;
-                    }
+                    comboBox2.Items.Add(centar);
                 }
             }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Došlo je do greške prilikom popunjavanja combo box-ova: {ex.Message}");
+            }
         }
+
 
 
         private bool ValidacijaKontrolaVozilo()

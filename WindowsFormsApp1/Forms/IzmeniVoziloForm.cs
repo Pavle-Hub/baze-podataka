@@ -34,9 +34,8 @@ namespace WindowsFormsApp1.Forms
             textBox2.Text = vozilo.Proizvodjac;
             dateTimePicker1.Value = vozilo.DatumOd;
             dateTimePicker2.Value = vozilo.DatumDo;
-            // Prepopunite comboBox kontrole sa odgovarajućim vrednostima
-            //textBox5.Text = vozilo.RC?.Naziv; 
-            //textBox6.Text = long.Parse(vozilo.DuziGaEkipa?);
+            textBox5.Text = (vozilo.RC.Id).ToString();
+            textBox6.Text = (vozilo.DuziGaEkipa.RedniBroj).ToString();
         }
 
         private bool ValidacijaKontrolaVozilo()
@@ -88,7 +87,19 @@ namespace WindowsFormsApp1.Forms
 
         private void izmeniVozilo_Click(object sender, EventArgs e)
         {
+            vozilo.Boja = textBox1.Text;
+            vozilo.Tip = textBox2.Text;
+            vozilo.Model = textBox3.Text;
+            vozilo.Proizvodjac = textBox4.Text;
+            vozilo.DatumOd = dateTimePicker1.Value;
+            vozilo.DatumDo = dateTimePicker2.Value;
+            vozilo.RC.Id = int.Parse(textBox5.Text);
+            vozilo.DuziGaEkipa.RedniBroj = int.Parse(textBox6.Text);
 
+            DTOManager.IzmeniVozilo(vozilo);
+
+            MessageBox.Show("Vozilo je uspešno izmenjeno.");
+            this.Close();
         }
 
         private void IzmeniVoziloForm_Load(object sender, EventArgs e)

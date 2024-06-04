@@ -40,10 +40,9 @@
             // prikaziEkipe
             // 
             prikaziEkipe.BackColor = System.Drawing.SystemColors.GradientActiveCaption;
-            prikaziEkipe.Location = new System.Drawing.Point(68, 27);
-            prikaziEkipe.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            prikaziEkipe.Location = new System.Drawing.Point(78, 36);
             prikaziEkipe.Name = "prikaziEkipe";
-            prikaziEkipe.Size = new System.Drawing.Size(131, 112);
+            prikaziEkipe.Size = new System.Drawing.Size(150, 149);
             prikaziEkipe.TabIndex = 0;
             prikaziEkipe.Text = "Ekipe";
             prikaziEkipe.UseVisualStyleBackColor = false;
@@ -52,10 +51,9 @@
             // button2
             // 
             button2.BackColor = System.Drawing.SystemColors.GradientActiveCaption;
-            button2.Location = new System.Drawing.Point(250, 27);
-            button2.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            button2.Location = new System.Drawing.Point(286, 36);
             button2.Name = "button2";
-            button2.Size = new System.Drawing.Size(131, 112);
+            button2.Size = new System.Drawing.Size(150, 149);
             button2.TabIndex = 1;
             button2.Text = "Smene";
             button2.UseVisualStyleBackColor = false;
@@ -64,10 +62,9 @@
             // button3
             // 
             button3.BackColor = System.Drawing.SystemColors.GradientActiveCaption;
-            button3.Location = new System.Drawing.Point(430, 27);
-            button3.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            button3.Location = new System.Drawing.Point(491, 36);
             button3.Name = "button3";
-            button3.Size = new System.Drawing.Size(131, 112);
+            button3.Size = new System.Drawing.Size(150, 149);
             button3.TabIndex = 2;
             button3.Text = "Objekti";
             button3.UseVisualStyleBackColor = false;
@@ -75,10 +72,9 @@
             // button4
             // 
             button4.BackColor = System.Drawing.SystemColors.GradientActiveCaption;
-            button4.Location = new System.Drawing.Point(68, 187);
-            button4.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            button4.Location = new System.Drawing.Point(78, 249);
             button4.Name = "button4";
-            button4.Size = new System.Drawing.Size(131, 112);
+            button4.Size = new System.Drawing.Size(150, 149);
             button4.TabIndex = 3;
             button4.Text = "Vozila";
             button4.UseVisualStyleBackColor = false;
@@ -87,10 +83,9 @@
             // button5
             // 
             button5.BackColor = System.Drawing.SystemColors.GradientActiveCaption;
-            button5.Location = new System.Drawing.Point(250, 187);
-            button5.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            button5.Location = new System.Drawing.Point(286, 249);
             button5.Name = "button5";
-            button5.Size = new System.Drawing.Size(131, 112);
+            button5.Size = new System.Drawing.Size(150, 149);
             button5.TabIndex = 4;
             button5.Text = "Regionalni centri";
             button5.UseVisualStyleBackColor = false;
@@ -99,28 +94,27 @@
             // button6
             // 
             button6.BackColor = System.Drawing.SystemColors.GradientActiveCaption;
-            button6.Location = new System.Drawing.Point(430, 187);
-            button6.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            button6.Location = new System.Drawing.Point(491, 249);
             button6.Name = "button6";
-            button6.Size = new System.Drawing.Size(131, 112);
+            button6.Size = new System.Drawing.Size(150, 149);
             button6.TabIndex = 5;
             button6.Text = "Nazad";
             button6.UseVisualStyleBackColor = false;
+            button6.Click += button6_Click;
             // 
             // OstaloForm
             // 
-            AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
+            AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             BackgroundImage = (System.Drawing.Image)resources.GetObject("$this.BackgroundImage");
             BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            ClientSize = new System.Drawing.Size(627, 347);
+            ClientSize = new System.Drawing.Size(717, 463);
             Controls.Add(button6);
             Controls.Add(button5);
             Controls.Add(button4);
             Controls.Add(button3);
             Controls.Add(button2);
             Controls.Add(prikaziEkipe);
-            Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             Name = "OstaloForm";
             Text = "OstaloForm";
             Load += OstaloForm_Load;

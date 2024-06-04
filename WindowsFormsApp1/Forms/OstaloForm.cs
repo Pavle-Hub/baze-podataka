@@ -45,5 +45,10 @@ namespace WindowsFormsApp1.Forms
             RegionalniCentarForm frm = new RegionalniCentarForm();
             DialogResult dlg = frm.ShowDialog();
         }
+
+        private void button6_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
     }
 }
