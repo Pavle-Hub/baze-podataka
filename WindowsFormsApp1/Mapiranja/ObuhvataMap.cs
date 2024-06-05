@@ -6,7 +6,7 @@
         {
             Table("OBUHVATANJE");
 
-            Id(x => x.Id, "ID").GeneratedBy.TriggerIdentity();
+            Id(x => x.Id).GeneratedBy.Sequence("PRODUCT_ID_SEQ").Column("ID");
 
 
 

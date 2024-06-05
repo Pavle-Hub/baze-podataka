@@ -98,6 +98,11 @@ namespace WindowsFormsApp1
         public IList<RegionalniCentarDTO> RegionalniCentri;
         public IList<string> Gradovi;
 
+        public override string ToString()
+        {
+            return $"{Ime} {Prezime}";
+        }
+
         public MenadzerDTO(long maticniBroj, string ime, string prezime, char? pol, DateTime datumRodjenja)
         {
             MaticniBroj = maticniBroj;
@@ -123,17 +128,17 @@ namespace WindowsFormsApp1
     {
         public int Id;
         public string Adresa;
-        public string ImeMenadzera;
-        public IList<string> BrojeviTelefona;
+        public MenadzerDTO Menadzer;
+        public IList<int> BrojeviTelefona;
         public IList<string> ImenaGradova;
         public IList<string> RegOznakaVozila;
 
-        public RegionalniCentarDTO(int id, string adresa, string imeMenadzera)
+        public RegionalniCentarDTO(int id, string adresa, MenadzerDTO menadzer)
         {
             Id = id;
             Adresa = adresa;
-            ImeMenadzera = imeMenadzera;
-            BrojeviTelefona = new List<string>();
+            Menadzer = menadzer;
+            BrojeviTelefona = new List<int>();
             ImenaGradova = new List<string>();
             RegOznakaVozila = new List<string>();
         }
@@ -141,13 +146,15 @@ namespace WindowsFormsApp1
         {
             Id = id;
             Adresa = adresa;
-            BrojeviTelefona = new List<string>();
+            BrojeviTelefona = new List<int>();
             ImenaGradova = new List<string>();
             RegOznakaVozila = new List<string>();
         }
         public RegionalniCentarDTO()
         {
-
+            BrojeviTelefona = new List<int>();
+            ImenaGradova = new List<string>();
+            RegOznakaVozila = new List<string>();
         }
 
     }

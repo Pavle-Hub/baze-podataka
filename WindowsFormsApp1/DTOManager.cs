@@ -422,6 +422,31 @@ namespace WindowsFormsApp1
             return dostupniClanovi;
         }
 
+        public static List<MenadzerDTO> VratiSveMenadzere()
+        {
+            List<MenadzerDTO> menadzeri = new List<MenadzerDTO>();
+            try
+            {
+                using (ISession s = DataLayer.GetSession())
+                {
+                    menadzeri = s.Query<Menadzer>()
+                                 .Select(m => new MenadzerDTO
+                                 {
+                                     MaticniBroj = m.MaticniBroj,
+                                     Ime = m.Ime,
+                                     Prezime = m.Prezime
+                                 })
+                                 .ToList();
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Došlo je do greške: {ex.Message}");
+            }
+
+            return menadzeri;
+        }
+
         #endregion
 
         #region MenGradovi
@@ -1368,37 +1393,36 @@ namespace WindowsFormsApp1
         #endregion
 
         #region RegionalniCentar
-        public static List<RegionalniCentarDTO> PopuniRegionalneCentre()
+        public static List<RegionalniCentarDTO> VratiRegionalneCentre()
         {
-            List<RegionalniCentarDTO> lista = new List<RegionalniCentarDTO>();
+            List<RegionalniCentarDTO> centri = new List<RegionalniCentarDTO>();
             try
             {
-                ISession s = DataLayer.GetSession();
-
-                IEnumerable<RegionalniCentar> centri = from rc in s.Query<RegionalniCentar>()
-                                                       select rc;
-
-                foreach (RegionalniCentar rc in centri)
+                using (ISession s = DataLayer.GetSession())
                 {
-                    string imeMenadzera = rc.AngazovanMenadzer != null ? rc.AngazovanMenadzer.Ime + " " + rc.AngazovanMenadzer.Prezime : "N/A";
+                    var query = s.Query<RegionalniCentar>()
+                                 .Select(rc => new RegionalniCentarDTO
+                                 {
+                                     Id = rc.Id,
+                                     Adresa = rc.Adresa,
+                                     Menadzer = new MenadzerDTO
+                                     {
+                                         MaticniBroj = rc.AngazovanMenadzer.MaticniBroj,
+                                         Ime = rc.AngazovanMenadzer.Ime,
+                                         Prezime = rc.AngazovanMenadzer.Prezime
+                                     }
+                                 })
+                                 .ToList();
 
-                    RegionalniCentarDTO rcDTO = new RegionalniCentarDTO(rc.Id, rc.Adresa, imeMenadzera);
-
-                    rcDTO.BrojeviTelefona = rc.BrojeviTelefona.Select(t => t.Telefon.ToString()).ToList();
-                    rcDTO.ImenaGradova = rc.ImenaGradova.Select(g => g.Grad).ToList();  // Koristimo g.Grad za naziv grada
-                    rcDTO.RegOznakaVozila = rc.Vozila.Select(v => v.RegistarskaOznaka).ToList();
-
-                    lista.Add(rcDTO);
+                    centri = query;
                 }
-
-                s.Close();
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Oh no\n" + ex.Message);
+                MessageBox.Show($"Došlo je do greške: {ex.Message}");
             }
 
-            return lista;
+            return centri;
         }
 
         public static List<int> VratiSveRegionalneCentre()
@@ -1420,6 +1444,266 @@ namespace WindowsFormsApp1
             return regionalniCentri;
         }
 
+        public static RegionalniCentarDTO vratiRegCnt(int id)
+        {
+            RegionalniCentarDTO regcnt = null;
+            try
+            {
+                using (ISession s = DataLayer.GetSession())
+                {
+                    regcnt = s.Query<RegionalniCentar>()
+                              .Where(rc => rc.Id == id)
+                              .Select(rc => new RegionalniCentarDTO
+                              {
+                                  Id = rc.Id,
+                                  Adresa = rc.Adresa,
+                                  Menadzer = new MenadzerDTO
+                                  {
+                                      MaticniBroj = rc.AngazovanMenadzer.MaticniBroj,
+                                      Ime = rc.AngazovanMenadzer.Ime,
+                                      Prezime = rc.AngazovanMenadzer.Prezime
+                                  },
+                              }).FirstOrDefault();
+                              
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Došlo je do greške: {ex.Message}");
+            }
+
+            return regcnt;
+        }
+
+        public static List<string> vratiGradoveZaRegCentar(int regCentarId)
+        {
+            List<string> gradovi = new List<string>();
+            try
+            {
+                using (ISession s = DataLayer.GetSession())
+                {
+                    gradovi = s.Query<Gradovi>()
+                               .Where(g => g.RegCentar.Id == regCentarId)
+                               .Select(g => g.Grad)
+                               .ToList();
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Došlo je do greške: {ex.Message}");
+            }
+
+            return gradovi;
+        }
+        public static List<int> vratiTelefoneZaRegCentar(int regCentarId)
+        {
+            List<int> brojevi = new List<int>();
+            try
+            {
+                using (ISession s = DataLayer.GetSession())
+                {
+                    brojevi = s.Query<Telefoni>()
+                               .Where(t => t.RegCentar.Id == regCentarId)
+                               .Select(t => t.Telefon)
+                               .ToList();
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Došlo je do greške: {ex.Message}");
+            }
+
+            return brojevi;
+        }
+        public static List<string> vratiVozilaZaRegCentar(int regCentarId)
+        {
+            List<string> vozila = new List<string>();
+            try
+            {
+                using (ISession s = DataLayer.GetSession())
+                {
+                    vozila = s.Query<Vozilo>()
+                               .Where(v => v.RegistrovanNaRegCentar.Id == regCentarId)
+                               .Select(v => v.RegistarskaOznaka)
+                               .ToList();
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Došlo je do greške: {ex.Message}");
+            }
+
+            return vozila;
+        }
+
+        public static void DodajNoviGrad(string imeGrada, int idRegionalnogCentra)
+        {
+            try
+            {
+                using (ISession s = DataLayer.GetSession())
+                {
+                    using (ITransaction transaction = s.BeginTransaction())
+                    {
+                        var regionalniCentar = s.Load<RegionalniCentar>(idRegionalnogCentra);
+
+                        Gradovi noviGrad = new Gradovi
+                        {
+                            Grad = imeGrada,
+                            RegCentar = regionalniCentar
+                        };
+
+                        
+                        s.Save(noviGrad);
+                        transaction.Commit();
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Došlo je do greške: {ex.Message}");
+            }
+        }
+        public static void ObrisiGrad(string grad, int regCentarId)
+        {
+            try
+            {
+                using (ISession s = DataLayer.GetSession())
+                {
+                    using (ITransaction transaction = s.BeginTransaction())
+                    {
+                        Gradovi gradZaBrisanje = s.Query<Gradovi>()
+                                                .Where(g => g.Grad == grad && g.RegCentar.Id == regCentarId)
+                                                .FirstOrDefault();
+
+                        if (gradZaBrisanje != null)
+                        {
+                            s.Delete(gradZaBrisanje);
+                            transaction.Commit();
+                            MessageBox.Show("Grad uspešno obrisan.");
+                        }
+                        else
+                        {
+                            MessageBox.Show("Grad nije pronađen.");
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Došlo je do greške: {ex.Message}");
+            }
+        }
+
+        public static void DodajBrojTelefona(int regCentarId, int brojTelefona)
+        {
+            try
+            {
+                using (ISession s = DataLayer.GetSession())
+                {
+                    using (ITransaction transaction = s.BeginTransaction())
+                    {
+                        RegionalniCentar regCentar = s.Load<RegionalniCentar>(regCentarId);
+
+                        Telefoni noviBroj = new Telefoni
+                        {
+                            Telefon = brojTelefona,
+                            RegCentar = regCentar
+                        };
+
+                        s.Save(noviBroj);
+                        transaction.Commit();
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Došlo je do greške: {ex.Message}");
+            }
+        }
+        public static void ObrisiBrojTelefona(int brojTelefona, int regCentarId)
+        {
+            try
+            {
+                using (ISession s = DataLayer.GetSession())
+                {
+                    using (ITransaction transaction = s.BeginTransaction())
+                    {
+                        Telefoni brojZaBrisanje = s.Query<Telefoni>()
+                                                       .Where(bt => bt.Telefon == brojTelefona && bt.RegCentar.Id == regCentarId)
+                                                       .FirstOrDefault();
+
+                        if (brojZaBrisanje != null)
+                        {
+                            s.Delete(brojZaBrisanje);
+                            transaction.Commit();
+                            MessageBox.Show("Broj telefona uspešno obrisan.");
+                        }
+                        else
+                        {
+                            MessageBox.Show("Broj telefona nije pronađen.");
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Došlo je do greške: {ex.Message}");
+            }
+        }
+        public static void DodajNoviRegionalniCentar(string adresa, long menadzerId)
+        {
+            try
+            {
+                using (ISession s = DataLayer.GetSession())
+                {
+                    using (ITransaction transaction = s.BeginTransaction())
+                    {
+                        Menadzer menadzer = s.Load<Menadzer>(menadzerId);
+
+                        RegionalniCentar noviCentar = new RegionalniCentar
+                        {
+                            Adresa = adresa,
+                            AngazovanMenadzer = menadzer
+                        };
+                        s.Save(noviCentar);
+                        transaction.Commit();
+                    }
+                    s.Close();
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Došlo je do greške: {ex.Message}");
+            }
+        }
+        public static void ObrisiRegionalniCentar(int regCentarId)
+        {
+            try
+            {
+                using (ISession s = DataLayer.GetSession())
+                {
+                    using (ITransaction transaction = s.BeginTransaction())
+                    {
+                        RegionalniCentar regCentar = s.Get<RegionalniCentar>(regCentarId);
+
+                        if (regCentar != null)
+                        {
+                            s.Delete(regCentar);
+                            transaction.Commit();
+                        }
+                        else
+                        {
+                            MessageBox.Show("Regionalni centar sa datim ID-jem ne postoji.");
+                        }
+                        s.Close();
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Došlo je do greške: {ex.Message}");
+            }
+        }
 
         #endregion
 

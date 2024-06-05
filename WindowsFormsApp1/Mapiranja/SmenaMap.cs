@@ -6,7 +6,7 @@
         {
             Table("SMENA");
 
-            Id(x => x.Id, "ID_SMENE").GeneratedBy.TriggerIdentity();
+            Id(x => x.Id).GeneratedBy.Sequence("PRODUCT_ID_SEQ").Column("ID_SMENE");
 
             Map(x => x.VremePocetka, "VREME_POCETKA");
             Map(x => x.VremeKraja, "VREME_KRAJA");

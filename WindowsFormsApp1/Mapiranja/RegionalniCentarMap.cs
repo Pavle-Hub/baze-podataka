@@ -12,7 +12,7 @@ namespace WindowsFormsApp1.Mapiranja
         {
             Table("REGIONALNI_CENTAR");
 
-            Id(x => x.Id, "ID").GeneratedBy.TriggerIdentity(); // mapiranje primarnog kljuca
+            Id(x => x.Id).GeneratedBy.Sequence("PRODUCT_ID_SEQ").Column("ID"); // mapiranje primarnog kljuca
 
             Map(x => x.Adresa, "ADRESA"); // mapiranje svojstva
 

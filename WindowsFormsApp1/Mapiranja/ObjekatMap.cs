@@ -6,7 +6,7 @@
         {
             Table("OBJEKAT");
 
-            Id(x => x.Id, "ID_OBJEKTA").GeneratedBy.TriggerIdentity();
+            Id(x => x.Id).GeneratedBy.Sequence("PRODUCT_ID_SEQ").Column("ID_OBJEKTA");
 
             Map(x => x.Adresa, "ADRESA");
             Map(x => x.TipObjekta, "TIP_OBJEKTA");

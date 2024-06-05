@@ -15,40 +15,84 @@ namespace WindowsFormsApp1.Forms
         public RegionalniCentarForm()
         {
             InitializeComponent();
-            
+            PopuniListView();
+
         }
-        private void PopuniListuRegionalnihCentara()
+        private void PopuniListView()
         {
-            listBox1.Items.Clear();
-            listBox1.Items.Add("Loading...");
+            listView1.Items.Clear();
 
-            List<RegionalniCentarDTO> lista = DTOManager.PopuniRegionalneCentre();
+            List<RegionalniCentarDTO> centri = DTOManager.VratiRegionalneCentre();
 
-            listBox1.Items.Clear();
-
-            foreach (RegionalniCentarDTO rc in lista)
+            foreach (var centar in centri)
             {
-                string brojeviTelefona = rc.BrojeviTelefona != null && rc.BrojeviTelefona.Count > 0
-                    ? string.Join(", ", rc.BrojeviTelefona)
-                    : "N/A";
-                string imenaGradova = rc.ImenaGradova != null && rc.ImenaGradova.Count > 0
-                    ? string.Join(", ", rc.ImenaGradova)
-                    : "N/A";
-                string regOznakeVozila = rc.RegOznakaVozila != null && rc.RegOznakaVozila.Count > 0
-                    ? string.Join(", ", rc.RegOznakaVozila)
-                    : "N/A";
+                ListViewItem item = new ListViewItem(centar.Id.ToString());
+                item.SubItems.Add(centar.Adresa);
+                item.SubItems.Add(centar.Menadzer.MaticniBroj.ToString());
+                item.SubItems.Add(centar.Menadzer.Ime);
+                item.SubItems.Add(centar.Menadzer.Prezime);
 
-                listBox1.Items.Add(
-                   rc.Adresa + " - " + rc.ImeMenadzera + " - " +
-                   brojeviTelefona + " - " + imenaGradova + " - " + regOznakeVozila
-                );
+                listView1.Items.Add(item);
             }
         }
 
 
         private void RegionalniCentarForm_Load(object sender, EventArgs e)
         {
-            PopuniListuRegionalnihCentara();
+            PopuniListView();
+        }
+
+        private void nazadDugme_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            if (listView1.SelectedItems.Count == 0)
+            {
+                MessageBox.Show("Izaberite regionalni centar cije gradove zelite da vidite!");
+                return;
+            }
+            ListViewItem selectedItem = listView1.SelectedItems[0];
+            int idRegCnt = int.Parse(selectedItem.SubItems[0].Text);
+            RegionalniCentarDTO rc = DTOManager.vratiRegCnt(idRegCnt);
+            rc.ImenaGradova = DTOManager.vratiGradoveZaRegCentar(idRegCnt);
+            rc.BrojeviTelefona = DTOManager.vratiTelefoneZaRegCentar(idRegCnt);
+            rc.RegOznakaVozila = DTOManager.vratiVozilaZaRegCentar(idRegCnt);
+            TelefoniGradoviRegCntForm frm = new TelefoniGradoviRegCntForm(rc);
+            DialogResult dlg = frm.ShowDialog();
+        }
+
+        private void dodajDugme_Click(object sender, EventArgs e)
+        {
+            dodajRegionalniCentar frm = new dodajRegionalniCentar();
+            DialogResult dlg = frm.ShowDialog();
+            PopuniListView();
+        }
+
+        private void izbrisiDugme_Click(object sender, EventArgs e)
+        {
+            if (listView1.SelectedItems.Count > 0)
+            {
+                ListViewItem selectedItem = listView1.SelectedItems[0];
+                int regCentarId = int.Parse(selectedItem.SubItems[0].Text);
+
+                var result = MessageBox.Show("Da li ste sigurni da želite da obrišete ovaj regionalni centar?",
+                                              "Potvrda brisanja",
+                                              MessageBoxButtons.YesNo);
+
+                if (result == DialogResult.Yes)
+                {
+                    DTOManager.ObrisiRegionalniCentar(regCentarId);
+                    MessageBox.Show("Regionalni centar je uspešno obrisan.");
+                    PopuniListView();
+                }
+            }
+            else
+            {
+                MessageBox.Show("Molimo izaberite regionalni centar za brisanje.");
+            }
         }
     }
 }

@@ -13,7 +13,7 @@ namespace WindowsFormsApp1.Mapiranja
         {
             Table("BROJEVI_TELEFONA_OBJ");
 
-            Id(x => x.Id, "ID_TELEFON").GeneratedBy.TriggerIdentity();
+            Id(x => x.Id).GeneratedBy.Sequence("PRODUCT_ID_SEQ").Column("ID_TELEFON");
 
             Map(x => x.Telefon, "KONTAKT_TELEFON");
 

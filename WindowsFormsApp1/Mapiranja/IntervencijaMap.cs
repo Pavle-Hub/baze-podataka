@@ -6,7 +6,7 @@
         {
             Table("INTERVENCIJA");
 
-            Id(x => x.Id, "ID").GeneratedBy.TriggerIdentity();
+            Id(x => x.Id).GeneratedBy.Sequence("PRODUCT_ID_SEQ").Column("ID");
 
             Map(x => x.Vreme, "VREME");
             Map(x => x.Datum, "DATUM");
