@@ -156,7 +156,7 @@
             // 
             // nazadDugme
             // 
-            nazadDugme.Location = new System.Drawing.Point(288, 826);
+            nazadDugme.Location = new System.Drawing.Point(278, 670);
             nazadDugme.Name = "nazadDugme";
             nazadDugme.Size = new System.Drawing.Size(141, 46);
             nazadDugme.TabIndex = 10;

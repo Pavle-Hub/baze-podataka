@@ -68,6 +68,7 @@
             button3.TabIndex = 2;
             button3.Text = "Objekti";
             button3.UseVisualStyleBackColor = false;
+            button3.Click += button3_Click;
             // 
             // button4
             // 

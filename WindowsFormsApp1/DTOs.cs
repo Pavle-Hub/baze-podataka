@@ -382,7 +382,7 @@ namespace WindowsFormsApp1
         public string Adresa;
         public string Tip;
         public float? Povrsina;
-        public IList<int> KontaktTelefoni;
+        public IList<long> KontaktTelefoni;
         public IList<ObuhvataDTO> SmeneZaObjekat;
         public IList<IntervencijaDTO> Intervencije;
         public IList<AlarmniSistemDTO> AlarmniSistemi;
@@ -393,7 +393,7 @@ namespace WindowsFormsApp1
             Adresa = adresa;
             Tip = tip;
             Povrsina = povrsina;
-            KontaktTelefoni = new List<int>();
+            KontaktTelefoni = new List<long>();
             SmeneZaObjekat = new List<ObuhvataDTO>();
             Intervencije = new List<IntervencijaDTO>();
             AlarmniSistemi = new List<AlarmniSistemDTO>();

@@ -1137,6 +1137,272 @@ namespace WindowsFormsApp1
             }
             return o;
         }
+        public static void dodajObjekat(ObjekatDTO objekatDTO)
+        {
+            try
+            {
+                using (ISession s = DataLayer.GetSession())
+                {
+                    using (ITransaction transaction = s.BeginTransaction())
+                    {
+                        Objekat objekat = new Objekat
+                        {
+                            Adresa = objekatDTO.Adresa,
+                            TipObjekta = objekatDTO.Tip,
+                            Povrsina = objekatDTO.Povrsina
+                        };
+
+                        s.Save(objekat);
+                        transaction.Commit();
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Došlo je do greške: {ex.Message}");
+            }
+        }
+
+        public static List<ObjekatDTO> vratiSveObjekte()
+        {
+            List<ObjekatDTO> objekti = new List<ObjekatDTO>();
+
+            try
+            {
+                using (ISession s = DataLayer.GetSession())
+                {
+                    var sviObjekti = s.Query<Objekat>().ToList();
+
+                    foreach (var objekat in sviObjekti)
+                    {
+                        objekti.Add(new ObjekatDTO
+                        {
+                            Id = objekat.Id,
+                            Adresa = objekat.Adresa,
+                            Tip = objekat.TipObjekta,
+                            Povrsina = objekat.Povrsina
+                        }) ;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Došlo je do greške: {ex.Message}");
+            }
+
+            return objekti;
+        }
+
+        public static void ObrisiObjekat(int objekatId)
+        {
+            try
+            {
+                using (ISession s = DataLayer.GetSession())
+                {
+                    using (ITransaction transaction = s.BeginTransaction())
+                    {
+                        Objekat objekatZaBrisanje = s.Get<Objekat>(objekatId);
+
+                        if (objekatZaBrisanje != null)
+                        {
+                            s.Delete(objekatZaBrisanje);
+                            transaction.Commit();
+                        }
+                        else
+                        {
+                            MessageBox.Show("Objekat nije pronađen.");
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Došlo je do greške: {ex.Message}");
+            }
+        }
+
+        public static List<AlarmniSistemDTO> vratiAlarmneSistemeZaObjekat(int objekatId)
+        {
+            List<AlarmniSistemDTO> alarmniSistemi = new List<AlarmniSistemDTO>();
+
+            try
+            {
+                using (ISession s = DataLayer.GetSession())
+                {
+                    var alarmi = s.Query<AlarmniSistem>()
+                                  .Where(a => a.Objekat.Id == objekatId)
+                                  .ToList();
+
+                    foreach (var alarm in alarmi)
+                    {
+                        alarmniSistemi.Add(new AlarmniSistemDTO
+                        {
+                            Id = alarm.Id,
+                            Proizvodjac = alarm.Proizvodjac,
+                            GodinaProizvodnje = alarm.GodinaProizvodnje,
+                            DatumInstalacije = alarm.DatumInstalacije
+                        });
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Došlo je do greške: {ex.Message}");
+            }
+
+            return alarmniSistemi;
+        }
+        public static List<long> vratiTelefoneZaObjekat(int objekatID)
+        {
+            List<long> brojevi = new List<long>();
+            try
+            {
+                using (ISession s = DataLayer.GetSession())
+                {
+                    brojevi = s.Query<ObjektiTelefoni>()
+                               .Where(o => o.Objekat.Id == objekatID)
+                               .Select(o => o.Telefon)
+                               .ToList();
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Došlo je do greške: {ex.Message}");
+            }
+
+            return brojevi;
+        }
+
+        public static void DodajBrojTelefonaObjektu(int objekatId, int brojTelefona)
+        {
+            try
+            {
+                using (ISession s = DataLayer.GetSession())
+                {
+                    using (ITransaction transaction = s.BeginTransaction())
+                    {
+                        Objekat objekat = s.Load<Objekat>(objekatId);
+
+                        ObjektiTelefoni noviBroj = new ObjektiTelefoni
+                        {
+                            Telefon = brojTelefona,
+                            Objekat = objekat
+                        };
+
+                        s.Save(noviBroj);
+                        transaction.Commit();
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Došlo je do greške: {ex.Message}");
+            }
+        }
+        public static void ObrisiBrojTelefonaObjektu(int brojTelefona, int objekatId)
+        {
+            try
+            {
+                using (ISession s = DataLayer.GetSession())
+                {
+                    using (ITransaction transaction = s.BeginTransaction())
+                    {
+                        ObjektiTelefoni brojZaBrisanje = s.Query<ObjektiTelefoni>()
+                                                       .Where(bt => bt.Telefon == brojTelefona && bt.Objekat.Id == objekatId)
+                                                       .FirstOrDefault();
+
+                        if (brojZaBrisanje != null)
+                        {
+                            s.Delete(brojZaBrisanje);
+                            transaction.Commit();
+                            MessageBox.Show("Broj telefona uspešno obrisan.");
+                        }
+                        else
+                        {
+                            MessageBox.Show("Broj telefona nije pronađen.");
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Došlo je do greške: {ex.Message}");
+            }
+        }
+        public static List<SmenaDTO> VratiSmeneZaObjekat(int objekatId)
+        {
+            List<SmenaDTO> smene = new List<SmenaDTO>();
+            try
+            {
+                using (ISession s = DataLayer.GetSession())
+                {
+                    var obilasci = s.Query<Obuhvata>()
+                                    .Where(o => o.Objekat.Id == objekatId)
+                                    .Select(o => o.Smena)
+                                    .ToList();
+
+                    smene = obilasci.Select(smena => new SmenaDTO(smena.Id, smena.VremePocetka, smena.VremeKraja, smena.EkipaZaSmenu)).ToList();
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Oh no\n" + ex.Message);
+            }
+            return smene;
+        }
+
+        public static List<IntervencijaDTO> VratiIntervencijeZaObjekat(int objekatId)
+        {
+            List<IntervencijaDTO> intervencije = new List<IntervencijaDTO>();
+            try
+            {
+                using (ISession session = DataLayer.GetSession())
+                {
+                    var objekat = session.Get<Objekat>(objekatId);
+                    if (objekat != null)
+                    {
+                        var intervencijeZaObjekat = session.Query<Intervencija>()
+                                                            .Where(i => i.Objekat.Id == objekatId)
+                                                            .ToList();
+
+                        foreach (var intervencija in intervencijeZaObjekat)
+                        {
+                            var ekipaDTO = new EkipaDTO
+                            {
+                                RedniBroj = intervencija.Ekipa.RedniBroj,
+                            };
+
+                            var intervencijaDTO = new IntervencijaDTO
+                            {
+                                Id = intervencija.Id,
+                                Datum = intervencija.Datum,
+                                Vreme = intervencija.Vreme,
+                                Tip = intervencija.Tip,
+                                IntervencijaObjekta = new ObjekatDTO
+                                {
+                                    Id = intervencija.Objekat.Id,
+                                    Adresa = intervencija.Objekat.Adresa,
+                                },
+                                IntervencijaEkipe = ekipaDTO
+                            };
+
+                            intervencije.Add(intervencijaDTO);
+                        }
+                    }
+                    else
+                    {
+                        MessageBox.Show("Objekat nije pronađen.");
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Došlo je do greške: {ex.Message}");
+            }
+
+            return intervencije;
+        }
+
 
         #endregion
 

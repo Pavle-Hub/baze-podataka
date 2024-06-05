@@ -50,5 +50,11 @@ namespace WindowsFormsApp1.Forms
         {
             this.Close();
         }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            ObjekatForm frm = new ObjekatForm();
+            DialogResult dlg = frm.ShowDialog();
+        }
     }
 }
