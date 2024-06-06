@@ -56,5 +56,17 @@ namespace WindowsFormsApp1.Forms
             ObjekatForm frm = new ObjekatForm();
             DialogResult dlg = frm.ShowDialog();
         }
+
+        private void intervencijeDugme_Click(object sender, EventArgs e)
+        {
+            IntervencijaForm frm = new IntervencijaForm();
+            DialogResult dlg = frm.ShowDialog();
+        }
+
+        private void smenaObjekatDugme_Click(object sender, EventArgs e)
+        {
+            ObuhvataForm frm = new ObuhvataForm();
+            DialogResult dlg = frm.ShowDialog();
+        }
     }
 }

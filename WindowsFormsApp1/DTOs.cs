@@ -415,11 +415,16 @@ namespace WindowsFormsApp1
         public ObjekatDTO Objekat;
         public SmenaDTO Smena;
 
-        public ObuhvataDTO(int id, ObjekatDTO o, SmenaDTO s)
+        public ObuhvataDTO(int id, SmenaDTO s, ObjekatDTO o)
         {
             this.Id = id;
-            this.Objekat = o;
             this.Smena = s;
+            this.Objekat = o;
+        }
+
+        public ObuhvataDTO()
+        {
+
         }
     }
 

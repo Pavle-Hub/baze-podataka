@@ -35,12 +35,14 @@
             button4 = new System.Windows.Forms.Button();
             button5 = new System.Windows.Forms.Button();
             button6 = new System.Windows.Forms.Button();
+            intervencijeDugme = new System.Windows.Forms.Button();
+            smenaObjekatDugme = new System.Windows.Forms.Button();
             SuspendLayout();
             // 
             // prikaziEkipe
             // 
             prikaziEkipe.BackColor = System.Drawing.SystemColors.GradientActiveCaption;
-            prikaziEkipe.Location = new System.Drawing.Point(78, 36);
+            prikaziEkipe.Location = new System.Drawing.Point(26, 36);
             prikaziEkipe.Name = "prikaziEkipe";
             prikaziEkipe.Size = new System.Drawing.Size(150, 149);
             prikaziEkipe.TabIndex = 0;
@@ -51,7 +53,7 @@
             // button2
             // 
             button2.BackColor = System.Drawing.SystemColors.GradientActiveCaption;
-            button2.Location = new System.Drawing.Point(286, 36);
+            button2.Location = new System.Drawing.Point(197, 36);
             button2.Name = "button2";
             button2.Size = new System.Drawing.Size(150, 149);
             button2.TabIndex = 1;
@@ -62,7 +64,7 @@
             // button3
             // 
             button3.BackColor = System.Drawing.SystemColors.GradientActiveCaption;
-            button3.Location = new System.Drawing.Point(491, 36);
+            button3.Location = new System.Drawing.Point(369, 36);
             button3.Name = "button3";
             button3.Size = new System.Drawing.Size(150, 149);
             button3.TabIndex = 2;
@@ -73,7 +75,7 @@
             // button4
             // 
             button4.BackColor = System.Drawing.SystemColors.GradientActiveCaption;
-            button4.Location = new System.Drawing.Point(78, 249);
+            button4.Location = new System.Drawing.Point(26, 217);
             button4.Name = "button4";
             button4.Size = new System.Drawing.Size(150, 149);
             button4.TabIndex = 3;
@@ -84,7 +86,7 @@
             // button5
             // 
             button5.BackColor = System.Drawing.SystemColors.GradientActiveCaption;
-            button5.Location = new System.Drawing.Point(286, 249);
+            button5.Location = new System.Drawing.Point(197, 217);
             button5.Name = "button5";
             button5.Size = new System.Drawing.Size(150, 149);
             button5.TabIndex = 4;
@@ -95,13 +97,35 @@
             // button6
             // 
             button6.BackColor = System.Drawing.SystemColors.GradientActiveCaption;
-            button6.Location = new System.Drawing.Point(491, 249);
+            button6.Location = new System.Drawing.Point(535, 217);
             button6.Name = "button6";
             button6.Size = new System.Drawing.Size(150, 149);
             button6.TabIndex = 5;
             button6.Text = "Nazad";
             button6.UseVisualStyleBackColor = false;
             button6.Click += button6_Click;
+            // 
+            // intervencijeDugme
+            // 
+            intervencijeDugme.BackColor = System.Drawing.SystemColors.GradientActiveCaption;
+            intervencijeDugme.Location = new System.Drawing.Point(535, 36);
+            intervencijeDugme.Name = "intervencijeDugme";
+            intervencijeDugme.Size = new System.Drawing.Size(150, 149);
+            intervencijeDugme.TabIndex = 6;
+            intervencijeDugme.Text = "Intervencije";
+            intervencijeDugme.UseVisualStyleBackColor = false;
+            intervencijeDugme.Click += intervencijeDugme_Click;
+            // 
+            // smenaObjekatDugme
+            // 
+            smenaObjekatDugme.BackColor = System.Drawing.SystemColors.GradientActiveCaption;
+            smenaObjekatDugme.Location = new System.Drawing.Point(369, 217);
+            smenaObjekatDugme.Name = "smenaObjekatDugme";
+            smenaObjekatDugme.Size = new System.Drawing.Size(150, 149);
+            smenaObjekatDugme.TabIndex = 7;
+            smenaObjekatDugme.Text = "Smena - Objekat";
+            smenaObjekatDugme.UseVisualStyleBackColor = false;
+            smenaObjekatDugme.Click += smenaObjekatDugme_Click;
             // 
             // OstaloForm
             // 
@@ -110,6 +134,8 @@
             BackgroundImage = (System.Drawing.Image)resources.GetObject("$this.BackgroundImage");
             BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             ClientSize = new System.Drawing.Size(717, 463);
+            Controls.Add(smenaObjekatDugme);
+            Controls.Add(intervencijeDugme);
             Controls.Add(button6);
             Controls.Add(button5);
             Controls.Add(button4);
@@ -130,5 +156,7 @@
         private System.Windows.Forms.Button button4;
         private System.Windows.Forms.Button button5;
         private System.Windows.Forms.Button button6;
+        private System.Windows.Forms.Button intervencijeDugme;
+        private System.Windows.Forms.Button smenaObjekatDugme;
     }
 }
