@@ -26,7 +26,6 @@ namespace WindowsFormsApp1.Forms
 
             SmenaDTO s = new SmenaDTO();
 
-            s.Id = int.Parse(textBox1.Text);
             s.EkipaZaSmenu = DTOManager.vratiEkipu(int.Parse(textBox2.Text));
             s.VremePocetka = dateTimePicker1.Value;
             s.VremeKraja = dateTimePicker2.Value;           

@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using WindowsFormsApp1.Entiteti;
 
 namespace WindowsFormsApp1.Forms
 {
@@ -28,7 +29,10 @@ namespace WindowsFormsApp1.Forms
 
             foreach (SmenaDTO a in lista)
             {
-                listBoxSmena.Items.Add(a.Id + " - " + a.VremePocetka.ToString("MMM dd yyyy,hh:mm:ss") + " " + a.VremeKraja.ToString("MMM dd yyyy, hh: mm:ss") + " - " + a.EkipaSmene.RedniBroj);
+                if(a.EkipaSmene != null)
+                listBoxSmena.Items.Add(a.Id + " - " + a.VremePocetka.ToString("dd MMM yyyy") + " " + a.VremeKraja.ToString("dd MMM yyyy") + " - " + a.EkipaSmene.RedniBroj);
+                else
+                    listBoxSmena.Items.Add(a.Id + " - " + a.VremePocetka.ToString("dd MMM yyyy") + " " + a.VremeKraja.ToString("dd MMM yyyy") + " - " + "Nema ekipe");
             }
         }
 
@@ -76,7 +80,7 @@ namespace WindowsFormsApp1.Forms
                 MessageBox.Show("Izaberite smenu koju zelite da obrisete!");
                 return;
             }
-            int idSmene = Convert.ToInt32((listBoxSmena.SelectedItem).ToString().Substring(0, 2));
+            int smenaId = int.Parse(listBoxSmena.SelectedItem.ToString().Split(' ')[0]);
             string poruka = "Da li zelite da obrisete izabranu smenu?";
             string title = "Pitanje";
             MessageBoxButtons buttons = MessageBoxButtons.OKCancel;
@@ -84,7 +88,7 @@ namespace WindowsFormsApp1.Forms
 
             if (result == DialogResult.OK)
             {
-                DTOManager.obrisiSmenu(idSmene);
+                DTOManager.obrisiSmenu(smenaId);
                 MessageBox.Show("Uspesno obrisana smena!");
                 this.PopuniListuSmena();
             }
@@ -94,8 +98,14 @@ namespace WindowsFormsApp1.Forms
 
         private void izmeniSmenu_Click(object sender, EventArgs e)
         {
-            
-            IzmeniSmenuForm frm = new IzmeniSmenuForm();
+            if (listBoxSmena.SelectedItems.Count == 0)
+            {
+                MessageBox.Show("Izaberite smenu koju zelite da izmenite!");
+                return;
+            }
+            int smenaId = int.Parse(listBoxSmena.SelectedItem.ToString().Split(' ')[0]);
+            SmenaDTO smena = DTOManager.VratiPodatkeOSmeni(smenaId);
+            IzmeniSmenuForm frm = new IzmeniSmenuForm(smena);
             DialogResult dlg = frm.ShowDialog();
 
             PopuniListuSmena();

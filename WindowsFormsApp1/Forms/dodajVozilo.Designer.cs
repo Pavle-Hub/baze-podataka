@@ -44,8 +44,8 @@
             label5 = new System.Windows.Forms.Label();
             label7 = new System.Windows.Forms.Label();
             label8 = new System.Windows.Forms.Label();
-            comboBox1 = new System.Windows.Forms.ComboBox();
             comboBox2 = new System.Windows.Forms.ComboBox();
+            comboBoxEkipa1 = new System.Windows.Forms.ComboBox();
             SuspendLayout();
             // 
             // textBox1
@@ -191,17 +191,6 @@
             label8.TabIndex = 30;
             label8.Text = "Redni broj ekipe:";
             // 
-            // comboBox1
-            // 
-            comboBox1.FormattingEnabled = true;
-            comboBox1.Location = new System.Drawing.Point(134, 212);
-            comboBox1.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            comboBox1.Name = "comboBox1";
-            comboBox1.Size = new System.Drawing.Size(138, 28);
-            comboBox1.TabIndex = 31;
-            comboBox1.SelectedIndexChanged += VoziloDialog_Load;
-            comboBox1.TextUpdate += VoziloDialog_Load;
-            // 
             // comboBox2
             // 
             comboBox2.FormattingEnabled = true;
@@ -216,13 +205,21 @@
             comboBox2.TextUpdate += VoziloDialog_Load;
             comboBox2.SelectedValueChanged += comboBox1_SelectedIndexChanged;
             // 
+            // comboBoxEkipa1
+            // 
+            comboBoxEkipa1.FormattingEnabled = true;
+            comboBoxEkipa1.Location = new System.Drawing.Point(130, 212);
+            comboBoxEkipa1.Name = "comboBoxEkipa1";
+            comboBoxEkipa1.Size = new System.Drawing.Size(145, 28);
+            comboBoxEkipa1.TabIndex = 33;
+            // 
             // dodajVozilo
             // 
             AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             ClientSize = new System.Drawing.Size(434, 452);
+            Controls.Add(comboBoxEkipa1);
             Controls.Add(comboBox2);
-            Controls.Add(comboBox1);
             Controls.Add(label8);
             Controls.Add(label7);
             Controls.Add(label5);
@@ -242,6 +239,7 @@
             Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             Name = "dodajVozilo";
             Text = "dodajVozilo";
+            Load += dodajVozilo_Load;
             ResumeLayout(false);
             PerformLayout();
         }
@@ -264,7 +262,7 @@
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Label label8;
-        private System.Windows.Forms.ComboBox comboBox1;
         private System.Windows.Forms.ComboBox comboBox2;
+        private System.Windows.Forms.ComboBox comboBoxEkipa1;
     }
 }

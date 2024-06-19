@@ -6,6 +6,7 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Transactions;
 using System.Windows.Forms;
 using WindowsFormsApp1;
 
@@ -1574,16 +1575,16 @@ namespace WindowsFormsApp1
                     smenaDTO = new SmenaDTO
                     {
                         Id = smena.Id,
-                        EkipaZaSmenu = new EkipaDTO
+                        EkipaZaSmenu = smena.EkipaZaSmenu !=null ? new EkipaDTO
                         {
                             RedniBroj = smena.EkipaZaSmenu.RedniBroj,
-                            clanoviEkipe = smena.EkipaZaSmenu.Clanovi.Select(cl => new FizickoObezbedjenjeDTO
+                            clanoviEkipe = smena.EkipaZaSmenu.Clanovi.Select(cl =>  new FizickoObezbedjenjeDTO
                             {
                                 MaticniBroj = cl.MaticniBroj,
                                 Ime = cl.Ime,
                                 Prezime = cl.Prezime
                             }).ToList()
-                        },
+                        } : null,
                         ObjektiZaSmenu = s.Query<Obuhvata>()
                                           .Where(ob => ob.Smena.Id == smenaId)
                                           .Select(ob => new ObjekatDTO
@@ -1619,12 +1620,12 @@ namespace WindowsFormsApp1
                                  {
                                      Id = rc.Id,
                                      Adresa = rc.Adresa,
-                                     Menadzer = new MenadzerDTO
+                                     Menadzer = rc.AngazovanMenadzer != null ? new MenadzerDTO
                                      {
                                          MaticniBroj = rc.AngazovanMenadzer.MaticniBroj,
                                          Ime = rc.AngazovanMenadzer.Ime,
                                          Prezime = rc.AngazovanMenadzer.Prezime
-                                     }
+                                     } : null
                                  })
                                  .ToList();
 
@@ -1637,6 +1638,44 @@ namespace WindowsFormsApp1
             }
 
             return centri;
+        }
+
+        public static void DodajMenadzeraZaCentar(int centarId, long maticniBrojMenadzera)
+        {
+            ISession? s = null;
+
+            try
+            {
+                s = DataLayer.GetSession();
+
+                var centar = s.Load<RegionalniCentar>(centarId);
+                if (centar == null)
+                {
+                    MessageBox.Show("Regionalni centar nije pronađen.");
+                    return;
+                }
+                var menadzer = s.Query<Menadzer>()
+                                .Where(m => m.MaticniBroj == maticniBrojMenadzera)
+                                .FirstOrDefault();
+
+                if (menadzer == null)
+                {
+                    MessageBox.Show("Menadzer nije pronadjen!");
+                    return;
+                }
+
+                centar.AngazovanMenadzer = menadzer;
+
+                s.SaveOrUpdate(centar);
+                s.Flush();
+                s.Close();
+
+                
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Došlo je do greške: {ex.Message}");
+            }
         }
 
         public static List<int> VratiSveRegionalneCentre()

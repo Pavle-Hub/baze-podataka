@@ -38,6 +38,7 @@
             izbrisiDugme = new System.Windows.Forms.Button();
             nazadDugme = new System.Windows.Forms.Button();
             button2 = new System.Windows.Forms.Button();
+            button1 = new System.Windows.Forms.Button();
             SuspendLayout();
             // 
             // listView1
@@ -111,7 +112,7 @@
             // 
             // button2
             // 
-            button2.Location = new System.Drawing.Point(599, 176);
+            button2.Location = new System.Drawing.Point(598, 211);
             button2.Name = "button2";
             button2.Size = new System.Drawing.Size(149, 73);
             button2.TabIndex = 5;
@@ -119,11 +120,22 @@
             button2.UseVisualStyleBackColor = true;
             button2.Click += button2_Click;
             // 
+            // button1
+            // 
+            button1.Location = new System.Drawing.Point(598, 135);
+            button1.Name = "button1";
+            button1.Size = new System.Drawing.Size(149, 51);
+            button1.TabIndex = 6;
+            button1.Text = "Dodaj menadzera";
+            button1.UseVisualStyleBackColor = true;
+            button1.Click += button1_Click;
+            // 
             // RegionalniCentarForm
             // 
             AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             ClientSize = new System.Drawing.Size(759, 362);
+            Controls.Add(button1);
             Controls.Add(button2);
             Controls.Add(nazadDugme);
             Controls.Add(izbrisiDugme);
@@ -148,5 +160,6 @@
         private System.Windows.Forms.Button nazadDugme;
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.ColumnHeader columnHeader5;
+        private System.Windows.Forms.Button button1;
     }
 }

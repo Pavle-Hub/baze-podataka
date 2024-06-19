@@ -28,9 +28,18 @@ namespace WindowsFormsApp1.Forms
             {
                 ListViewItem item = new ListViewItem(centar.Id.ToString());
                 item.SubItems.Add(centar.Adresa);
-                item.SubItems.Add(centar.Menadzer.MaticniBroj.ToString());
-                item.SubItems.Add(centar.Menadzer.Ime);
-                item.SubItems.Add(centar.Menadzer.Prezime);
+                if (centar.Menadzer != null)
+                {
+                    item.SubItems.Add(centar.Menadzer.MaticniBroj.ToString());
+                    item.SubItems.Add(centar.Menadzer.Ime);
+                    item.SubItems.Add(centar.Menadzer.Prezime);
+                }
+                else
+                {
+                    item.SubItems.Add("");
+                    item.SubItems.Add("");
+                    item.SubItems.Add("");
+                }
 
                 listView1.Items.Add(item);
             }
@@ -93,6 +102,13 @@ namespace WindowsFormsApp1.Forms
             {
                 MessageBox.Show("Molimo izaberite regionalni centar za brisanje.");
             }
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            izmeniMenadzeraRegCntForm frm = new izmeniMenadzeraRegCntForm();
+            DialogResult dlg = frm.ShowDialog();
+            PopuniListView();
         }
     }
 }

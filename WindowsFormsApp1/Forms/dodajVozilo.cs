@@ -31,10 +31,10 @@ namespace WindowsFormsApp1.Forms
             try
             {
                 List<int> ekipeBezVozila = DTOManager.VratiEkipeBezVozila();
-                comboBox1.Items.Clear();
+                comboBoxEkipa1.Items.Clear();
                 foreach (var ekipa in ekipeBezVozila)
                 {
-                    comboBox1.Items.Add(ekipa);
+                    comboBoxEkipa1.Items.Add(ekipa);
                 }
 
                 List<int> regionalniCentri = DTOManager.VratiSveRegionalneCentre();
@@ -113,7 +113,7 @@ namespace WindowsFormsApp1.Forms
 
                 return false;
             }
-            if (comboBox1.SelectedIndex == -1)
+            if (comboBox2.SelectedIndex == -1)
             {
                 MessageBox.Show("Izaberite regionalni centar.",
                                 "Obaveštenje",
@@ -123,7 +123,7 @@ namespace WindowsFormsApp1.Forms
                 return false;
             }
 
-            if (comboBox2.SelectedIndex == -1)
+            if (comboBoxEkipa1.SelectedIndex == -1)
             {
                 MessageBox.Show("Izaberite ekipu.",
                                 "Obaveštenje",
@@ -150,8 +150,8 @@ namespace WindowsFormsApp1.Forms
                 Proizvodjac = string.IsNullOrWhiteSpace(textBox1.Text) ? null : textBox1.Text,
                 DatumOd = dateTimePicker1.Value,
                 DatumDo = datumRodj.Value,
-                RC = (RegionalniCentarDTO)comboBox1.SelectedItem,
-                DuziGaEkipa = (EkipaDTO)comboBox2.SelectedItem
+                RC = DTOManager.vratiRegCnt((int)comboBox2.SelectedItem),
+                DuziGaEkipa = DTOManager.vratiEkipu((int)comboBoxEkipa1.SelectedItem)
             };
 
             DTOManager.dodajVozilo(v);
@@ -161,6 +161,11 @@ namespace WindowsFormsApp1.Forms
         }
 
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void dodajVozilo_Load(object sender, EventArgs e)
         {
 
         }
